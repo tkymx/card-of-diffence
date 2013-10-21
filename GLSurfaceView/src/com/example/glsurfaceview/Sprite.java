@@ -15,14 +15,14 @@ public class Sprite {
 	public static ArrayList<LinkedList<Sprite>> spriteList = new ArrayList<LinkedList<Sprite>>();
 	public static final int maxSpriteListNum = Const.SpriteType.TYPE_MAX.getValue();
 	
-	private VertexBuffer vertexBuffer;
-	private Texture texture;
+	protected VertexBuffer vertexBuffer;
+	protected Texture texture;
 	private Vector3 trans = new Vector3();
 	private Vector3 rot = new Vector3();
 	private Vector3 scl = new Vector3( 1.0f, 1.0f, 1.0f );
 	private boolean bUse;
 	private boolean bTextureSend;
-	private float m_width, m_height;
+	protected float m_width, m_height;
 	private int spriteType = Const.SpriteType.TYPE_OTHER.getValue();
 	private static boolean isCreate = false;
 		
@@ -215,7 +215,7 @@ public class Sprite {
 		return trans;
 	}
 	
-	private float[] transToVertex( Vector3 trans )
+	protected float[] transToVertex( Vector3 trans )
 	{
 		float l, t, w, h;
 		
@@ -285,7 +285,7 @@ public class Sprite {
 	}
 	
 	// ‰ñ“]
-	private float[] rotToVertex( Vector3 rot )
+	protected float[] rotToVertex( Vector3 rot )
 	{
 		float[] work = transToVertex(trans);
 		

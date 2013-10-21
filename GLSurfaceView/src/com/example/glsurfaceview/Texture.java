@@ -3,7 +3,12 @@ package com.example.glsurfaceview;
 import java.nio.FloatBuffer;
 
 import android.graphics.Bitmap;
+import android.graphics.Bitmap.Config;
 import android.graphics.BitmapFactory;
+import android.graphics.Canvas;
+import android.graphics.Color;
+import android.graphics.Paint;
+import android.graphics.Paint.Style;
 
 public class Texture {
 	
@@ -71,6 +76,18 @@ public class Texture {
 			// UV‚Ìæ“¾
 			texUV = t.GetUV();
 		}
+	}
+	
+	public Texture( int width, int height, String text )
+	{
+		texture = Bitmap.createBitmap(256, 256, Config.ARGB_8888);
+		
+		Canvas canvas = new Canvas( texture );
+        Paint paint = new Paint();
+        paint.setColor(Color.WHITE);
+        paint.setStyle(Style.FILL);
+        canvas.drawColor(0);
+        canvas.drawText(text, 0, 15, paint); 
 	}
     
     // UVÀ•W‚Ìæ“¾
