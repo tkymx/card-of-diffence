@@ -12,12 +12,25 @@ public class SceneManager {
 	public static final String gameKey = "game"; 
 	public static final String titleKey = "title"; 
 	public static final String resultKey = "result"; 
+	private static SceneManager instance = new SceneManager();
+	private boolean isCreate = false; 
+	
+	public static SceneManager getInstance()
+	{
+		return instance;
+	}
 	
 	// コンストラクタ
 	public SceneManager()
 	{
-		// 先にリストを生成
-		Sprite.ListCreate();
+		// 閉じても再作成させない
+		if( !isCreate )
+		{
+			// 先にリストを生成
+			Sprite.ListCreate();
+			
+			isCreate = true;
+		}
 		
 		Scene game = new Game();
 		
@@ -72,7 +85,7 @@ public class SceneManager {
 	}
 	
 	// シーンの取得
-	public static Scene GetScene()
+	public Scene GetScene()
 	{
 		scene = Dictionary.get( mapKey );
 		
