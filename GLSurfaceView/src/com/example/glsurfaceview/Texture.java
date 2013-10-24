@@ -15,6 +15,7 @@ public class Texture {
 	private FloatBuffer texUV;
 	private Bitmap texture;
 	private int texBuffer[] = new int[1];
+	private static BitmapFactory.Options options = new BitmapFactory.Options();
 	
 	// コンストラクタ
 	public Texture( int id, float[] UV )
@@ -23,9 +24,11 @@ public class Texture {
 		
 		// テクスチャがつくられていないとき
 		if( haveTextue == false )
-		{
+		{			
+			options.inScaled = false;
+			
 			// 画像の生成
-			texture = BitmapFactory.decodeResource( OpenGLSurfaceView.c.getResources(), id );
+			texture = BitmapFactory.decodeResource( OpenGLSurfaceView.c.getResources(), id, options );
 			
 			// テクスチャのUV座標の生成
 			texUV = Common.FloatToBuffer( UV );
@@ -48,9 +51,9 @@ public class Texture {
 	{
 		// デフォルトUV
 		float UV[] = {
-			-1.0f, -1.0f,
-			-1.0f, 0.0f,
-			0.0f, -1.0f,
+			1.0f, 1.0f,
+			1.0f, 0.0f,
+			0.0f, 1.0f,
 			0.0f, 0.0f,
 		};
 		
@@ -59,11 +62,16 @@ public class Texture {
 		// テクスチャがつくられていないとき
 		if( haveTextue == false )
 		{
+			options.inScaled = false;
+			
 			// 画像の生成
-			texture = BitmapFactory.decodeResource( OpenGLSurfaceView.c.getResources(), id );
+			texture = BitmapFactory.decodeResource( OpenGLSurfaceView.c.getResources(), id, options );
 			
 			// テクスチャのUV座標の生成
 			texUV = Common.FloatToBuffer( UV );
+			
+			// テクスチャをリストに追加
+			TextureManager.AddTexture(id, this);
 		}
 		else
 		{

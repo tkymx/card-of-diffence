@@ -20,10 +20,10 @@ public class Sprite {
 	private Vector3 trans = new Vector3();
 	private Vector3 rot = new Vector3();
 	private Vector3 scl = new Vector3( 1.0f, 1.0f, 1.0f );
-	private boolean bUse;
-	private boolean bTextureSend;
+	protected boolean bUse;
+	protected boolean bTextureSend;
 	protected float m_width, m_height;
-	private int spriteType = Const.SpriteType.TYPE_OTHER.getValue();
+	protected int spriteType = Const.SpriteType.TYPE_OTHER.getValue();
 	private static boolean isCreate = false;
 		
 	// コンストラクタ
@@ -142,17 +142,21 @@ public class Sprite {
 	    	
 	    	int tex[] = texture.GetTextureBuffer();
 	    	Bitmap bitmap = texture.GetBitmap();
-	    	
+	    		    	
 	    	// 画像の読み込み
 	    	gl.glGenTextures( 1, tex, 0 );
 	    	
+	    	// 拡縮の設定
+	        gl.glTexParameterf(GL10.GL_TEXTURE_2D, GL10.GL_TEXTURE_MIN_FILTER, GL10.GL_NEAREST);
+	        gl.glTexParameterf(GL10.GL_TEXTURE_2D, GL10.GL_TEXTURE_MAG_FILTER, GL10.GL_NEAREST);
+	    	
 	    	// テクスチャのバインド
 	    	gl.glBindTexture( GL10.GL_TEXTURE_2D, tex[0] );
-	    	
+	    		    	
 	    	// サンプラーにテクスチャを送る
 	        GLUtils.texImage2D( GL10.GL_TEXTURE_2D, 0, bitmap, 0 );
 	        
-	        bitmap.recycle();
+	        //bitmap.recycle();
 	        
 	        bTextureSend = true;
     	}
@@ -173,13 +177,16 @@ public class Sprite {
     	// テクスチャを有効にする
     	gl.glEnableClientState(GL10.GL_TEXTURE_COORD_ARRAY);
     	
-    	gl.glActiveTexture(GL10.GL_TEXTURE0);
+    	//gl.glActiveTexture(GL10.GL_TEXTURE0);
     	
     	// デプスバッファのテストを無効にする
      	gl.glDisable(GL10.GL_DEPTH_TEST);
      	
      	// ライトを無効にする
      	gl.glDisable(GL10.GL_LIGHTING);
+     	
+     	// テクスチャを有効にする
+     	gl.glEnable(GL10.GL_TEXTURE_2D);
      	
      	// 1度だけ画像をopenglへ転送する
      	SetSprite(gl);
@@ -217,10 +224,12 @@ public class Sprite {
 	
 	protected float[] transToVertex( Vector3 trans )
 	{
+		this.trans = trans;
+		
 		float l, t, w, h;
 		
-		l = ( trans.x * 2.0f ) - ( float )MainActivity.width;
-		t = ( trans.y * 2.0f ) - ( float )MainActivity.height;
+		l = ( this.trans.x * 2.0f ) - ( float )MainActivity.width;
+		t = ( this.trans.y * 2.0f ) - ( float )MainActivity.height;
 		
 		l = ( float )l / (float )MainActivity.width;
 		t = ( float )t / ( float )MainActivity.height;
