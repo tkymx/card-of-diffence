@@ -25,7 +25,7 @@ public class OpenGLSurfaceView extends GLSurfaceView{
 		setRenderer( renderer );
 		
 		// シーンマネージャーの生成
-		sceneManager = new SceneManager();
+		sceneManager = SceneManager.getInstance();
 		
 		thread = new Thread( new Runnable() {
 			

@@ -21,7 +21,7 @@ public class SceneManager {
 	}
 	
 	// コンストラクタ
-	public SceneManager()
+	private SceneManager()
 	{
 		// 閉じても再作成させない
 		if( !isCreate )
