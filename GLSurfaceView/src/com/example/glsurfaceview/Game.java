@@ -7,7 +7,7 @@ import javax.microedition.khronos.opengles.GL10;
 public class Game implements Scene {
 	
 	Sprite s;
-	
+	Sprite player;
 	// コンストラクタ
 	public Game()
 	{		
@@ -16,6 +16,8 @@ public class Game implements Scene {
 		
 		// スプライトの追加
 		s = Sprite.Create( 0, 0, 600, 400, R.drawable.image1, Const.SpriteType.TYPE_OTHER.getValue() );
+		player =Sprite.Create( 100, 100, 600, 400, R.drawable.ic_launcher, Const.SpriteType.TYPE_OTHER.getValue() );
+		
 	}
 	
 	@Override
@@ -45,6 +47,8 @@ public class Game implements Scene {
 				{
 					Vector3 vec = new Vector3( 1.0f, 0, 0 );
 					s.Translate(vec);
+					player.Translate(vec);
+					
 				}
 			}
 		}

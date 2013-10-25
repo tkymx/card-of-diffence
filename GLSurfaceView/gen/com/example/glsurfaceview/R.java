@@ -28,6 +28,8 @@ public final class R {
         public static final int image3=0x7f020004;
         public static final int image4=0x7f020005;
         public static final int image5=0x7f020006;
+        public static final int sample1=0x7f020007;
+        public static final int sample2=0x7f020008;
     }
     public static final class id {
         public static final int action_settings=0x7f080000;
