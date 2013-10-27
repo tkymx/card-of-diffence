@@ -96,6 +96,23 @@ public class Texture {
         paint.setStyle(Style.FILL);
         canvas.drawColor(0);
         canvas.drawText(text, 0, 15, paint); 
+        
+        // デフォルトUV
+ 		float UV[] = {
+ 			1.0f, 1.0f,
+ 			1.0f, 0.0f,
+ 			0.0f, 1.0f,
+ 			0.0f, 0.0f,
+ 		};
+ 		
+ 		// テクスチャのUV座標の生成
+ 		texUV = Common.FloatToBuffer( UV );
+	}
+	
+	// UV座標のセット
+	public void SetUV( float[] UV )
+	{
+		texUV = Common.FloatToBuffer(UV);
 	}
     
     // UV座標の取得

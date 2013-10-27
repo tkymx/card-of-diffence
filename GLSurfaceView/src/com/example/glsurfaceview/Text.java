@@ -1,5 +1,7 @@
 package com.example.glsurfaceview;
 
+import com.example.glsurfaceview.Const.SpriteType;
+
 public class Text extends Sprite {
 	
 	// コンストラクタ
@@ -17,6 +19,11 @@ public class Text extends Sprite {
 		
 		vertexBuffer = new VertexBuffer( vertexs );
 		texture = new Texture(Width, Height, text);      
+		
+		appear(SpriteType.TYPE_TEXT.getValue());
+		
+		bUse = true;
+		bTextureSend = false;
 	}
 	
 	// 生成

@@ -14,7 +14,8 @@ public class Const {
 		TYPE_CARD( 3 ) ,
 		TYPE_ENEMY( 4 ), 
 		TYPE_PLAYER( 5 ), 
-		TYPE_MAX( 6 );
+		TYPE_TEXT( 6 ),
+		TYPE_MAX( 7 );
 		
 		private int value;
 		

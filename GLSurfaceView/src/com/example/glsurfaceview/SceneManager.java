@@ -69,7 +69,7 @@ public class SceneManager {
 	}
 	
 	// ƒV[ƒ“‚ÌØ‚è‘Ö‚¦
-	public void ChangeScene( String Key )
+	public static void ChangeScene( String Key )
 	{		
 		scene = Dictionary.get( mapKey );
 		
