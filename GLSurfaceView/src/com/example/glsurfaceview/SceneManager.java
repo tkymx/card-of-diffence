@@ -4,6 +4,11 @@ import java.util.HashMap;
 
 import javax.microedition.khronos.opengles.GL10;
 
+import com.example.scene.ClearScene;
+import com.example.scene.GameOverScene;
+import com.example.scene.GameScene;
+import com.example.scene.TitleScene;
+
 public class SceneManager {
 
 	private static HashMap< String, Scene > Dictionary = new HashMap< String, Scene >();
@@ -12,6 +17,8 @@ public class SceneManager {
 	public static final String gameKey = "game"; 
 	public static final String titleKey = "title"; 
 	public static final String resultKey = "result"; 
+	public static final String clearKey = "clear"; 
+	public static final String gameoverKey = "gameover"; 
 	private static SceneManager instance = new SceneManager();
 	private boolean isCreate = false; 
 	
@@ -32,10 +39,11 @@ public class SceneManager {
 			isCreate = true;
 		}
 		
-		Scene game = new Game();
-		
 		mapKey = gameKey;
-		Dictionary.put( mapKey, game );
+		Dictionary.put( titleKey, new TitleScene() );
+		Dictionary.put( gameKey, new GameScene() );
+		Dictionary.put( clearKey, new ClearScene() );
+		Dictionary.put( gameoverKey, new GameOverScene() );
 	}
 	
 	// èâä˙âªèàóù
