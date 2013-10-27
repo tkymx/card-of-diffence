@@ -4,7 +4,7 @@ import javax.microedition.khronos.opengles.GL10;
 
 import com.example.glsurfaceview.Scene;
 
-public class ClearScene implements Scene {
+public class ClearScene extends Scene {
 
 	@Override
 	public void Init() {
@@ -19,13 +19,13 @@ public class ClearScene implements Scene {
 	}
 
 	@Override
-	public void Update() {
+	public void onUpdate() {
 		// TODO Auto-generated method stub
 		
 	}
 
 	@Override
-	public void Draw(GL10 gl) {
+	public void onDraw(GL10 gl) {
 		// TODO Auto-generated method stub
 		
 	}

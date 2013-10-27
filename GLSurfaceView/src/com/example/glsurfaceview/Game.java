@@ -9,7 +9,7 @@ import java.util.LinkedList;
 
 import javax.microedition.khronos.opengles.GL10;
 
-public class Game implements Scene {
+public class Game extends Scene {
 	
 	Sprite s;
 	Sprite player;
@@ -41,7 +41,7 @@ public class Game implements Scene {
 	}
 
 	@Override
-	public void Update() {
+	public void onUpdate() {
 		// TODO Auto-generated method stub
 		
 		for( int i = 0; i < Const.SpriteType.TYPE_MAX.getValue(); i++ )
@@ -54,34 +54,16 @@ public class Game implements Scene {
 				// 使用中のとき
 				if( list.get(j).GetUse() == true )
 				{
-					Sprite sp = list.get(j);
-					
+					Sprite sp = list.get(j);					
 					Vector3 vec = new Vector3( 1.0f, 0, 0 );
 					s.Translate(vec);
-					
-					sp.Update();
 				}
 			}
 		}
 	}
 
 	@Override
-	public void Draw(GL10 gl) {
+	public void onDraw(GL10 gl) {
 		// TODO Auto-generated method stub
-		
-		for( int i = 0; i < Const.SpriteType.TYPE_MAX.getValue(); i++ )
-		{
-			LinkedList<Sprite> list = Sprite.spriteList.get(i);
-			
-			// リストに登録されているシーンの数分ループ
-			for( int j = 0; j < list.size(); j++ )
-			{
-				// 使用中のとき
-				if( list.get(j).GetUse() == true )
-				{
-					list.get(j).DrawSprite(gl);
-				}
-			}
-		}
 	}
 }

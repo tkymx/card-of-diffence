@@ -39,7 +39,7 @@ public class SceneManager {
 			isCreate = true;
 		}
 		
-		mapKey = gameKey;
+		mapKey = titleKey;
 		Dictionary.put( titleKey, new TitleScene() );
 		Dictionary.put( gameKey, new GameScene() );
 		Dictionary.put( clearKey, new ClearScene() );
