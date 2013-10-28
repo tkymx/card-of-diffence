@@ -1,5 +1,7 @@
 package com.example.user;
 
+import com.example.glsurfaceview.Const;
+import com.example.glsurfaceview.R;
 import com.example.glsurfaceview.Sprite;
 
 /**
@@ -16,7 +18,6 @@ public class PlayerCastle extends Sprite {
 	// ‰Šú‰»ˆ—
 	public void Init()
 	{
-		
 	}
 	
 	// XVˆ—

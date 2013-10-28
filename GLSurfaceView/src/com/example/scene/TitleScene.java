@@ -23,6 +23,8 @@ public class TitleScene extends Scene {
 	public void onUpdate() {
 		// TODO Auto-generated method stub
 		
+		SceneManager.ChangeScene( SceneManager.gameKey );
+		
 	}
 
 	@Override

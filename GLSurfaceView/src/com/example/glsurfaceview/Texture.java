@@ -51,10 +51,10 @@ public class Texture {
 	{
 		// デフォルトUV
 		float UV[] = {
-			1.0f, 1.0f,
-			1.0f, 0.0f,
 			0.0f, 1.0f,
 			0.0f, 0.0f,
+			1.0f, 1.0f,
+			1.0f, 0.0f,
 		};
 		
 		boolean haveTextue = TextureManager.haveTexture(id);

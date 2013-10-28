@@ -1,7 +1,21 @@
 package com.example.glsurfaceview;
 
 public class Vector3 {
+	
 	float x, y, z;
+	
+	public float getX() {
+		return x;
+	}
+
+	public float getY() {
+		return y;
+	}
+
+	public float getZ() {
+		return z;
+	}
+
 	
 	public Vector3()
 	{

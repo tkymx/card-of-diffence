@@ -241,8 +241,8 @@ public class Sprite {
 		
 		l = ( float )l / (float )MainActivity.width;
 		t = ( float )t / ( float )MainActivity.height;
-		w = l + ( float )m_width / ( float )MainActivity.width;
-		h = t + ( float )m_height / ( float )MainActivity.height;
+		w = l + ( float )m_width*2 / ( float )MainActivity.width;
+		h = t + ( float )m_height*2 / ( float )MainActivity.height;
 		
 		float[] vertexs ={
 				l, t, 0.0f,
@@ -362,6 +362,9 @@ public class Sprite {
 		{
 			LinkedList<Sprite> list = Sprite.spriteList.get(spriteType);
 		
+			//‰Šú‰»‚ğŒÄ‚Ô
+			this.Init();
+			
 			// ƒŠƒXƒg‚É©g‚ğ’Ç‰Á
 			list.add(this);
 		}
