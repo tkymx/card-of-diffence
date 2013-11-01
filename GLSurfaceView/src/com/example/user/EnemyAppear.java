@@ -27,15 +27,15 @@ public class EnemyAppear extends Sprite {
 		
 		if( liney == Const.LINE_1_Y)
 		{
-			new Enemy().Init( Const.LINE_RIGHT_1_X  , Const.LINE_1_Y , Const.LINE_1_W , Const.LINE_1_W , id , Const.SpriteType.TYPE_ENEMY.getValue() );			
+			new Enemy(10,1).Init( Const.LINE_RIGHT_1_X  , Const.LINE_1_Y , Const.LINE_1_W , Const.LINE_1_W , id , Const.SpriteType.TYPE_ENEMY.getValue() );			
 		}
 		else if( liney == Const.LINE_2_Y)
 		{
-			new Enemy().Init( Const.LINE_RIGHT_2_X  , Const.LINE_2_Y , Const.LINE_2_W , Const.LINE_2_W , id , Const.SpriteType.TYPE_ENEMY.getValue() );			
+			new Enemy(10,1).Init( Const.LINE_RIGHT_2_X  , Const.LINE_2_Y , Const.LINE_2_W , Const.LINE_2_W , id , Const.SpriteType.TYPE_ENEMY.getValue() );			
 		}
 		else if( liney == Const.LINE_3_Y)
 		{
-			new Enemy().Init( Const.LINE_RIGHT_3_X  , Const.LINE_3_Y , Const.LINE_3_W , Const.LINE_3_W , id , Const.SpriteType.TYPE_ENEMY.getValue() );			
+			new Enemy(10,1).Init( Const.LINE_RIGHT_3_X  , Const.LINE_3_Y , Const.LINE_3_W , Const.LINE_3_W , id , Const.SpriteType.TYPE_ENEMY.getValue() );			
 		}
 	}	
 	

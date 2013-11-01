@@ -26,7 +26,12 @@ public abstract class Scene {
 				if( list.get(j).GetUse() == true )
 				{
 					Sprite sp = list.get(j);
-					sp.Update();
+					
+					//fasle‚ª‹A‚Á‚Ä‚«‚½‚çÁ‚·
+					if(sp.Update()==false)
+					{
+						sp.remove();
+					}
 				}
 			}
 		}		

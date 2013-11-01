@@ -1,6 +1,7 @@
 package com.example.user;
 
 import com.example.glsurfaceview.Const;
+import com.example.glsurfaceview.R;
 import com.example.glsurfaceview.Sprite;
 import com.example.glsurfaceview.Vector3;
 
@@ -13,7 +14,13 @@ import com.example.glsurfaceview.Vector3;
  *
  */
 
-public class Enemy extends Sprite {
+public class Enemy extends Charactor {
+	
+
+	public Enemy(int hp, int attack) {
+		super(hp, attack);
+		// TODO Auto-generated constructor stub
+	}
 
 	// 初期化処理
 	public void Init()
@@ -22,7 +29,8 @@ public class Enemy extends Sprite {
 	}
 	
 	// 更新処理
-	public boolean Update()
+	@Override	
+	protected void move_state()
 	{
 		//歩くかどうか
 		boolean moveflag = true;
@@ -39,17 +47,23 @@ public class Enemy extends Sprite {
 					//距離を判断して止まる。
 					if( player.getTrans().getX() + player.GetWidth() > this.getTrans().getX() )
 					{
+						//止まる
 						moveflag = false;
+						
+						//攻撃状態にする
+						StartAttack( player );
+						setState( Charactor_State.ATTACK_STATE );
+						
+						//終了
+						break;
 					}
 				}			
 			}
 		}
 		//移動
 		if(moveflag==true)move();
-		
-		return true;			
 	}
-	
+		
 	private void move()
 	{
 		if( getTrans().getY() == Const.LINE_1_Y )
@@ -83,4 +97,34 @@ public class Enemy extends Sprite {
 			}			
 		}		
 	}
+	
+	@Override	
+	protected void attack_state()
+	{
+		//攻撃する
+		if( !UpdateAttack() )
+		{
+			//攻撃対象から外す
+			setAttackTarget( null );			
+			//歩行状態にする
+			setState( Charactor_State.WALK_STATE );				
+		}
+	}
+	
+	@Override
+	public void Damage( Charactor c )
+	{
+		super.Damage(c);
+
+		//ダメージエフェクト
+		AnimationEffect.Create( 
+				this.getTrans().getX() , 
+				this.getTrans().getY() + m_height/2  - Const.rx(0.05)/2, 
+				Const.rx(0.05), 
+				Const.rx(0.05), 
+				3, 1, 10, R.drawable.image1, Const.SpriteType.TYPE_PLAYER.getValue());
+
+	}	
+	
+
 }

@@ -7,6 +7,7 @@ import com.example.glsurfaceview.MainActivity;
 import com.example.glsurfaceview.R;
 import com.example.glsurfaceview.Scene;
 import com.example.glsurfaceview.Sprite;
+import com.example.user.AnimationEffect;
 import com.example.user.EnemyAppear;
 import com.example.user.EnemyCastle;
 import com.example.user.Map;
@@ -39,8 +40,7 @@ public class GameScene extends Scene {
 		
 		EnemyCastle ec = new EnemyCastle();
 		ec.Init(Const.rx(0.84), Const.ry(0.175), Const.rw(0.265), Const.rh(0.8), R.drawable.enemy_castle, Const.SpriteType.TYPE_CASLE.getValue());
-
-	
+		
 	}
 
 	@Override

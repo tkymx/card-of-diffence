@@ -33,7 +33,23 @@ public class Sprite {
 	protected float m_width, m_height;
 	protected int spriteType = Const.SpriteType.TYPE_OTHER.getValue();
 	private static boolean isCreate = false;
-		
+
+	public float getM_width() {
+		return m_width;
+	}
+
+	public void setM_width(float m_width) {
+		this.m_width = m_width;
+	}
+
+	public float getM_height() {
+		return m_height;
+	}
+
+	public void setM_height(float m_height) {
+		this.m_height = m_height;
+	}	
+	
 	// コンストラクタ
 	public Sprite()
 	{
@@ -367,6 +383,9 @@ public class Sprite {
 			
 			// リストに自身を追加
 			list.add(this);
+			
+			//自分の番号を登録
+			this.spriteType = spriteType;
 		}
 	}
 	
