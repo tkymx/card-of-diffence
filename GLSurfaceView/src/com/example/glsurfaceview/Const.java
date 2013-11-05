@@ -35,6 +35,9 @@ public class Const {
 	public static int rw( double r ){return (int) (MainActivity.width*r);}
 	public static int rh( double r ){return (int) (MainActivity.height*r);}
 	
+	// スコアの最大数表示数
+	public static final int MAX_SCORE_NUM = 8;
+	
 	public enum SpriteType
 	{
 		TYPE_OTHER( 0 ),
@@ -42,9 +45,10 @@ public class Const {
 		TYPE_CASLE( 2 ), 
 		TYPE_CARD( 3 ) ,
 		TYPE_ENEMY( 4 ), 
-		TYPE_PLAYER( 5 ), 
-		TYPE_TEXT( 6 ),
-		TYPE_MAX( 7 );
+		TYPE_PLAYER( 5 ),
+		TYPE_BUTTON( 6 ),
+		TYPE_TEXT( 7 ),
+		TYPE_MAX( 8 );
 		
 		private int value;
 		

@@ -25,14 +25,15 @@ public class Sprite {
 	
 	protected VertexBuffer vertexBuffer;
 	protected Texture texture;
-	private Vector3 trans = new Vector3();
-	private Vector3 rot = new Vector3();
-	private Vector3 scl = new Vector3( 1.0f, 1.0f, 1.0f );
+	protected Vector3 trans = new Vector3();
+	protected Vector3 rot = new Vector3();
+	protected Vector3 scl = new Vector3( 1.0f, 1.0f, 1.0f );
 	protected boolean bUse;
 	protected boolean bTextureSend;
 	protected float m_width, m_height;
 	protected int spriteType = Const.SpriteType.TYPE_OTHER.getValue();
 	private static boolean isCreate = false;
+	private int TextureIDBackUp;
 		
 	// ƒRƒ“ƒXƒgƒ‰ƒNƒ^
 	public Sprite()
@@ -84,6 +85,16 @@ public class Sprite {
 		return s;
 	}
 	
+	public static Sprite Create( float left, float top, float width, float height, int id, float[] UV, int SpriteType )
+	{
+		Sprite s = new Sprite();
+		
+		// ‰Šú‰»
+		s.Init( left, top, width, height, id, UV, SpriteType );
+		
+		return s;
+	}
+	
 	// ‰Šú‰»ˆ—
 	public void Init()
 	{
@@ -115,8 +126,8 @@ public class Sprite {
 	public void Init( float left, float top, float width, float height, int id, int SpriteType )
 	{
 		// •‚ÌŠi”[
-		m_width = width;
-		m_height = height;
+		m_width = width * 2.0f;
+		m_height = height * 2.0f;
 				
 		float[] vertexs = transToVertex(new Vector3( left, top, 0.0f ));
 		
@@ -127,6 +138,24 @@ public class Sprite {
 		bUse = true;
 		bTextureSend = false;
 	}
+	
+	// ‰Šú‰»ˆ—
+		public void Init( float left, float top, float width, float height, int id, float[] UV, int SpriteType )
+		{
+			// •‚ÌŠi”[
+			m_width = width * 2.0f;
+			m_height = height * 2.0f;
+					
+			float[] vertexs = transToVertex(new Vector3( left, top, 0.0f ));
+			
+			vertexBuffer = new VertexBuffer( vertexs );
+			texture = new Texture( id, UV );
+			appear( SpriteType );
+			
+			bUse = true;
+			bTextureSend = false;
+			TextureIDBackUp = id;
+		}
 	
 	// Œãˆ—
 	public void Uninit()
@@ -241,8 +270,8 @@ public class Sprite {
 		
 		l = ( float )l / (float )MainActivity.width;
 		t = ( float )t / ( float )MainActivity.height;
-		w = l + ( float )m_width*2 / ( float )MainActivity.width;
-		h = t + ( float )m_height*2 / ( float )MainActivity.height;
+		w = l + ( float )m_width / ( float )MainActivity.width;
+		h = t + ( float )m_height / ( float )MainActivity.height;
 		
 		float[] vertexs ={
 				l, t, 0.0f,

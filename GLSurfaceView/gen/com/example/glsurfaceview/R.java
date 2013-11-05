@@ -30,7 +30,8 @@ public final class R {
         public static final int image4=0x7f020006;
         public static final int image5=0x7f020007;
         public static final int map=0x7f020008;
-        public static final int player_castle=0x7f020009;
+        public static final int number003=0x7f020009;
+        public static final int player_castle=0x7f02000a;
     }
     public static final class id {
         public static final int action_settings=0x7f080000;

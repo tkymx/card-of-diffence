@@ -23,7 +23,7 @@ public class EnemyAppear extends Sprite {
 	public static void CreateEnemy( int liney , String playername )
 	{
 		//–¼‘O‚Å‰æ‘œ‚ð”»’f‚·‚é
-		int id = R.drawable.image2;
+		int id = R.drawable.image4;
 		
 		if( liney == Const.LINE_1_Y)
 		{
