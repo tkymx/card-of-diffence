@@ -29,8 +29,18 @@ public final class R {
         public static final int image3=0x7f020005;
         public static final int image4=0x7f020006;
         public static final int image5=0x7f020007;
-        public static final int map=0x7f020008;
-        public static final int player_castle=0x7f020009;
+        public static final int magic_card=0x7f020008;
+        public static final int magic_card_selected=0x7f020009;
+        public static final int magic_card_used=0x7f02000a;
+        public static final int map=0x7f02000b;
+        public static final int moster_card=0x7f02000c;
+        public static final int moster_card_selected=0x7f02000d;
+        public static final int moster_card_used=0x7f02000e;
+        public static final int player_castle=0x7f02000f;
+        public static final int trap=0x7f020010;
+        public static final int trap_card=0x7f020011;
+        public static final int trap_card_selected=0x7f020012;
+        public static final int trap_card_used=0x7f020013;
     }
     public static final class id {
         public static final int action_settings=0x7f080000;

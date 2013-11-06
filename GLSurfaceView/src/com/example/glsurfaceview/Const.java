@@ -25,11 +25,18 @@ public class Const {
 	public static final int LINE_2_W = rw(0.09);
 	public static final int LINE_3_W = rw(0.1);
 	
+	//カードの座標情報
+	public static int card_width_offset =   Const.rx(0.005);
+	public static int card_heught_offset =  Const.ry(0.05);
+	public static int card_width = 			Const.rx( 1.0/11.0 ) - card_width_offset;
+	public static int card_height = 		Const.ry( 0.23 );
 	
+	//シーン情報の紹介
 	public static final int SCENE_TITLE = 0;
 	public static final int SCENE_GAME = 1;
 	public static final int SCENE_RESULT = 2;
 	
+	//座標変換系のマクロ
 	public static int rx( double r ){return (int) (MainActivity.width*r);}
 	public static int ry( double r ){return (int) (MainActivity.height*r);}
 	public static int rw( double r ){return (int) (MainActivity.width*r);}
@@ -41,10 +48,12 @@ public class Const {
 		TYPE_BG( 1 ), 
 		TYPE_CASLE( 2 ), 
 		TYPE_CARD( 3 ) ,
-		TYPE_ENEMY( 4 ), 
-		TYPE_PLAYER( 5 ), 
-		TYPE_TEXT( 6 ),
-		TYPE_MAX( 7 );
+		TYPE_TRAP( 4 ),
+		TYPE_ENEMY( 5 ), 
+		TYPE_PLAYER( 6 ), 
+		TYPE_EFFECT( 7 ),
+		TYPE_TEXT( 8 ),
+		TYPE_MAX( 9 );
 		
 		private int value;
 		

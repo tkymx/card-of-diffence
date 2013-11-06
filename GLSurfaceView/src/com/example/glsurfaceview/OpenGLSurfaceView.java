@@ -39,8 +39,13 @@ public class OpenGLSurfaceView extends GLSurfaceView{
 					
 					// NULL‚Ì‚Æ‚«
 					if( scene!= null ) {
+					
 						// XVˆ—
-						scene.Update();
+						scene.Update();											
+
+						//“ü—Í‚Ì‰Šú‰»
+						Touch touch = Touch.getInstance();
+						touch.UpdateEnd();
 					}
 					
 					// —áŠOˆ—

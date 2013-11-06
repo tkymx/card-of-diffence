@@ -4,6 +4,7 @@ import com.example.glsurfaceview.Const;
 import com.example.glsurfaceview.R;
 import com.example.glsurfaceview.Sprite;
 import com.example.glsurfaceview.Vector3;
+import com.example.user.Charactor.Charactor_State;
 
 /**
  * 
@@ -66,6 +67,9 @@ public class Enemy extends Charactor {
 		
 	private void move()
 	{
+		//城にアタックするかどうかを決めたフラグ
+		boolean castle_attack_flag = false;
+		
 		if( getTrans().getY() == Const.LINE_1_Y )
 		{
 			this.Translate( new Vector3( -Const.LINE_1_SPEED ,0,0) );
@@ -74,6 +78,8 @@ public class Enemy extends Charactor {
 			if( getTrans().getX() < Const.LINE_LEFT_1_X )
 			{
 				setTrans( new Vector3( Const.LINE_LEFT_1_X , Const.LINE_1_Y , 0 ) );
+				//城フラグを立てる
+				castle_attack_flag = true;
 			}			
 		}
 		else if( getTrans().getY() == Const.LINE_2_Y )
@@ -84,6 +90,8 @@ public class Enemy extends Charactor {
 			if( getTrans().getX() < Const.LINE_LEFT_2_X )
 			{
 				setTrans( new Vector3( Const.LINE_LEFT_2_X , Const.LINE_2_Y , 0 ) );
+				//城フラグを立てる
+				castle_attack_flag = true;
 			}			
 		}
 		else if( getTrans().getY() == Const.LINE_3_Y )
@@ -94,8 +102,32 @@ public class Enemy extends Charactor {
 			if( getTrans().getX() < Const.LINE_LEFT_3_X )
 			{
 				setTrans( new Vector3( Const.LINE_LEFT_3_X , Const.LINE_3_Y , 0 ) );
+				//城フラグを立てる
+				castle_attack_flag = true;
 			}			
 		}		
+		
+		//城だったら
+		if( castle_attack_flag )
+		{
+			//城でループする
+			for( Sprite sprite : Sprite.spriteList.get( Const.SpriteType.TYPE_CASLE.getValue() ) )
+			{
+				//敵の城だったら攻撃対象としてセット
+				if( sprite instanceof PlayerCastle )
+				{
+					//城をセットして攻撃状態にする
+					setCastleTarget( (PlayerCastle)sprite );
+					setState( Charactor_State.ATTACK_STATE );
+				}
+			}
+		}
+		else
+		{
+			//一番橋じゃなかったら城を攻撃しない
+			setCastleTarget(null);
+		}
+		
 	}
 	
 	@Override	
@@ -112,6 +144,7 @@ public class Enemy extends Charactor {
 	}
 	
 	@Override
+	//キャラクタの攻撃を受けた時
 	public void Damage( Charactor c )
 	{
 		super.Damage(c);
@@ -122,7 +155,22 @@ public class Enemy extends Charactor {
 				this.getTrans().getY() + m_height/2  - Const.rx(0.05)/2, 
 				Const.rx(0.05), 
 				Const.rx(0.05), 
-				3, 1, 10, R.drawable.image1, Const.SpriteType.TYPE_PLAYER.getValue());
+				3, 1, 10, R.drawable.image1, Const.SpriteType.TYPE_EFFECT.getValue());
+
+	}	
+	//通常のダメージを受けた時
+	@Override	
+	public void Damage( int c )
+	{
+		super.Damage(c);
+
+		//ダメージエフェクト
+		AnimationEffect.Create( 
+				this.getTrans().getX() + m_width/2  - Const.rx(0.05)/2, 
+				this.getTrans().getY() + m_height/2  - Const.rx(0.05)/2, 
+				Const.rx(0.05), 
+				Const.rx(0.05), 
+				3, 1, 10, R.drawable.image1, Const.SpriteType.TYPE_EFFECT.getValue());
 
 	}	
 	

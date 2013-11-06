@@ -6,17 +6,26 @@ import com.example.glsurfaceview.Sprite;
 
 public class EnemyAppear extends Sprite {
 	
+	long time;
+	
 	// 初期化処理
 	public void Init()
 	{		
-		CreateEnemy( Const.LINE_1_Y , "" );
-		CreateEnemy( Const.LINE_2_Y , "" );
-		CreateEnemy( Const.LINE_3_Y , "" );
+		time = 0;
 	}
 	
 	// 更新処理
 	public boolean Update()
 	{
+		if( System.currentTimeMillis() - time >= 10000 )
+		{
+			//敵キャラを配置
+			CreateEnemy( Const.LINE_1_Y , "" );
+			CreateEnemy( Const.LINE_2_Y , "" );
+			CreateEnemy( Const.LINE_3_Y , "" );					
+			
+			time = System.currentTimeMillis();
+		}
 		return true;		
 	}
 	

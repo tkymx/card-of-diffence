@@ -19,9 +19,10 @@ public abstract class Charactor extends Sprite {
 	//状態の管理をする
 	Charactor_State state;
 	
-	//攻撃対象
+	//攻撃対象(城＞敵の順番)
 	Charactor attackTarget;
-
+	Castle castleTarget;
+	
 	//セッターとゲッター
 	public int getValue_hp() {return value_hp;}
 	public void setValue_hp(int value_hp) {this.value_hp = value_hp;}
@@ -33,6 +34,8 @@ public abstract class Charactor extends Sprite {
 	public void setState(Charactor_State state) {this.state = state;}		
 	public Charactor getAttackTarget() {return attackTarget;}
 	public void setAttackTarget(Charactor attackTarget) {this.attackTarget = attackTarget;}
+	public Castle getCastleTarget() {return castleTarget;}
+	public void setCastleTarget(Castle castleTarget) {this.castleTarget = castleTarget;}
 	
 	//コンストラクタ
 	public Charactor( int hp , int attack )
@@ -46,7 +49,13 @@ public abstract class Charactor extends Sprite {
 		
 		//攻撃対象
 		attackTarget = null;
+		castleTarget = null;
 	}
+	
+	// 初期化処理
+	public void Init()
+	{
+	}	
 	
 	// 更新処理
 	protected abstract void move_state();
@@ -76,7 +85,15 @@ public abstract class Charactor extends Sprite {
 	}
 	public boolean UpdateAttack()
 	{
-		attackTarget.Damage(this);
+		//城が優先順位が高い
+		if( castleTarget != null )
+		{
+			castleTarget.Damage(this);
+		}
+		else if( attackTarget != null )
+		{
+			attackTarget.Damage(this);			
+		}
 		return false;
 	}
 	
@@ -84,6 +101,11 @@ public abstract class Charactor extends Sprite {
 	{
 		value_hp -= c.getValue_attack();	
 	}
+	public void Damage( int c )
+	{
+		value_hp -= c;	
+	}
+	
 
 	//死んでいるかどうか
 	boolean isDead()
