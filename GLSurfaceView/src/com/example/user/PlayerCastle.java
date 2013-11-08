@@ -42,10 +42,10 @@ public class PlayerCastle extends Castle {
 		
 		//ダメージエフェクト
 		AnimationEffect.Create( 
-				c.getTrans().getX() - Const.rx(0.05), 
-				c.getTrans().getY() + c.getM_height()/2 - Const.rx(0.05)/2, 
-				Const.rx(0.05), 
-				Const.rx(0.05), 
-				3, 1, 10, R.drawable.image1, Const.SpriteType.TYPE_ENEMY.getValue());				
+				c.getTrans().getX() - Const.rx(0.1), 
+				c.getTrans().getY() + c.getM_height()/2 - Const.rx(0.1)/2, 
+				Const.rx(0.1), 
+				Const.rx(0.1), 
+				10, 1, 1, R.drawable.effect, Const.SpriteType.TYPE_EFFECT.getValue());				
 	}	
 }

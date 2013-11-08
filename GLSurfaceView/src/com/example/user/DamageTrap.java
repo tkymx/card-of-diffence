@@ -56,7 +56,7 @@ public class DamageTrap extends Trap {
 				Enemy enemy = (Enemy)sp;
 				
 				//‚à‚µÚG‚µ‚Ä‚¢‚½‚ç
-				if( enemy.Colission(this) )
+				if( enemy.Collission(this) )
 				{
 					//“G‚ÉUŒ‚
 					enemy.Damage( damage );	

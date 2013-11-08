@@ -459,7 +459,7 @@ public class Sprite {
 	}
 	
 	//Sprite“¯m‚ÌÚG
-	public boolean Colission( Sprite s )
+	public boolean Collission( Sprite s )
 	{
 		//î•ñ
 		int X1 = (int)getTrans().getX();

@@ -32,19 +32,21 @@ public class EnemyAppear extends Sprite {
 	public static void CreateEnemy( int liney , String playername )
 	{
 		//ñºëOÇ≈âÊëúÇîªífÇ∑ÇÈ
-		int id = R.drawable.image2;
+		int id = R.drawable.walk_enemy;
+		//ìGèÓïÒ
+		Enemy enemy = new Enemy(10,1,-2);
 		
 		if( liney == Const.LINE_1_Y)
 		{
-			new Enemy(10,1).Init( Const.LINE_RIGHT_1_X  , Const.LINE_1_Y , Const.LINE_1_W , Const.LINE_1_W , id , Const.SpriteType.TYPE_ENEMY.getValue() );			
+			enemy.Init( Const.LINE_RIGHT_1_X  , Const.LINE_1_Y , Const.LINE_1_W , Const.LINE_1_W , 3 , 1 , 10 , id , Const.SpriteType.TYPE_ENEMY.getValue() );			
 		}
 		else if( liney == Const.LINE_2_Y)
 		{
-			new Enemy(10,1).Init( Const.LINE_RIGHT_2_X  , Const.LINE_2_Y , Const.LINE_2_W , Const.LINE_2_W , id , Const.SpriteType.TYPE_ENEMY.getValue() );			
+			enemy.Init( Const.LINE_RIGHT_2_X  , Const.LINE_2_Y , Const.LINE_2_W , Const.LINE_2_W , 3 , 1 , 10 , id , Const.SpriteType.TYPE_ENEMY.getValue() );			
 		}
 		else if( liney == Const.LINE_3_Y)
 		{
-			new Enemy(10,1).Init( Const.LINE_RIGHT_3_X  , Const.LINE_3_Y , Const.LINE_3_W , Const.LINE_3_W , id , Const.SpriteType.TYPE_ENEMY.getValue() );			
+			enemy.Init( Const.LINE_RIGHT_3_X  , Const.LINE_3_Y , Const.LINE_3_W , Const.LINE_3_W , 3 , 1 , 10 , id , Const.SpriteType.TYPE_ENEMY.getValue() );			
 		}
 	}	
 	

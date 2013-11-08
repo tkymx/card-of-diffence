@@ -8,8 +8,8 @@ import com.example.user.Charactor.Charactor_State;
 
 public class Player extends Charactor {
 
-	public Player(int hp, int attack) {
-		super(hp, attack);
+	public Player(int hp, int attack ,int speed) {
+		super(hp, attack,speed);
 		// TODO Auto-generated constructor stub
 	}
 
@@ -19,121 +19,17 @@ public class Player extends Charactor {
 		
 	}
 	
-	// 更新処理
-	@Override	
-	protected void move_state()
-	{
-
-		//歩くかどうか
-		boolean moveflag = true;
-		//敵がいたら止まる
-		for( Sprite sp : Sprite.spriteList.get( Const.SpriteType.TYPE_ENEMY.getValue() ) )
-		{
-			if( sp instanceof Enemy )
-			{
-				Enemy enemy = (Enemy)sp;
-				
-				//同じ行だったら
-				if( enemy.getTrans().getY() == this.getTrans().getY() )
-				{			
-					//距離を判断して止まる。
-					if( enemy.getTrans().getX() < this.getTrans().getX() + this.GetWidth())
-					{
-						//移動させない
-						moveflag = false;
-						
-						//攻撃状態にする
-						StartAttack( enemy );
-						setState( Charactor_State.ATTACK_STATE );
-						
-						//終了
-						break;						
-					}
-				}			
-			}
-		}
-		//移動
-		if(moveflag==true)move();
-			
-	}	
-	
-	private void move()
-	{
-		//城にアタックするかどうかを決めたフラグ
-		boolean castle_attack_flag = false;
-		
-		if( getTrans().getY() == Const.LINE_1_Y )
-		{
-			this.Translate( new Vector3( Const.LINE_1_SPEED ,0,0) );
-			
-			//座標規制(城まで進んだ)
-			if( getTrans().getX() > Const.LINE_RIGHT_1_X )
-			{
-				setTrans( new Vector3( Const.LINE_RIGHT_1_X , Const.LINE_1_Y , 0 ) );
-				//城フラグを立てる
-				castle_attack_flag = true;
-			}			
-		}
-		else if( getTrans().getY() == Const.LINE_2_Y )
-		{
-			this.Translate( new Vector3( Const.LINE_2_SPEED ,0,0) );
-			
-			//座標規制(城まで進んだ)
-			if( getTrans().getX() > Const.LINE_RIGHT_2_X )
-			{
-				setTrans( new Vector3( Const.LINE_RIGHT_2_X , Const.LINE_2_Y , 0 ) );
-				//城フラグを立てる
-				castle_attack_flag = true;
-			}			
-		}
-		else if( getTrans().getY() == Const.LINE_3_Y )
-		{
-			this.Translate( new Vector3( Const.LINE_3_SPEED ,0,0) );
-			
-			//座標規制(城まで進んだ)
-			if( getTrans().getX() > Const.LINE_RIGHT_3_X )
-			{
-				setTrans( new Vector3( Const.LINE_RIGHT_3_X , Const.LINE_3_Y , 0 ) );
-				//城フラグを立てる
-				castle_attack_flag = true;
-			}			
-		}		
-		
-		//城だったら
-		if( castle_attack_flag )
-		{
-			//城でループする
-			for( Sprite sprite : Sprite.spriteList.get( Const.SpriteType.TYPE_CASLE.getValue() ) )
-			{
-				//敵の城だったら攻撃対象としてセット
-				if( sprite instanceof EnemyCastle )
-				{
-					//城をセットして攻撃状態にする
-					setCastleTarget( (EnemyCastle)sprite );
-					setState( Charactor_State.ATTACK_STATE );
-				}
-			}
-		}
-		else
-		{
-			//一番橋じゃなかったら城を攻撃しない
-			setCastleTarget(null);
-		}
-	}
 
 	@Override
-	protected void attack_state() {		
+	//ターゲットの判断
+	protected boolean IsTarget(Sprite sp) {
 		
-		//攻撃する
-		if( !UpdateAttack() )
-		{
-			//攻撃対象から外す
-			setAttackTarget( null );		
-			//歩行状態にする
-			setState( Charactor_State.WALK_STATE );			
-		}
-	}
-	
+		if( sp instanceof Enemy )return true;
+		if( sp instanceof EnemyCastle )return true;
+		
+		return false;
+	}		
+		
 	@Override	
 	public void Damage( Charactor c )
 	{
@@ -141,11 +37,11 @@ public class Player extends Charactor {
 
 		//ダメージエフェクト
 		AnimationEffect.Create( 
-				this.getTrans().getX() + m_width - Const.rx(0.05), 
-				this.getTrans().getY() + m_height/2  - Const.rx(0.05)/2, 
-				Const.rx(0.05), 
-				Const.rx(0.05), 
-				3, 1, 10, R.drawable.image1, Const.SpriteType.TYPE_EFFECT.getValue());
+				this.getTrans().getX() + m_width - Const.rx(0.1), 
+				this.getTrans().getY() + m_height/2  - Const.rx(0.1)/2, 
+				Const.rx(0.1), 
+				Const.rx(0.1), 
+				10, 1, 1, R.drawable.effect, Const.SpriteType.TYPE_EFFECT.getValue());
 
 	}	
 	//通常のダメージを受けた時
@@ -156,12 +52,14 @@ public class Player extends Charactor {
 
 		//ダメージエフェクト
 		AnimationEffect.Create( 
-				this.getTrans().getX() + m_width/2  - Const.rx(0.05)/2, 
-				this.getTrans().getY() + m_height/2  - Const.rx(0.05)/2, 
-				Const.rx(0.05), 
-				Const.rx(0.05), 
-				3, 1, 10, R.drawable.image1, Const.SpriteType.TYPE_EFFECT.getValue());
+				this.getTrans().getX() + m_width/2  - Const.rx(0.1)/2, 
+				this.getTrans().getY() + m_height/2  - Const.rx(0.1)/2, 
+				Const.rx(0.1), 
+				Const.rx(0.1), 
+				10, 1, 1, R.drawable.effect, Const.SpriteType.TYPE_EFFECT.getValue());
 
-	}		
+	}
+
+	
 
 }
