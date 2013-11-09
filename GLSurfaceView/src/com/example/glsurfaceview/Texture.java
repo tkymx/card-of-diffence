@@ -13,9 +13,11 @@ import android.graphics.Paint.Style;
 public class Texture {
 	
 	private FloatBuffer texUV;
+	private float texColor[] = new float[4];
 	private Bitmap texture;
 	private int texBuffer[] = new int[1];
 	private static BitmapFactory.Options options = new BitmapFactory.Options();
+	private boolean isBind;
 	
 	// コンストラクタ
 	public Texture( int id, float[] UV )
@@ -26,49 +28,18 @@ public class Texture {
 		if( haveTextue == false )
 		{			
 			options.inScaled = false;
+			isBind = false;
+			
+			float color[] = { 1.0f, 1.0f, 1.0f, 1.0f };
 			
 			// 画像の生成
 			texture = BitmapFactory.decodeResource( OpenGLSurfaceView.c.getResources(), id, options );
 			
 			// テクスチャのUV座標の生成
 			texUV = Common.FloatToBuffer( UV );
-		}
-		else
-		{
-			// テクスチャの取得
-			Texture t = TextureManager.GetTexture(id);
 			
-			// 画像の取得
-			texture = t.GetBitmap();
-			
-			// UVの取得
-			texUV = t.GetUV();
-		}
-	}
-	
-	// コンストラクタ
-	public Texture( int id )
-	{
-		// デフォルトUV
-		float UV[] = {
-			0.0f, 1.0f,
-			0.0f, 0.0f,
-			1.0f, 1.0f,
-			1.0f, 0.0f,
-		};
-		
-		boolean haveTextue = TextureManager.haveTexture(id);
-		
-		// テクスチャがつくられていないとき
-		if( haveTextue == false )
-		{
-			options.inScaled = false;
-			
-			// 画像の生成
-			texture = BitmapFactory.decodeResource( OpenGLSurfaceView.c.getResources(), id, options );
-			
-			// テクスチャのUV座標の生成
-			texUV = Common.FloatToBuffer( UV );
+			// 色の設定
+			texColor = color;
 			
 			// テクスチャをリストに追加
 			TextureManager.AddTexture(id, this);
@@ -83,6 +54,57 @@ public class Texture {
 			
 			// UVの取得
 			texUV = t.GetUV();
+			
+			// 色の設定
+			texColor = t.GetColor();
+		}
+	}
+	
+	// コンストラクタ
+	public Texture( int id )
+	{
+		// デフォルトUV
+		float UV[] = {
+			0.0f, 1.0f,
+			0.0f, 0.0f,
+			1.0f, 1.0f,
+			1.0f, 0.0f,
+		};
+		
+		float color[] = { 1.0f, 1.0f, 1.0f, 1.0f };
+		
+		boolean haveTextue = TextureManager.haveTexture(id);
+		
+		// テクスチャがつくられていないとき
+		if( haveTextue == false )
+		{
+			options.inScaled = false;
+			
+			// 画像の生成
+			texture = BitmapFactory.decodeResource( OpenGLSurfaceView.c.getResources(), id, options );
+			
+			// テクスチャのUV座標の生成
+			texUV = Common.FloatToBuffer( UV );
+			
+			// 色の設定
+			texColor = color;
+			
+			// テクスチャをリストに追加
+			TextureManager.AddTexture(id, this);
+		}
+		else
+		{
+			// テクスチャの取得
+			Texture t = TextureManager.GetTexture(id);
+			
+			// 画像の取得
+			texture = t.GetBitmap();
+			
+			// UVの取得
+			texUV = t.GetUV();
+			
+			// 色の設定
+			texColor = t.GetColor();
 		}
 	}
 	
@@ -105,8 +127,13 @@ public class Texture {
  			0.0f, 0.0f,
  		};
  		
+ 		float color[] = { 1.0f, 1.0f, 1.0f, 1.0f };
+ 		
  		// テクスチャのUV座標の生成
  		texUV = Common.FloatToBuffer( UV );
+ 		
+ 		// 色の設定
+ 		texColor = color;
 	}
 	
 	// UV座標のセット
@@ -133,4 +160,27 @@ public class Texture {
     	return texBuffer;
     }
 
+    // バインド状況取得
+    public boolean GetBind()
+    {
+    	return isBind;
+    }
+    
+    // バインドを有効にする
+    public void SetBind()
+    {
+    	isBind = true;
+    }
+    
+    // 色の取得
+    public float[] GetColor()
+    {
+    	return texColor;
+    }
+    
+    // 色の設定
+    public void SetColor( float color[] )
+    {
+    	texColor = color;
+    }
 }
