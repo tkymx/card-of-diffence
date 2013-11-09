@@ -6,8 +6,8 @@ import com.example.glsurfaceview.Touch;
 public abstract class TrapCard extends Card {
 	
 	//コンストラクタ
-	protected TrapCard(int left, int top, int width, int height, int id,int s_id, int u_id) {
-		super(left, top, width, height, id, s_id, u_id);
+	protected TrapCard(int left, int top, int width, int height, int id,int s_id, int u_id,int need) {
+		super(left, top, width, height, id, s_id, u_id,need);
 	
 	}
 	

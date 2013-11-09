@@ -8,16 +8,16 @@ public class DamageMagicCard extends MagicCard {
 	int damage;
 	
 	//作成用の関数
-	public static DamageMagicCard CreateDamageMagicCard( int left, int top, int width, int height, int id,int s_id, int u_id )
+	public static DamageMagicCard CreateDamageMagicCard( int left, int top, int width, int height, int id,int s_id, int u_id,int need )
 	{
-		DamageMagicCard mc = new DamageMagicCard(left, top, width, height, id, s_id, u_id);
+		DamageMagicCard mc = new DamageMagicCard(left, top, width, height, id, s_id, u_id,need);
 		return mc;
 	}	
 	
 
 	//コンストラクタ
-	protected DamageMagicCard(int left, int top, int width, int height, int id,int s_id, int u_id) {
-		super(left, top, width, height, id, s_id, u_id);
+	protected DamageMagicCard(int left, int top, int width, int height, int id,int s_id, int u_id,int need) {
+		super(left, top, width, height, id, s_id, u_id,need);
 		
 		//攻撃力をセット
 		damage = 10;

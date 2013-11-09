@@ -14,7 +14,7 @@ import com.example.glsurfaceview.Sprite;
 
 public class Deck extends Sprite {
 	
-	private void inCard( int x,int y,int id )
+	private void inCard( int x,int y,int id,int need )
 	{
 		Card card = MonsterCard.CreateMonsterCard(
 				x , 
@@ -23,7 +23,8 @@ public class Deck extends Sprite {
 				Const.card_height , 
 				id ,
 				R.drawable.moster_card_selected ,
-				R.drawable.moster_card_used );		
+				R.drawable.moster_card_used,
+				need);		
 	}
 	
 	// 初期化処理
@@ -48,9 +49,13 @@ public class Deck extends Sprite {
 			int y1 = -Const.card_heught_offset;			
 			
 			//モンスターカード
-			if( i >= 0 && i <= 8 )
+			if( i == 0 )
 			{
-				inCard(x1, y1, image[i]);
+				inCard(x1, y1, image[i],5);				
+			}
+			if( i >= 1 && i <= 8 )
+			{
+				inCard(x1, y1, image[i],1);
 			}
 			//罠カード
 			if( i == 9 )
@@ -63,7 +68,8 @@ public class Deck extends Sprite {
 						Const.card_height , 
 						R.drawable.trap_card ,
 						R.drawable.trap_card_selected ,
-						R.drawable.trap_card_used );
+						R.drawable.trap_card_used,
+						1);
 			}
 			//魔法カード
 			if( i == 10 )
@@ -76,7 +82,8 @@ public class Deck extends Sprite {
 						Const.card_height , 
 						R.drawable.magic_card ,
 						R.drawable.magic_card_selected ,
-						R.drawable.magic_card_used );
+						R.drawable.magic_card_used,
+						1);
 			}
 		}
 	}

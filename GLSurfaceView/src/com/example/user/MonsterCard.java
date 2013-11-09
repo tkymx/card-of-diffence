@@ -9,15 +9,15 @@ public class MonsterCard extends Card {
 	Charactor charactor;
 	
 	//生成メソッド
-	public static MonsterCard CreateMonsterCard( int left, int top, int width, int height, int id,int s_id, int u_id )
+	public static MonsterCard CreateMonsterCard( int left, int top, int width, int height, int id,int s_id, int u_id,int need )
 	{
-		MonsterCard mc = new MonsterCard(left, top, width, height, id, s_id, u_id);
+		MonsterCard mc = new MonsterCard(left, top, width, height, id, s_id, u_id,need);
 		return mc;
 	}
 	
 	//コンストラクタ
-	protected MonsterCard(int left, int top, int width, int height, int id,int s_id, int u_id) {
-		super(left, top, width, height, id, s_id, u_id);
+	protected MonsterCard(int left, int top, int width, int height, int id,int s_id, int u_id,int need) {
+		super(left, top, width, height, id, s_id, u_id,need);
 		
 		//キャラクターを始め無しにする
 		charactor = null;
@@ -84,5 +84,5 @@ public class MonsterCard extends Card {
 		charactor = null;
 		
 	}
-
+	
 }

@@ -1,5 +1,9 @@
 package com.example.user;
 
+import java.util.ArrayList;
+import java.util.LinkedList;
+import java.util.Vector;
+
 import com.example.glsurfaceview.Const.SpriteType;
 import com.example.glsurfaceview.Sprite;
 import com.example.glsurfaceview.Texture;
@@ -20,7 +24,10 @@ import com.example.glsurfaceview.Touch;
 public abstract class Card extends Sprite {
 
 	//全体的の選択対象(選択されているカード)
-	static Card SelectedCard = null;
+	static Vector<Card> SelectedCard = new Vector<Card>();
+	
+	//生贄の数
+	int neednum;
 	
 	//選択時
 	Texture can;
@@ -49,56 +56,150 @@ public abstract class Card extends Sprite {
 	}	
 	
 	//継承先からしか生産できない
-	protected Card( int left , int top, int width , int height , int id , int s_id , int u_id )
+	protected Card( int left , int top, int width , int height , int id , int s_id , int u_id , int need )
 	{
 		setCan( new Texture(id) );
 		setSelected( new Texture(s_id) );
 		setUsed( new Texture(u_id) );	
 		Init(left, top, width, height, id, SpriteType.TYPE_CARD.getValue());		
+		
+		//生贄の数
+		neednum = need;
 	}	
-	
 	
 	//選択されている時の更新処理
 	public abstract void SelectedUpdate();		
+	//メインかどうか
+	public boolean isMainSelected( Card card )
+	{
+		if( SelectedCard.indexOf(card) != -1 )
+		{
+			if( SelectedCard.get( 0 ) == card )
+			return true;
+		}
+		return false;
+	}
+	//サブかどうか
+	public boolean isSubSelected( Card card )
+	{
+		if( SelectedCard.indexOf(card) != -1 )
+		{
+			if( SelectedCard.get( 0 ) != card )
+			return true;
+		}
+		return false;
+	}
+	//他のかどうか	
+	public boolean isElseSelected( Card card )
+	{
+		if( SelectedCard.indexOf(card) == -1 )return true;
+		return false;
+	}
+	//必要数に満たしているか
+	public boolean isNeed()
+	{
+		if( SelectedCard.size() > 0 )
+		{
+			//メインの必要数
+			int need = SelectedCard.get(0).neednum;
+			//必要個数揃っていたら
+			if( SelectedCard.size() == need )
+			{
+				return true;
+			}			
+		}
+		return false;
+	}
+	//必要数の取得
+	public int getNeed()
+	{
+		if( SelectedCard.size() > 0 )
+		{
+			//メインの必要数
+			return SelectedCard.get(0).neednum;
+		}
+		return -1;
+	}
+	//セレクトの追加
+	public void SelectedAdd( Card card )
+	{
+		card.SetTexture( selected );
+		SelectedCard.add(card);
+	}
+	//セレクトのクリア
+	public void SelectedClear(  )
+	{
+		for( Card card : SelectedCard )
+		{
+			card.SetTexture( card.can );
+		}
+		SelectedCard.clear();
+	}
+	public void SelectedClear( Card card )
+	{
+		if( SelectedCard.indexOf(card) != -1 )
+		{
+			card.SetTexture( can );
+		}
+		SelectedCard.remove(this);
+	}
 	// 更新処理
 	public boolean Update()
 	{
 		//自分が選択対象なら
 		//使用可だったら
 		if( GetTexture() != used )
-		{
-			if( SelectedCard == this )
+		{			
+			//自分がメインの時
+			if( isMainSelected(this) )
 			{
-				//セレクト次の更新処理
-				SelectedUpdate();
-				
-				//押された時、もとに戻す
+				//タッチしたら
 				if( IsTouch() )
 				{
-					//しようかにする
-					SetTexture( can );					
-					SelectedCard = null;
-				}						
-				
-			}
-			else
-			//自分が選択対象じゃなかったら
-			{
-				//押された時、選択にする
-				if( IsTouch() )
-				{
-					Touch touch = Touch.getInstance();
-					//セレクト状態にする。
-					SetTexture( selected );					
-					SelectedCard = this;
-					
-					IsTouch();
+					//すべてを消す
+					SelectedClear();
 				}
-				//普通に戻す
-				else if( GetTexture() != can )
+				else
 				{
-					//普通のカードにする
-					SetTexture( can );
+					//個数が揃っていたら
+					if( isNeed() )
+					{
+						//自分がタッチされていなかったら更新動作
+						SelectedUpdate();						
+					}
+				}
+			}
+			//自分がサブの時
+			else if( isSubSelected(this) )
+			{
+				if( IsTouch() )
+				{
+					//自分を消す
+					SelectedClear(this);
+				}
+			}
+			//自分が他の時
+			else if( isElseSelected(this))
+			{
+				if( IsTouch() )
+				{
+					//個数が揃っていたら
+					if( isNeed() )
+					{
+						//すべてを消して自分を入れる
+						SelectedClear();
+						//自分を入れる
+						SelectedAdd(this);
+					}
+					//必要未満だったら
+					else if( SelectedCard.size() < getNeed() || getNeed() == -1 )
+					{
+						SelectedAdd(this);
+					}
+				}
+				else
+				{
+					SetTexture(can);
 				}
 			}
 		}
@@ -109,7 +210,9 @@ public abstract class Card extends Sprite {
 	//カードを使用する
 	public void use()
 	{
-		SelectedCard = null;
+		//すべてを消す
+		SelectedClear();
+		//自分を使用済みにする
 		SetTexture( used );
 	}
 	
