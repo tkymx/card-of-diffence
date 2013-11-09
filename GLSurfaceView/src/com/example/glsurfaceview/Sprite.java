@@ -151,8 +151,8 @@ public class Sprite {
 	public void Init( float left, float top, float width, float height, int id, int SpriteType )
 	{
 		// ïùÇÃäiî[
-		m_width = width * 2.0f;
-		m_height = height * 2.0f;
+		m_width = width;
+		m_height = height;
 				
 		float[] vertexs = transToVertex(new Vector3( left, top, 0.0f ));
 		
@@ -168,8 +168,8 @@ public class Sprite {
 		public void Init( float left, float top, float width, float height, int id, float[] UV, int SpriteType )
 		{
 			// ïùÇÃäiî[
-			m_width = width * 2.0f;
-			m_height = height * 2.0f;
+			m_width = width;
+			m_height = height;
 					
 			float[] vertexs = transToVertex(new Vector3( left, top, 0.0f ));
 			
@@ -299,8 +299,8 @@ public class Sprite {
 		
 		l = ( float )l / (float )MainActivity.width;
 		t = ( float )t / ( float )MainActivity.height;
-		w = l + ( float )m_width / ( float )MainActivity.width;
-		h = t + ( float )m_height / ( float )MainActivity.height;
+		w = l + ( float )(m_width*2) / ( float )MainActivity.width;
+		h = t + ( float )(m_height*2) / ( float )MainActivity.height;
 		
 		float[] vertexs ={
 				l, t, 0.0f,

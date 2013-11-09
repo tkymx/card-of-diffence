@@ -3,6 +3,7 @@ package com.example.user;
 import com.example.glsurfaceview.Const.SpriteType;
 import com.example.glsurfaceview.Sprite;
 import com.example.glsurfaceview.Texture;
+import com.example.glsurfaceview.Touch;
 
 /**
  * 
@@ -86,9 +87,12 @@ public abstract class Card extends Sprite {
 				//押された時、選択にする
 				if( IsTouch() )
 				{
+					Touch touch = Touch.getInstance();
 					//セレクト状態にする。
 					SetTexture( selected );					
 					SelectedCard = this;
+					
+					IsTouch();
 				}
 				//普通に戻す
 				else if( GetTexture() != can )
