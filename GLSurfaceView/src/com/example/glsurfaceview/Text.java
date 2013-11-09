@@ -23,7 +23,6 @@ public class Text extends Sprite {
 		appear(SpriteType.TYPE_TEXT.getValue());
 		
 		bUse = true;
-		bTextureSend = false;
 	}
 	
 	// ê∂ê¨

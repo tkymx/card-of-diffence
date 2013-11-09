@@ -29,7 +29,6 @@ public class Sprite {
 	protected Vector3 rot = new Vector3();
 	protected Vector3 scl = new Vector3( 1.0f, 1.0f, 1.0f );
 	protected boolean bUse;
-	protected boolean bTextureSend;
 	protected float m_width, m_height;
 	protected int spriteType = Const.SpriteType.TYPE_OTHER.getValue();
 	private static boolean isCreate = false;
@@ -57,7 +56,6 @@ public class Sprite {
 	{
 		//テクス茶の設定
 		texture = tex;
-		bTextureSend = false;
 	}
 	
 	// コンストラクタ
@@ -133,7 +131,6 @@ public class Sprite {
 		appear( SpriteType );
 		
 		bUse = true;
-		bTextureSend = false;
 	}
 	
 	// 初期化処理
@@ -144,7 +141,6 @@ public class Sprite {
 		appear( SpriteType );
 		
 		bUse = true;
-		bTextureSend = false;
 	}
 	
 	// 初期化処理
@@ -161,7 +157,6 @@ public class Sprite {
 		appear( SpriteType );
 		
 		bUse = true;
-		bTextureSend = false;
 	}
 	
 	// 初期化処理
@@ -178,7 +173,6 @@ public class Sprite {
 			appear( SpriteType );
 			
 			bUse = true;
-			bTextureSend = false;
 			TextureIDBackUp = id;
 		}
 	
@@ -197,7 +191,7 @@ public class Sprite {
     public void SetSprite( GL10 gl )
     {
     	// テクスチャをopenglへ送っていないとき
-    	if( bTextureSend != true )
+    	if( texture.GetBind() != true )
     	{
 	    	// テクスチャバッファの取得
 	    	Texture texture = GetTexture();
@@ -217,8 +211,9 @@ public class Sprite {
 	        // 拡縮の設定
 	        gl.glTexParameterf(GL10.GL_TEXTURE_2D, GL10.GL_TEXTURE_MIN_FILTER, GL10.GL_NEAREST);
 	        gl.glTexParameterf(GL10.GL_TEXTURE_2D, GL10.GL_TEXTURE_MAG_FILTER, GL10.GL_NEAREST);
-	        	        
-	        bTextureSend = true;
+	        
+	        // テクスチャを使用にする
+	        texture.SetBind();
     	}
     }
     
@@ -233,6 +228,7 @@ public class Sprite {
     	
 	    	FloatBuffer buffer = vertexBuffer.GetVertexBuffer();
 	    	FloatBuffer UV = texture.GetUV();
+	    	float[] color = texture.GetColor();
 	    	int size = vertexBuffer.GetVertexBufferSize();
 	    	int tex[] = texture.GetTextureBuffer();
 	    	
@@ -240,7 +236,7 @@ public class Sprite {
 	    	gl.glEnableClientState( GL10.GL_VERTEX_ARRAY );
 	    	
 	    	// テクスチャを有効にする
-	    	gl.glEnableClientState(GL10.GL_TEXTURE_COORD_ARRAY);
+	    	gl.glEnableClientState( GL10.GL_TEXTURE_COORD_ARRAY );
 	    	
 	    	//gl.glActiveTexture(GL10.GL_TEXTURE0);
 	    	
@@ -258,12 +254,15 @@ public class Sprite {
 	    	
 	    	// テクスチャのバインド
 	    	gl.glBindTexture( GL10.GL_TEXTURE_2D, tex[0] );
-	
-	        // UV配列をGLに紐づけ
-	        gl.glTexCoordPointer( 2, GL10.GL_FLOAT, 0, UV );
 	        
 	        // 頂点配列のセット
 	     	gl.glVertexPointer( 3, GL10.GL_FLOAT, 0, buffer );
+	     	
+	     	 // UV配列をGLに紐づけ
+	        gl.glTexCoordPointer( 2, GL10.GL_FLOAT, 0, UV );
+	     	
+	     	 // 描画色の設定
+	    	gl.glColor4f( color[0], color[1], color[2], color[3]);
 			
 			// 描画
 			gl.glDrawArrays( GL10.GL_TRIANGLE_STRIP, 0, size );
