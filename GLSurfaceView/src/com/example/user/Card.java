@@ -28,41 +28,43 @@ public abstract class Card extends Sprite {
 	
 	//生贄の数
 	int neednum;
-	
-	//選択時
-	Texture can;
-	//選択時
-	Texture selected;
-	//使えない時
-	Texture used;	
+
+	//時間情報 -1で使わない
+	long alive_time;
+	//しようかかどうか
+	boolean isUse;
+			
+	public void startCan() {
+		//時間を設定できるようにする
+		if( alive_time < 0 )
+		{
+			alive_time = System.currentTimeMillis();			
+		}
+	}
+	public void setCan() {
+		texture.SetColor( 1.0f,1.0f,1.0f,1.0f );
+		isUse = true;
 		
-	public Texture getCan() {
-		return can;
+		//時間の初期化
+		alive_time = -1;
 	}
-	public void setCan(Texture can) {
-		this.can = can;
+	public void setSelected() {
+		texture.SetColor( 1.5f,1.2f,0.0f,0.5f );
 	}
-	public Texture getSelected() {
-		return selected;
-	}
-	public void setSelected(Texture selected) {
-		this.selected = selected;
-	}
-	public Texture getUsed() {
-		return used;
-	}
-	public void setUsed(Texture used) {
-		this.used = used;
+	public void setUsed() {
+		texture.SetColor( 0.4f,0.4f,0.4f,1.0f );
+		isUse = false;
 	}	
 	
 	//継承先からしか生産できない
-	protected Card( int left , int top, int width , int height , int id , int s_id , int u_id , int need )
+	protected Card( int left , int top, int width , int height , int id , int need )
 	{
-		setCan( new Texture(id) );
-		setSelected( new Texture(s_id) );
-		setUsed( new Texture(u_id) );	
-		Init(left, top, width, height, id, SpriteType.TYPE_CARD.getValue());		
+		//しようかにする
+		isUse = true;
+		//時間の初期化
+		alive_time = -1;
 		
+		Init(left, top, width, height, id, SpriteType.TYPE_CARD.getValue());				
 		//生贄の数
 		neednum = need;
 	}	
@@ -123,7 +125,7 @@ public abstract class Card extends Sprite {
 	//セレクトの追加
 	public void SelectedAdd( Card card )
 	{
-		card.SetTexture( selected );
+		card.setSelected();
 		SelectedCard.add(card);
 	}
 	//セレクトのクリア
@@ -131,7 +133,7 @@ public abstract class Card extends Sprite {
 	{
 		for( Card card : SelectedCard )
 		{
-			card.SetTexture( card.can );
+			card.setCan();
 		}
 		SelectedCard.clear();
 	}
@@ -139,16 +141,25 @@ public abstract class Card extends Sprite {
 	{
 		if( SelectedCard.indexOf(card) != -1 )
 		{
-			card.SetTexture( can );
+			card.setCan();
 		}
 		SelectedCard.remove(this);
+	}
+	//セレクトのクリア
+	public void SelectedAllUsedClear(  )
+	{
+		for( Card card : SelectedCard )
+		{
+			card.setUsed();
+		}
+		SelectedCard.clear();
 	}
 	// 更新処理
 	public boolean Update()
 	{
 		//自分が選択対象なら
 		//使用可だったら
-		if( GetTexture() != used )
+		if( isUse )
 		{			
 			//自分がメインの時
 			if( isMainSelected(this) )
@@ -199,7 +210,19 @@ public abstract class Card extends Sprite {
 				}
 				else
 				{
-					SetTexture(can);
+					setCan();
+				}
+			}
+		}
+		else
+		{
+			//0より上で時間判断開始
+			if( alive_time > 0 )
+			{
+				//使えない時に時間経過で使えるようにする
+				if( System.currentTimeMillis() - alive_time > 1000 )
+				{
+					setCan();
 				}
 			}
 		}
@@ -211,22 +234,22 @@ public abstract class Card extends Sprite {
 	public void use()
 	{
 		//すべてを消す
-		SelectedClear();
+		SelectedAllUsedClear();
 		//自分を使用済みにする
-		SetTexture( used );
+		setUsed();
 	}
 	
 	//使用を許可する
 	public void permitUse()
 	{
-		SetTexture( can );
+		startCan();
 	}
 
 	
 	//今使用できるかをチェックする
 	public boolean IsUse()
 	{
-		return GetTexture() != used;
+		return isUse;
 	}
 	
 }
