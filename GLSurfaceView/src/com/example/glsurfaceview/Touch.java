@@ -36,7 +36,7 @@ public class Touch {
 	// Yæ“¾
 	public float getY()
 	{
-		return y;
+		return MainActivity.height-y;
 	}
 	
 	// ˆÚ“®—ÊXæ“¾
@@ -73,6 +73,15 @@ public class Touch {
 	public boolean IsMove()
 	{
 		return isMove;
+	}
+	
+	//–ˆ“x‚Ìˆ—
+	public void UpdateEnd()
+	{
+		isTouch = false;
+		isRelease = false;
+		isCancel = false;
+		isMove = false;		
 	}
 	
 	// XVˆ—

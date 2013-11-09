@@ -1,10 +1,17 @@
 package com.example.user;
 
 import com.example.glsurfaceview.Const;
+import com.example.glsurfaceview.R;
 import com.example.glsurfaceview.Sprite;
 import com.example.glsurfaceview.Vector3;
+import com.example.user.Charactor.Charactor_State;
 
-public class Player extends Sprite {
+public class Player extends Charactor {
+
+	public Player(int hp, int attack ,int speed) {
+		super(hp, attack,speed);
+		// TODO Auto-generated constructor stub
+	}
 
 	// 初期化処理
 	public void Init()
@@ -12,69 +19,47 @@ public class Player extends Sprite {
 		
 	}
 	
-	// 更新処理
-	public boolean Update()
-	{
 
-		//歩くかどうか
-		boolean moveflag = true;
-		//敵がいたら止まる
-		for( Sprite sp : Sprite.spriteList.get( Const.SpriteType.TYPE_ENEMY.getValue() ) )
-		{
-			if( sp instanceof Enemy )
-			{
-				Enemy enemy = (Enemy)sp;
-				
-				//同じ行だったら
-				if( enemy.getTrans().getY() == this.getTrans().getY() )
-				{			
-					//距離を判断して止まる。
-					if( enemy.getTrans().getX() < this.getTrans().getX() + this.GetWidth())
-					{
-						moveflag = false;
-					}
-				}			
-			}
-		}
-		//移動
-		if(moveflag==true)move();
+	@Override
+	//ターゲットの判断
+	protected boolean IsTarget(Sprite sp) {
 		
-		return true;		
-	}	
-	
-	
-	private void move()
+		if( sp instanceof Enemy )return true;
+		if( sp instanceof EnemyCastle )return true;
+		
+		return false;
+	}		
+		
+	@Override	
+	public void Damage( Charactor c )
 	{
-		if( getTrans().getY() == Const.LINE_1_Y )
-		{
-			this.Translate( new Vector3( Const.LINE_1_SPEED ,0,0) );
-			
-			//座標規制
-			if( getTrans().getX() > Const.LINE_RIGHT_1_X )
-			{
-				setTrans( new Vector3( Const.LINE_RIGHT_1_X , Const.LINE_1_Y , 0 ) );
-			}			
-		}
-		else if( getTrans().getY() == Const.LINE_2_Y )
-		{
-			this.Translate( new Vector3( Const.LINE_2_SPEED ,0,0) );
-			
-			//座標規制
-			if( getTrans().getX() > Const.LINE_RIGHT_2_X )
-			{
-				setTrans( new Vector3( Const.LINE_RIGHT_2_X , Const.LINE_2_Y , 0 ) );
-			}			
-		}
-		else if( getTrans().getY() == Const.LINE_3_Y )
-		{
-			this.Translate( new Vector3( Const.LINE_3_SPEED ,0,0) );
-			
-			//座標規制
-			if( getTrans().getX() > Const.LINE_RIGHT_3_X )
-			{
-				setTrans( new Vector3( Const.LINE_RIGHT_3_X , Const.LINE_3_Y , 0 ) );
-			}			
-		}		
+		super.Damage(c);
+
+		//ダメージエフェクト
+		AnimationEffect.Create( 
+				this.getTrans().getX() + m_width - Const.rx(0.1), 
+				this.getTrans().getY() + m_height/2  - Const.rx(0.1)/2, 
+				Const.rx(0.1), 
+				Const.rx(0.1), 
+				10, 1, 1, R.drawable.effect, Const.SpriteType.TYPE_EFFECT.getValue());
+
+	}	
+	//通常のダメージを受けた時
+	@Override	
+	public void Damage( int c )
+	{
+		super.Damage(c);
+
+		//ダメージエフェクト
+		AnimationEffect.Create( 
+				this.getTrans().getX() + m_width/2  - Const.rx(0.1)/2, 
+				this.getTrans().getY() + m_height/2  - Const.rx(0.1)/2, 
+				Const.rx(0.1), 
+				Const.rx(0.1), 
+				10, 1, 1, R.drawable.effect, Const.SpriteType.TYPE_EFFECT.getValue());
+
 	}
+
 	
+
 }

@@ -3,37 +3,40 @@ package com.example.user;
 import com.example.glsurfaceview.Const;
 import com.example.glsurfaceview.R;
 import com.example.glsurfaceview.Sprite;
+import com.example.glsurfaceview.Touch;
 
 public class PlayerAppear extends Sprite {
 	
 	// 初期化処理
 	public void Init()
 	{
-		CreatePlayer( Const.LINE_1_Y , "" );
-		CreatePlayer( Const.LINE_2_Y , "" );
-		CreatePlayer( Const.LINE_3_Y , "" );
 	}
 	
 	// 更新処理
 	public boolean Update()
-	{
+	{		
 		return true;		
 	}
 	
-	public static void CreatePlayer( int liney , String playername )
+	public static Player CreatePlayer( int liney , String playername )
 	{
+		//そのうちに名前で判断したプレイヤーを表示するようにする。
+		Player player = new Player(10,1,2);
+		
 		if( liney == Const.LINE_1_Y)
 		{
-			new Player().Init( Const.LINE_LEFT_1_X  , Const.LINE_1_Y , Const.LINE_1_W , Const.LINE_1_W , R.drawable.image1 , Const.SpriteType.TYPE_PLAYER.getValue() );			
+			player.Init( Const.LINE_LEFT_1_X  , Const.LINE_1_Y , Const.LINE_1_W , Const.LINE_1_W , 3 , 1 , 10 , R.drawable.walk , Const.SpriteType.TYPE_PLAYER.getValue() );			
 		}
 		else if( liney == Const.LINE_2_Y)
 		{
-			new Player().Init( Const.LINE_LEFT_2_X  , Const.LINE_2_Y , Const.LINE_2_W , Const.LINE_2_W , R.drawable.image1 , Const.SpriteType.TYPE_PLAYER.getValue() );			
+			player.Init( Const.LINE_LEFT_2_X  , Const.LINE_2_Y , Const.LINE_2_W , Const.LINE_2_W , 3 , 1 , 10 , R.drawable.walk , Const.SpriteType.TYPE_PLAYER.getValue() );			
 		}
 		else if( liney == Const.LINE_3_Y)
 		{
-			new Player().Init( Const.LINE_LEFT_3_X  , Const.LINE_3_Y , Const.LINE_3_W , Const.LINE_3_W , R.drawable.image1 , Const.SpriteType.TYPE_PLAYER.getValue() );			
+			player.Init( Const.LINE_LEFT_3_X  , Const.LINE_3_Y , Const.LINE_3_W , Const.LINE_3_W , 3 , 1 , 10 , R.drawable.walk , Const.SpriteType.TYPE_PLAYER.getValue() );			
 		}
+		
+		return player;
 	}
 	
 }

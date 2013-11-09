@@ -14,9 +14,13 @@ public class SpriteAnimation extends Sprite {
 	private int animeTime, animeNowTime;
 	private float[] UV = new float[8];
 	
+	//終了したかどうか
+	protected boolean isEnd;
+	
 	// コンストラクタ
 	public SpriteAnimation()
 	{
+		isEnd = false;
 	}
 	
 	// 生成
@@ -44,30 +48,38 @@ public class SpriteAnimation extends Sprite {
 		makeUV();
 		
 		texture.SetUV(UV);
+
+		//初めにすぐ次へ行かないため
+		animeNowTime = 1;
 	}
 	
 	// 更新処理
 	@Override
 	public boolean Update()
 	{
-		// アニメーションの時間が一定時間たったとき
 		if( ( animeNowTime % animeTime ) == 0 )
 		{
-			// テクスチャの更新
+			//X方向のアニメーションの移動
 			animeUV[0] += animeUVX;
-			animeUV[1] += animeUVY;
-			
+			//終了していない
+			isEnd = false;
+
 			// アニメーションがテクスチャ最大を超えたとき
 			if( animeUV[0] >= 1.0f )
 			{
 				animeUV[0] = 0.0f;
+				
+				//Y方向のアニメーションの移動
+				animeUV[1] += animeUVY;
+				
+				// アニメーションがテクスチャ最大を超えたとき
+				if( animeUV[1] >= 1.0f )
+				{
+					animeUV[1] = 0.0f;
+					isEnd = true;					
+				}				
 			}
 			
-			// アニメーションがテクスチャ最大を超えたとき
-			if( animeUV[1] >= 1.0f )
-			{
-				animeUV[1] = 0.0f;
-			}
 			
 			makeUV();
 			
@@ -103,13 +115,13 @@ public class SpriteAnimation extends Sprite {
 	private void makeUV( )
 	{
 		UV[0] =	animeUV[0];
-		UV[1] = animeUV[1];
+		UV[1] = animeUV[1] + animeUVY;
 		UV[2] = animeUV[0];
-		UV[3] = animeUV[1] + animeUVY;
+		UV[3] = animeUV[1];
 		UV[4] = animeUV[0] + animeUVX;
-		UV[5] = animeUV[1];
+		UV[5] = animeUV[1] + animeUVY;
 		UV[6] = animeUV[0] + animeUVX;
-		UV[7] = animeUV[1] + animeUVY;
+		UV[7] = animeUV[1];
 	}
 	
 }

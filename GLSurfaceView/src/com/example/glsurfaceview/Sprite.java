@@ -35,6 +35,31 @@ public class Sprite {
 	private static boolean isCreate = false;
 	private int TextureIDBackUp;
 		
+
+	public float getM_width() {
+		return m_width;
+	}
+
+	public void setM_width(float m_width) {
+		this.m_width = m_width;
+	}
+
+	public float getM_height() {
+		return m_height;
+	}
+
+	public void setM_height(float m_height) {
+		this.m_height = m_height;
+	}	
+	
+	//テクスチャのセットをする
+	public void SetTexture( Texture tex )
+	{
+		//テクス茶の設定
+		texture = tex;
+		bTextureSend = false;
+	}
+	
 	// コンストラクタ
 	public Sprite()
 	{
@@ -192,53 +217,57 @@ public class Sprite {
 	        // 拡縮の設定
 	        gl.glTexParameterf(GL10.GL_TEXTURE_2D, GL10.GL_TEXTURE_MIN_FILTER, GL10.GL_NEAREST);
 	        gl.glTexParameterf(GL10.GL_TEXTURE_2D, GL10.GL_TEXTURE_MAG_FILTER, GL10.GL_NEAREST);
-	        
-	        //bitmap.recycle();
-	        
+	        	        
 	        bTextureSend = true;
     	}
     }
     
     // スプライトの描画
     public void DrawSprite( GL10 gl )
-    {
+    {    	
     	Texture texture = GetTexture();
-    	FloatBuffer buffer = vertexBuffer.GetVertexBuffer();
-    	FloatBuffer UV = texture.GetUV();
-    	int size = vertexBuffer.GetVertexBufferSize();
-    	int tex[] = texture.GetTextureBuffer();
-    	
-    	// 頂点配列を有効にする
-    	gl.glEnableClientState( GL10.GL_VERTEX_ARRAY );
-    	
-    	// テクスチャを有効にする
-    	gl.glEnableClientState(GL10.GL_TEXTURE_COORD_ARRAY);
-    	
-    	//gl.glActiveTexture(GL10.GL_TEXTURE0);
-    	
-    	// デプスバッファのテストを無効にする
-     	gl.glDisable(GL10.GL_DEPTH_TEST);
-     	
-     	// ライトを無効にする
-     	gl.glDisable(GL10.GL_LIGHTING);
-     	
-     	// テクスチャを有効にする
-     	gl.glEnable(GL10.GL_TEXTURE_2D);
-     	
-     	// 1度だけ画像をopenglへ転送する
-     	SetSprite(gl);
-    	
-    	// テクスチャのバインド
-    	gl.glBindTexture( GL10.GL_TEXTURE_2D, tex[0] );
 
-        // UV配列をGLに紐づけ
-        gl.glTexCoordPointer( 2, GL10.GL_FLOAT, 0, UV );
-        
-        // 頂点配列のセット
-     	gl.glVertexPointer( 3, GL10.GL_FLOAT, 0, buffer );
-		
-		// 描画
-		gl.glDrawArrays( GL10.GL_TRIANGLE_STRIP, 0, size );
+    	//テクスチャがあったら描画
+    	if( texture != null )
+    	{
+    	
+	    	FloatBuffer buffer = vertexBuffer.GetVertexBuffer();
+	    	FloatBuffer UV = texture.GetUV();
+	    	int size = vertexBuffer.GetVertexBufferSize();
+	    	int tex[] = texture.GetTextureBuffer();
+	    	
+	    	// 頂点配列を有効にする
+	    	gl.glEnableClientState( GL10.GL_VERTEX_ARRAY );
+	    	
+	    	// テクスチャを有効にする
+	    	gl.glEnableClientState(GL10.GL_TEXTURE_COORD_ARRAY);
+	    	
+	    	//gl.glActiveTexture(GL10.GL_TEXTURE0);
+	    	
+	    	// デプスバッファのテストを無効にする
+	     	gl.glDisable(GL10.GL_DEPTH_TEST);
+	     	
+	     	// ライトを無効にする
+	     	gl.glDisable(GL10.GL_LIGHTING);
+	     	
+	     	// テクスチャを有効にする
+	     	gl.glEnable(GL10.GL_TEXTURE_2D);
+	     	
+	     	// 1度だけ画像をopenglへ転送する
+	     	SetSprite(gl);
+	    	
+	    	// テクスチャのバインド
+	    	gl.glBindTexture( GL10.GL_TEXTURE_2D, tex[0] );
+	
+	        // UV配列をGLに紐づけ
+	        gl.glTexCoordPointer( 2, GL10.GL_FLOAT, 0, UV );
+	        
+	        // 頂点配列のセット
+	     	gl.glVertexPointer( 3, GL10.GL_FLOAT, 0, buffer );
+			
+			// 描画
+			gl.glDrawArrays( GL10.GL_TRIANGLE_STRIP, 0, size );
+    	}
     }
 	
 	// 頂点バッファの取得
@@ -396,6 +425,12 @@ public class Sprite {
 			
 			// リストに自身を追加
 			list.add(this);
+			
+			//使用中にする
+			bUse = true;
+			
+			//自分の番号を登録
+			this.spriteType = spriteType;
 		}
 	}
 	
@@ -435,4 +470,43 @@ public class Sprite {
 		
 		return isCreate;
 	}
+	
+	//タッチされた
+	public boolean IsTouch()
+	{
+		Touch touch = Touch.getInstance();
+		if( touch.IsTouch() )
+		{
+			float x = touch.getX();
+			//openglの座標系への変更
+			float y = touch.getY();
+			if( trans.getX() < x && trans.getX() + GetWidth() > x && trans.getY() < y && trans.getY() + GetHeight() > y )
+			{
+				return true;
+			}
+		}		
+		return false;
+	}
+	
+	//Sprite同士の接触
+	public boolean Collission( Sprite s )
+	{
+		//情報
+		int X1 = (int)getTrans().getX();
+		int Y1 = (int)getTrans().getY();
+		int W1 = (int)getM_width();
+		int H1 = (int)getM_height();
+		int X2 = (int)s.getTrans().getX();
+		int Y2 = (int)s.getTrans().getY();
+		int W2 = (int)s.getM_width();
+		int H2 = (int)s.getM_width();
+		
+		if((X2 <= X1+W1)&&(X1 <= X2+W2)&&(Y2 <= Y1+H1)&&(Y1 <= Y2+H2 ) )
+		{
+			return true;
+		}
+		
+		return false;		
+	}
+	
 }

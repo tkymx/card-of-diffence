@@ -8,6 +8,8 @@ import com.example.glsurfaceview.R;
 import com.example.glsurfaceview.Scene;
 import com.example.glsurfaceview.Score;
 import com.example.glsurfaceview.Sprite;
+import com.example.user.AnimationEffect;
+import com.example.user.Deck;
 import com.example.user.EnemyAppear;
 import com.example.user.EnemyCastle;
 import com.example.user.Map;
@@ -35,14 +37,19 @@ public class GameScene extends Scene {
 		
 		
 		//城の配置
-		PlayerCastle pc = new PlayerCastle();
+		PlayerCastle pc = new PlayerCastle(10);
 		pc.Init(-Const.rx(0.12), Const.ry(0.17), Const.rw(0.28), Const.rh(0.8), R.drawable.player_castle, Const.SpriteType.TYPE_CASLE.getValue());
 		
-		EnemyCastle ec = new EnemyCastle();
+		EnemyCastle ec = new EnemyCastle(10);
 		ec.Init(Const.rx(0.84), Const.ry(0.175), Const.rw(0.265), Const.rh(0.8), R.drawable.enemy_castle, Const.SpriteType.TYPE_CASLE.getValue());
 
 		// スコア生成
 		Score.getInstance();
+		
+		//カードの配置
+		Deck deck = new Deck();
+		deck.appear( Const.SpriteType.TYPE_CARD.getValue() );
+		
 	}
 
 	@Override
