@@ -3,8 +3,6 @@ package com.example.user;
 import java.util.LinkedList;
 
 import com.example.glsurfaceview.Const;
-import com.example.glsurfaceview.MainActivity;
-import com.example.glsurfaceview.R;
 import com.example.glsurfaceview.Sprite;
 import com.example.glsurfaceview.SpriteAnimation;
 import com.example.glsurfaceview.Vector3;

@@ -4,20 +4,25 @@ import javax.microedition.khronos.opengles.GL10;
 
 import com.example.glsurfaceview.Const;
 import com.example.glsurfaceview.MainActivity;
+import com.example.glsurfaceview.Pause;
 import com.example.glsurfaceview.R;
 import com.example.glsurfaceview.Scene;
 import com.example.glsurfaceview.Score;
-import com.example.glsurfaceview.Sprite;
-import com.example.user.AnimationEffect;
 import com.example.user.Deck;
 import com.example.user.EnemyAppear;
 import com.example.user.EnemyCastle;
 import com.example.user.Map;
-import com.example.user.Player;
 import com.example.user.PlayerAppear;
 import com.example.user.PlayerCastle;
 
 public class GameScene extends Scene {
+	
+	private Pause pause;
+	
+	// コンストラクタ
+	public GameScene()
+	{
+	}
 
 	@Override
 	public void Init() {
@@ -44,12 +49,13 @@ public class GameScene extends Scene {
 		ec.Init(Const.rx(0.84), Const.ry(0.175), Const.rw(0.265), Const.rh(0.8), R.drawable.enemy_castle, Const.SpriteType.TYPE_CASLE.getValue());
 
 		// スコア生成
-		Score.getInstance();
+		Score.getInstance().Init();
 		
 		//カードの配置
 		Deck deck = new Deck();
 		deck.appear( Const.SpriteType.TYPE_CARD.getValue() );
 		
+		pause = new Pause();
 	}
 
 	@Override
@@ -61,7 +67,7 @@ public class GameScene extends Scene {
 	@Override
 	public void onUpdate() {
 		// TODO Auto-generated method stub
-		
+		pause.Update();
 	}
 
 	@Override

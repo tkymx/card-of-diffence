@@ -26,6 +26,9 @@ public class Button extends Sprite{
 
 	public boolean Update()
 	{
+		isTouch = false;
+		isRelease = false;
+		
 		// ƒ^ƒbƒ`‚³‚ê‚Ä‚¢‚é‚Æ‚«
 		if( Touch.getInstance().IsTouch() )
 		{

@@ -22,6 +22,7 @@ public class Sprite {
 	// TODO リストからはずす
 	public static ArrayList<LinkedList<Sprite>> spriteList = new ArrayList<LinkedList<Sprite>>();
 	public static final int maxSpriteListNum = Const.SpriteType.TYPE_MAX.getValue();
+	private static boolean isCreate = false;
 	
 	protected VertexBuffer vertexBuffer;
 	protected Texture texture;
@@ -31,7 +32,6 @@ public class Sprite {
 	protected boolean bUse;
 	protected float m_width, m_height;
 	protected int spriteType = Const.SpriteType.TYPE_OTHER.getValue();
-	private static boolean isCreate = false;
 		
 
 	public float getM_width() {
@@ -211,7 +211,7 @@ public class Sprite {
 	        gl.glTexParameterf(GL10.GL_TEXTURE_2D, GL10.GL_TEXTURE_MAG_FILTER, GL10.GL_NEAREST);
 	        
 	        // テクスチャを使用にする
-	        texture.SetBind();
+	        texture.SetBind( true );
     	}
     }
     
@@ -447,6 +447,23 @@ public class Sprite {
 			{
 				// リストからはずす
 				spriteList.get(i).get(j).remove();
+			}
+		}
+	}
+	
+	// resume時に呼ぶ
+	public static void resumeAll()
+	{
+		for( int i = 0; i < maxSpriteListNum; i++ )
+		{
+			LinkedList<Sprite> list = Sprite.spriteList.get(i);
+			
+			for( int j = 0; j < spriteList.get(i).size(); j++ )
+			{
+				if( list.get(j).texture != null )
+				{
+					list.get(j).texture.SetBind( false );
+				}
 			}
 		}
 	}
