@@ -18,6 +18,7 @@ public class Texture {
 	private int texBuffer[] = new int[1];
 	private static BitmapFactory.Options options = new BitmapFactory.Options();
 	private boolean isBind;
+	private int ID;
 	
 	// コンストラクタ
 	public Texture( int id, float[] UV )
@@ -43,6 +44,9 @@ public class Texture {
 			
 			// テクスチャをリストに追加
 			TextureManager.AddTexture(id, this);
+			
+			// IDの保存
+			ID = id;
 		}
 		else
 		{
@@ -91,6 +95,9 @@ public class Texture {
 			
 			// テクスチャをリストに追加
 			TextureManager.AddTexture(id, this);
+			
+			// IDの保存
+			ID = id;
 		}
 		else
 		{
@@ -182,5 +189,15 @@ public class Texture {
     public void SetColor( float color[] )
     {
     	texColor = color;
+    }
+    
+    // 再読み込み
+    public void Resume()
+    {
+    	options.inScaled = false;
+		isBind = false;
+		
+		// 画像の生成
+		texture = BitmapFactory.decodeResource( OpenGLSurfaceView.c.getResources(), ID, options );
     }
 }

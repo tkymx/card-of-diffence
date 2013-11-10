@@ -1,5 +1,7 @@
 package com.example.glsurfaceview;
 
+import android.graphics.BitmapFactory;
+
 public class Number {
 	
 	private static Number instance = new Number();
@@ -55,4 +57,8 @@ public class Number {
 		return id;
 	}
 	
+	public void Resume()
+	{
+		texture.Resume();
+	}
 }

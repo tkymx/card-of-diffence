@@ -32,7 +32,6 @@ public class Sprite {
 	protected float m_width, m_height;
 	protected int spriteType = Const.SpriteType.TYPE_OTHER.getValue();
 	private static boolean isCreate = false;
-	private int TextureIDBackUp;
 		
 
 	public float getM_width() {
@@ -173,7 +172,6 @@ public class Sprite {
 			appear( SpriteType );
 			
 			bUse = true;
-			TextureIDBackUp = id;
 		}
 	
 	// å„èàóù

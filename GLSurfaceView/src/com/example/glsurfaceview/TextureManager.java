@@ -1,10 +1,12 @@
 package com.example.glsurfaceview;
 
 import java.util.HashMap;
+import java.util.LinkedList;
 
 public class TextureManager {
 	
 	public static HashMap< String, Texture > Dictionary = new HashMap< String, Texture >();
+	public static LinkedList< String > IDList = new LinkedList< String >();
 
 	// コンストラクタ
 	public TextureManager()
@@ -17,6 +19,7 @@ public class TextureManager {
 		String s = String.valueOf( id );
 		
 		Dictionary.put( s, texture );
+		IDList.add( s );
 	}
 	
 	// テクスチャがすでにあるかの確認
@@ -41,5 +44,21 @@ public class TextureManager {
 		Texture texture = Dictionary.get(s);
 		
 		return texture;
+	}
+	
+	// テクスチャの再読み込み
+	public static void ResumeAll()
+	{
+		Texture texture;
+		
+		for( int i = 0; i < IDList.size(); i++ )
+		{
+			// 画像の再読み込み
+			texture = Dictionary.get( IDList.get(i) );
+			
+			texture.Resume();
+		}
+		
+		Number.getInstance().Resume();
 	}
 }
