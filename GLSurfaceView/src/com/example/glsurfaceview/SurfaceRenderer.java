@@ -69,6 +69,7 @@ public class SurfaceRenderer implements Renderer {
         
         // テクスチャの再読み込み
      	TextureManager.ResumeAll();
+     	Sprite.resumeAll();
 	}
 	
 	Context GetContext()

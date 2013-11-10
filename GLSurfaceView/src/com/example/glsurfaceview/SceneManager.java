@@ -1,7 +1,5 @@
 package com.example.glsurfaceview;
 
-import java.util.HashMap;
-
 import javax.microedition.khronos.opengles.GL10;
 
 import com.example.scene.ClearScene;
@@ -11,16 +9,13 @@ import com.example.scene.TitleScene;
 
 public class SceneManager {
 
-	private static HashMap< String, Scene > Dictionary = new HashMap< String, Scene >();
-	private static String mapKey;
-	private static Scene scene;
-	public static final String gameKey = "game"; 
-	public static final String titleKey = "title"; 
-	public static final String resultKey = "result"; 
-	public static final String clearKey = "clear"; 
-	public static final String gameoverKey = "gameover"; 
 	private static SceneManager instance = new SceneManager();
 	private boolean isCreate = false; 
+	private static Scene onScene;
+	public static final int titleKey = 0;
+	public static final int gameKey = 1;
+	public static final int resultKey = 2;
+	public static final int clearKey = 3;
 	
 	public static SceneManager getInstance()
 	{
@@ -39,11 +34,9 @@ public class SceneManager {
 			isCreate = true;
 		}
 		
-		mapKey = titleKey;
-		Dictionary.put( titleKey, new TitleScene() );
-		Dictionary.put( gameKey, new GameScene() );
-		Dictionary.put( clearKey, new ClearScene() );
-		Dictionary.put( gameoverKey, new GameOverScene() );
+		onScene = new GameScene();
+		
+		onScene.Init();
 	}
 	
 	// 初期化処理
@@ -59,44 +52,56 @@ public class SceneManager {
 	// 更新処理 シンクロ
 	synchronized public void Update()
 	{
-		scene = Dictionary.get( mapKey );
-		
-		scene.Update();
+		onScene.Update();
 	}
 	
 	// 描画処理 シンクロ
 	synchronized public static void Draw( GL10 gl )
 	{
-		scene = Dictionary.get( mapKey );
-		
      	// nullでないとき
-     	if( scene != null )
+     	if( onScene != null )
      	{
-     		scene.Draw( gl );
+     		onScene.Draw( gl );
      	}
 	}
 	
 	// シーンの切り替え
-	public static void ChangeScene( String Key )
+	public static void ChangeScene( int Key )
 	{		
-		scene = Dictionary.get( mapKey );
-		
 		// 後処理
-		scene.Uninit();
+		onScene.Uninit();
+		Sprite.removeAll();
 		
-		mapKey = Key;
+		switch( Key )
+		{
+		case titleKey:
+			onScene = new TitleScene();
+			
+			break;
+			
+		case gameKey:
+			onScene = new GameScene();
+			
+			break;
+			
+		case resultKey:
+			onScene = new GameOverScene();
+			
+			break;
+			
+		case clearKey:
+			onScene = new ClearScene();
+			
+			break;
+		}
 		
-		scene = Dictionary.get( mapKey );
-		
-		// 初期化処理
-		scene.Init();
+		// 初期化
+		onScene.Init();
 	}
 	
 	// シーンの取得
 	public Scene GetScene()
 	{
-		scene = Dictionary.get( mapKey );
-		
-		return scene;
+		return onScene;
 	}
 }

@@ -29,15 +29,11 @@ public class Texture {
 		if( haveTextue == false )
 		{			
 			options.inScaled = false;
-			isBind = false;
 			
 			float color[] = { 1.0f, 1.0f, 1.0f, 1.0f };
 			
 			// 画像の生成
 			texture = BitmapFactory.decodeResource( OpenGLSurfaceView.c.getResources(), id, options );
-			
-			// テクスチャのUV座標の生成
-			texUV = Common.FloatToBuffer( UV );
 			
 			// 色の設定
 			texColor = color;
@@ -56,12 +52,16 @@ public class Texture {
 			// 画像の取得
 			texture = t.GetBitmap();
 			
-			// UVの取得
-			texUV = t.GetUV();
-			
 			// 色の設定
 			texColor = t.GetColor();
+			
+			// IDの取得
+			ID = t.GetID();
 		}
+		
+		// テクスチャのUV座標の生成
+		texUV = Common.FloatToBuffer( UV );
+		isBind = false;
 	}
 	
 	// コンストラクタ
@@ -112,7 +112,12 @@ public class Texture {
 			
 			// 色の設定
 			texColor = t.GetColor();
+			
+			// IDの取得
+			ID = t.GetID();
 		}
+		
+		isBind = false;
 	}
 	
 	public Texture( int width, int height, String text )
@@ -174,9 +179,9 @@ public class Texture {
     }
     
     // バインドを有効にする
-    public void SetBind()
+    public void SetBind( boolean bind )
     {
-    	isBind = true;
+    	isBind = bind;
     }
     
     // 色の取得
@@ -186,8 +191,10 @@ public class Texture {
     }
     
     // 色の設定
-    public void SetColor( float color[] )
+    public void SetColor( float r, float g, float b, float a )
     {
+    	float color[] = { r, g, b, a };
+    	
     	texColor = color;
     }
     
@@ -199,5 +206,11 @@ public class Texture {
 		
 		// 画像の生成
 		texture = BitmapFactory.decodeResource( OpenGLSurfaceView.c.getResources(), ID, options );
+    }
+    
+    // IDの取得
+    public int GetID()
+    {
+    	return ID;
     }
 }

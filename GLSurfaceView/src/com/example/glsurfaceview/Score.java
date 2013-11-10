@@ -11,7 +11,7 @@ public class Score {
 	private int firstPosX = MainActivity.width - ( width * scoreNum );
 	private int firstPosY = MainActivity.height;
 	
-	public Score()
+	private Score()
 	{
 		Number n = Number.getInstance();
 		score = 0;
@@ -29,6 +29,17 @@ public class Score {
 			sprite[i].texture.SetUV( n.getNumber(0) );
 			
 			scoreFigure *= 10;
+		}
+	}
+	
+	public void Init()
+	{
+		Number n = Number.getInstance();
+		score = 0;
+		
+		for( int i = 0; i < scoreNum; i++ )
+		{
+			sprite[i].texture.SetUV( n.getNumber(0) );
 		}
 	}
 	

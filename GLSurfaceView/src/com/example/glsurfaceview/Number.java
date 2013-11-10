@@ -1,7 +1,5 @@
 package com.example.glsurfaceview;
 
-import android.graphics.BitmapFactory;
-
 public class Number {
 	
 	private static Number instance = new Number();
@@ -11,7 +9,7 @@ public class Number {
 	private float width = 0.1f;
 	
 	// コンストラクタ
-	public Number()
+	private Number()
 	{
 		UV = new float[10][8];
 		texture = new Texture( id );
