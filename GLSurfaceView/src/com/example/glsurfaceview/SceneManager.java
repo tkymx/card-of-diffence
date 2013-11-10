@@ -34,7 +34,7 @@ public class SceneManager {
 			isCreate = true;
 		}
 		
-		onScene = new GameScene();
+		onScene = new TitleScene();
 		
 		onScene.Init();
 	}

@@ -2,6 +2,7 @@ package com.example.glsurfaceview;
 
 import com.example.select.*;
 import android.app.Activity;
+import com.example.data.DataBase;
 import android.content.Context;
 import android.content.Intent;
 import android.opengl.GLSurfaceView;
@@ -14,6 +15,10 @@ public class OpenGLSurfaceView extends GLSurfaceView{
 	private SceneManager sceneManager;
 	private Thread thread;
 	public static Context c;
+
+	private static boolean stopflag;
+	public static void GameStop(){stopflag = true;};
+	public static void GameStart(){stopflag = false;};
 
 	public OpenGLSurfaceView(Context context) 
 	{
@@ -31,6 +36,13 @@ public class OpenGLSurfaceView extends GLSurfaceView{
 		// シーンマネージャーの生成
 		sceneManager = SceneManager.getInstance();
 		
+		//ストップフラグ
+		GameStart();
+		
+		//データベースの初期化処理などを行う
+		DataBase.Init();
+		DataBase.LoadData();
+		
 		thread = new Thread( new Runnable() {
 			
 			@Override
@@ -39,27 +51,30 @@ public class OpenGLSurfaceView extends GLSurfaceView{
 				// 更新スレッド
 				while( thread != null )
 				{
-					Scene scene = sceneManager.GetScene();
-					
-					// NULLのとき
-					if( scene!= null ) {
-					
-						// 更新処理
-						scene.Update();											
-
-						//入力の初期化
-						Touch touch = Touch.getInstance();
-						touch.UpdateEnd();
-					}
-					
-					// 例外処理
-					try
+					if( !stopflag )
 					{
-						// 60FPSで更新
-						Thread.sleep( 1000 / 60 );
-					}
-					catch(Exception e)
-					{
+						Scene scene = sceneManager.GetScene();
+						
+						// NULLのとき
+						if( scene!= null ) {
+						
+							// 更新処理
+							scene.Update();											
+	
+							//入力の初期化
+							Touch touch = Touch.getInstance();
+							touch.UpdateEnd();
+						}
+						
+						// 例外処理
+						try
+						{
+							// 60FPSで更新
+							Thread.sleep( 1000 / 60 );
+						}
+						catch(Exception e)
+						{
+						}
 					}
 				}	
 			}

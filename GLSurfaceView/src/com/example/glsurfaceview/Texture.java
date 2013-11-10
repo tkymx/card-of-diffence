@@ -187,7 +187,8 @@ public class Texture {
     // F‚Ìæ“¾
     public float[] GetColor()
     {
-    	return texColor;
+    	float color[] = texColor.clone();
+    	return color;
     }
     
     // F‚Ìİ’è

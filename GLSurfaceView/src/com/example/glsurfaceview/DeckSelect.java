@@ -1,7 +1,5 @@
 package com.example.glsurfaceview;
 
-
-
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
@@ -149,4 +147,3 @@ public class DeckSelect extends Activity{
 	
 
 }
-
