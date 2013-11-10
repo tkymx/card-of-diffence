@@ -1,7 +1,11 @@
 package com.example.glsurfaceview;
 
+import com.example.select.*;
+import android.app.Activity;
 import android.content.Context;
+import android.content.Intent;
 import android.opengl.GLSurfaceView;
+import android.provider.MediaStore;
 import android.view.MotionEvent;
 
 public class OpenGLSurfaceView extends GLSurfaceView{
@@ -68,6 +72,11 @@ public class OpenGLSurfaceView extends GLSurfaceView{
 	@Override
 	public boolean onTouchEvent( MotionEvent event )
 	{
+		//Intent intent = new Intent();
+		//intent.setClass(c, com.example.glsurfaceview.DeckSelect.class);
+		//intent.setClassName("com.example.select", "com.example.glsurfaceview.DeckSelect");
+		//c.startActivity(intent);
+
 		Touch touch = Touch.getInstance();
 		
 		touch.Update(event);
