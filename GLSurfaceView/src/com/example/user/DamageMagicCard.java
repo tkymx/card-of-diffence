@@ -8,16 +8,16 @@ public class DamageMagicCard extends MagicCard {
 	int damage;
 	
 	//作成用の関数
-	public static DamageMagicCard CreateDamageMagicCard( int left, int top, int width, int height, int id,int s_id, int u_id,int need )
+	public static DamageMagicCard CreateDamageMagicCard( int left, int top, int width, int height, int id ,int need )
 	{
-		DamageMagicCard mc = new DamageMagicCard(left, top, width, height, id, s_id, u_id,need);
+		DamageMagicCard mc = new DamageMagicCard(left, top, width, height, id ,need);
 		return mc;
 	}	
 	
 
 	//コンストラクタ
-	protected DamageMagicCard(int left, int top, int width, int height, int id,int s_id, int u_id,int need) {
-		super(left, top, width, height, id, s_id, u_id,need);
+	protected DamageMagicCard(int left, int top, int width, int height, int id ,int need) {
+		super(left, top, width, height, id ,need);
 		
 		//攻撃力をセット
 		damage = 10;
@@ -29,8 +29,10 @@ public class DamageMagicCard extends MagicCard {
 		if(super.Update()==false)return false;
 		
 		//使用不可だったら
-		if( GetTexture() == used )
+		if( !isUse )
 		{
+			//ここで、数秒まつなどの設定が必要になる
+			
 			//次の許可をする
 			permitUse();					
 		}

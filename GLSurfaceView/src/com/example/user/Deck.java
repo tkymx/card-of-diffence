@@ -22,8 +22,6 @@ public class Deck extends Sprite {
 				Const.card_width , 
 				Const.card_height , 
 				id ,
-				R.drawable.moster_card_selected ,
-				R.drawable.moster_card_used,
 				need);		
 	}
 	
@@ -67,8 +65,6 @@ public class Deck extends Sprite {
 						Const.card_width , 
 						Const.card_height , 
 						R.drawable.trap_card ,
-						R.drawable.trap_card_selected ,
-						R.drawable.trap_card_used,
 						1);
 			}
 			//魔法カード
@@ -81,8 +77,6 @@ public class Deck extends Sprite {
 						Const.card_width , 
 						Const.card_height , 
 						R.drawable.magic_card ,
-						R.drawable.magic_card_selected ,
-						R.drawable.magic_card_used,
 						1);
 			}
 		}

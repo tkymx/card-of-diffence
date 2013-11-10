@@ -200,4 +200,12 @@ public class Texture {
 		// âÊëúÇÃê∂ê¨
 		texture = BitmapFactory.decodeResource( OpenGLSurfaceView.c.getResources(), ID, options );
     }
+
+    public void SetColor( float r,float g,float b,float a )
+    {
+    	texColor[0] = r;
+    	texColor[1] = g;
+    	texColor[2] = b;
+    	texColor[3] = a;
+    }
 }
