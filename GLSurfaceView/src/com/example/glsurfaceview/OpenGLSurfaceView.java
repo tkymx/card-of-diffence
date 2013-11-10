@@ -33,16 +33,17 @@ public class OpenGLSurfaceView extends GLSurfaceView{
 		// レンダラーの設定
 		setRenderer( renderer );
 		
+		
+		//データベースの初期化処理などを行う
+		DataBase.Init();
+		DataBase.LoadData();		
+		
 		// シーンマネージャーの生成
 		sceneManager = SceneManager.getInstance();
 		
 		//ストップフラグ
 		GameStart();
-		
-		//データベースの初期化処理などを行う
-		DataBase.Init();
-		DataBase.LoadData();
-		
+
 		thread = new Thread( new Runnable() {
 			
 			@Override

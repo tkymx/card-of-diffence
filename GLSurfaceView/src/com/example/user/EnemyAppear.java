@@ -34,7 +34,7 @@ public class EnemyAppear extends Sprite {
 		//–¼‘O‚Å‰æ‘œ‚ğ”»’f‚·‚é
 		int id = R.drawable.walk_enemy;
 		//“Gî•ñ
-		Enemy enemy = new Enemy(10,1,-2);
+		Enemy enemy = new Enemy(10,1,-2 , R.drawable.walk_enemy , R.drawable.image1 , R.drawable.image2);
 		
 		if( liney == Const.LINE_1_Y)
 		{

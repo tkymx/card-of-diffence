@@ -43,6 +43,10 @@ public class Pause {
 			baseImage.texture.SetColor(0.5f, 0.5f, 0.5f, 0.5f);
 			
 			onPause = true;
+			
+			//ˆ—‚ğ~‚ß‚é
+			OpenGLSurfaceView.GameStop();
+			
 		}
 		// b’è“I‚Èˆ—
 		else if( onPause )
@@ -55,6 +59,9 @@ public class Pause {
 				baseImage.texture.SetColor(0.2f, 0.2f, 0.2f, 0);
 				
 				onPause = false;
+
+				//ˆ—‚ğŠJn‚·‚é
+				OpenGLSurfaceView.GameStart();
 			}
 		}
 	}

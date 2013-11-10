@@ -5,12 +5,13 @@ import java.util.LinkedList;
 import com.example.glsurfaceview.Const;
 import com.example.glsurfaceview.Sprite;
 import com.example.glsurfaceview.SpriteAnimation;
+import com.example.glsurfaceview.Texture;
 import com.example.glsurfaceview.Vector3;
 
 public abstract class Charactor extends SpriteAnimation {
 
 	//状態の管理
-	enum Charactor_State{ WALK_STATE , ATTACK_STATE };
+	enum Charactor_State{ WALK_STATE , ATTACK_STATE , ATTACK_AFTER_STATE };
 		
 	//体力や攻撃力
 	int value_hp;
@@ -25,6 +26,11 @@ public abstract class Charactor extends SpriteAnimation {
 	Charactor attackTarget;
 	Castle castleTarget;
 	
+	//行動アニメーション
+	Texture walkTexture;
+	Texture attackBeforeTexture;	
+	Texture attackAfterTexture;	
+	
 	//セッターとゲッター
 	public int getValue_hp() {return value_hp;}
 	public void setValue_hp(int value_hp) {this.value_hp = value_hp;}
@@ -38,7 +44,7 @@ public abstract class Charactor extends SpriteAnimation {
 	public void setValue_moveSpeed(int value_moveSpeed) {this.value_moveSpeed = value_moveSpeed;}
 	
 	//コンストラクタ
-	public Charactor( int hp , int attack , int speed )
+	public Charactor( int hp , int attack , int speed , int walk_id , int attak_before_id , int attak_after_id )
 	{
 		//基本情報設定
 		value_hp = value_maxhp = hp;
@@ -51,6 +57,11 @@ public abstract class Charactor extends SpriteAnimation {
 		//攻撃対象
 		attackTarget = null;
 		castleTarget = null;
+		
+		//行動アニメーション
+		walkTexture = new Texture(walk_id);
+		attackBeforeTexture = new Texture(attak_before_id);
+		attackAfterTexture = new Texture(attak_after_id);
 		
 	}
 	
@@ -88,7 +99,6 @@ public abstract class Charactor extends SpriteAnimation {
 						
 						//攻撃状態にする
 						StartAttack( (Charactor)sp );
-						setState( Charactor_State.ATTACK_STATE );
 						
 						//終了
 						break;						
@@ -178,7 +188,6 @@ public abstract class Charactor extends SpriteAnimation {
 				{
 					//城をセットして攻撃状態にする
 					StartAttack( (Castle)sprite );
-					setState( Charactor_State.ATTACK_STATE );
 				}
 			}
 		}
@@ -190,15 +199,26 @@ public abstract class Charactor extends SpriteAnimation {
 	}	
 	protected void attack_state()
 	{
-		//攻撃する
-		if( !UpdateAttack() )
+		//攻撃をセット
+		SetTexture(attackBeforeTexture);
+		
+		//終わっていたら攻撃して次へ
+		if( isEnd )
 		{
-			//攻撃対象から外す
-//			attackTarget = null;
-//			castleTarget = null;	
-			//歩行状態にする
-			setState( Charactor_State.WALK_STATE );			
-		}		
+			ActionAttack();
+			setState( Charactor_State.ATTACK_AFTER_STATE );
+		}
+	}
+	protected void attack_after_state()
+	{
+		//攻撃後をセット
+		SetTexture(attackAfterTexture);
+
+		//終わっていたら攻撃して次へ
+		if( isEnd )
+		{
+			setState( Charactor_State.WALK_STATE );
+		}
 	}
 	
 	@Override
@@ -218,20 +238,27 @@ public abstract class Charactor extends SpriteAnimation {
 		{
 			attack_state();
 		}
+		else if( state == Charactor_State.ATTACK_AFTER_STATE )
+		{
+			attack_after_state();
+		}
 		
 		return true;
 	}		
 	
-	//攻撃
+	//攻撃始め
 	public void StartAttack( Charactor c )
 	{
 		attackTarget = c;
+		setState(Charactor_State.ATTACK_STATE);
 	}
 	public void StartAttack( Castle c )
 	{
 		castleTarget = c;
+		setState(Charactor_State.ATTACK_STATE);		
 	}
-	public boolean UpdateAttack()
+	//攻撃実行
+	public void ActionAttack()
 	{
 		//城が優先順位が高い
 		if( castleTarget != null )
@@ -242,7 +269,6 @@ public abstract class Charactor extends SpriteAnimation {
 		{
 			attackTarget.Damage(this);			
 		}
-		return false;
 	}
 	
 	public void Damage( Charactor c )
