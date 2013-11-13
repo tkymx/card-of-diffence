@@ -18,21 +18,26 @@ import android.graphics.BitmapFactory;
 import android.graphics.Canvas;
 import android.graphics.Color;
 import android.graphics.Paint;
+import android.graphics.Point;
 import android.net.Uri;
 import android.os.Bundle;
+import android.view.Display;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.Window;
 import android.view.View.OnClickListener;
+import android.view.WindowManager;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
+import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.ListView;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 public class DeckSelect extends Activity{
-	
+	OpenGLSurfaceView surface;
+	public static int width, height;
 	Button okButton;//デッキ採用決定ボタン
 	Button backButton;//戻るボタン
 	ListView lv;//リストビュー　右のスクロールできるやつ
@@ -43,6 +48,7 @@ public class DeckSelect extends Activity{
 	public void onCreate(Bundle savedInstanceState){
 		super.onCreate(savedInstanceState);
 		requestWindowFeature(Window.FEATURE_NO_TITLE);
+		
 		
 		LinearLayout ll = new LinearLayout(this);
 		ll.setOrientation(LinearLayout.HORIZONTAL);
@@ -56,53 +62,89 @@ public class DeckSelect extends Activity{
 		explainText = new TextView(this);
 		cardNameText = new TextView(this);
 		
-		ll.addView(rl);
-		ll.addView(lv);
+		ll.addView(rl,new LinearLayout.LayoutParams(Const.rx(0.4), Const.ry(1)));
+		ll.addView(lv,new LinearLayout.LayoutParams(Const.rx(0.55), Const.ry(1)));
+		ll.setBackgroundResource(R.drawable.background);
+		okButton.setText("OK");
+		backButton.setText("戻る");
 		cardNameText.setText("ティガレックス");
-		cardNameText.setTextSize(Const.rx(0.1));
+		cardNameText.setBackgroundResource(R.drawable.name); 
+		cardNameText.setTextSize(Const.ry(0.030));
 		atackText.setText("攻撃力　53万");
+		atackText.setTextSize(Const.ry(0.020));
+		atackText.setBackgroundResource(R.drawable.atack); 
 		defenceText.setText("防御力　1");
+		defenceText.setTextSize(Const.ry(0.020));
+		defenceText.setBackgroundResource(R.drawable.defence); 
 		explainText.setText("やばいやつぐはははははは\nははははははははははは\nはははははははははははははは");
+		explainText.setTextSize(Const.ry(0.010));
+		explainText.setBackgroundResource(R.drawable.explain); 
 		
-		RelativeLayout.LayoutParams okParam = new RelativeLayout.LayoutParams(WC, WC);
-		RelativeLayout.LayoutParams backParam = new RelativeLayout.LayoutParams(WC, WC);
-		RelativeLayout.LayoutParams atackTextParam = new RelativeLayout.LayoutParams(WC, WC);
-		RelativeLayout.LayoutParams defenceTextParam = new RelativeLayout.LayoutParams(WC, WC);
-		RelativeLayout.LayoutParams explainTextParam = new RelativeLayout.LayoutParams(WC, WC);
-		RelativeLayout.LayoutParams cardNameTextParam = new RelativeLayout.LayoutParams(WC, WC);
+		RelativeLayout.LayoutParams okParam = new RelativeLayout.LayoutParams(Const.rx(0.1), Const.ry(0.1));
+		RelativeLayout.LayoutParams backParam = new RelativeLayout.LayoutParams(Const.rx(0.1), Const.ry(0.1));
+		RelativeLayout.LayoutParams atackTextParam = new RelativeLayout.LayoutParams(Const.rx(0.15), Const.ry(0.1));
+		RelativeLayout.LayoutParams defenceTextParam = new RelativeLayout.LayoutParams(Const.rx(0.15), Const.ry(0.1));
+		RelativeLayout.LayoutParams explainTextParam = new RelativeLayout.LayoutParams(Const.rx(0.3), Const.ry(0.2));
+		RelativeLayout.LayoutParams cardNameTextParam = new RelativeLayout.LayoutParams(Const.rx(0.3), Const.ry(0.1));
+		RelativeLayout.LayoutParams cardParam = new RelativeLayout.LayoutParams(Const.rx(0.2), Const.ry(0.3));
 		
-		okParam.setMargins(Const.rx(0.05), Const.ry(0.9),Const.rx(0.1),Const.rx(0.995));
-		backParam.setMargins(Const.rx(0.15), Const.ry(0.9),Const.rx(0.2),Const.rx(0.995));
-		atackTextParam.setMargins(Const.rx(0.05), Const.ry(0.5),Const.rx(0.2),Const.rx(0.6));
-		defenceTextParam.setMargins(Const.rx(0.05), Const.ry(0.6),Const.rx(0.2),Const.rx(0.7));
-		explainTextParam.setMargins(Const.rx(0.05), Const.ry(0.7),Const.rx(0.2),Const.rx(0.9));
-		cardNameTextParam.setMargins(Const.rx(0.05), Const.ry(0.1),Const.rx(0.5),Const.rx(0.4));
+		/*okParam.setMargins(Const.rx(0.05), Const.ry(0.8),Const.rx(0.15),Const.ry(0.995));
+		backParam.setMargins(Const.rx(0.25), Const.ry(0.8),Const.rx(0.35),Const.ry(0.995));
+		atackTextParam.setMargins(Const.rx(0.05), Const.ry(0.6),Const.rx(0.2),Const.ry(0.7));
+		defenceTextParam.setMargins(Const.rx(0.25), Const.ry(0.6),Const.rx(0.4),Const.ry(0.7));
+		explainTextParam.setMargins(Const.rx(0.05), Const.ry(0.7),Const.rx(0.25),Const.ry(0.8));
+		cardNameTextParam.setMargins(Const.rx(0.05), Const.ry(0.25),Const.rx(0.35),Const.ry(0.55));
+		cardParam.setMargins(Const.rx(0.1), Const.ry(0.1),Const.rx(0.35),Const.ry(0.55));*/
 		
+		cardNameTextParam.setMargins(Const.rx(0.05), Const.ry(0.05),0,0);
+		cardParam.setMargins(Const.rx(0.1), Const.ry(0.2),0,0);
+		atackTextParam.setMargins(Const.rx(0.05), Const.ry(0.50),0,0);
+		defenceTextParam.setMargins(Const.rx(0.20), Const.ry(0.50),0,0);
+		explainTextParam.setMargins(Const.rx(0.05), Const.ry(0.60),0,0);
+		okParam.setMargins(Const.rx(0.05), Const.ry(0.8),0,0);
+		backParam.setMargins(Const.rx(0.25), Const.ry(0.8),0,0);
+		
+		Bitmap image2;
+		image2 = BitmapFactory.decodeResource(getResources(), R.drawable.card);	
+		ImageView card = new ImageView(this);
+		card.setImageBitmap(image2);
+		atackText.setBackgroundResource(R.drawable.list);
+		defenceText.setBackgroundResource(R.drawable.list); 
+		explainText.setBackgroundResource(R.drawable.list); 
+		
+		
+		rl.addView(cardNameText, cardNameTextParam);
 		rl.addView(okButton, okParam);
 		rl.addView(backButton,backParam);
 		rl.addView(atackText,atackTextParam);
 		rl.addView(defenceText,defenceTextParam);
 		rl.addView(explainText,explainTextParam);
-		rl.addView(cardNameText, cardNameTextParam);
 		
-		String[] str = {"車","バス","飛行機","タクシー","自転車","歩行","クラウン","小山","渡辺","利光","河津",
-						"車","バス","飛行機","タクシー","自転車","歩行","クラウン","小山","渡辺","利光","河津",
-						"車","バス","飛行機","タクシー","自転車","歩行","クラウン","小山","渡辺","利光","河津",
-						"車","バス","飛行機","タクシー","自転車","歩行","クラウン","小山","渡辺","利光","河津",
-						"車","バス","飛行機","タクシー","自転車","歩行","クラウン","小山","渡辺","利光","河津"};
+		rl.addView(card, cardParam);
+		
+		String[] name = {"車","バス","飛行機","タクシー","自転車","歩行","クラウン","小山","渡辺","利光","河津",
+						};
 		Bitmap image1;
-        image1 = BitmapFactory.decodeResource(getResources(), R.drawable.ic_launcher);
+        image1 = BitmapFactory.decodeResource(getResources(), R.drawable.atack);
 		Bitmap[] bmp = {image1,image1,image1,image1,image1,image1,image1,image1,image1,image1,image1,
-						image1,image1,image1,image1,image1,image1,image1,image1,image1,image1,image1,
-						image1,image1,image1,image1,image1,image1,image1,image1,image1,image1,image1,
-						image1,image1,image1,image1,image1,image1,image1,image1,image1,image1,image1,
-						image1,image1,image1,image1,image1,image1,image1,image1,image1,image1,image1};
+						};
+		String[] atack = {"攻撃力 1000","攻撃力 2000","攻撃力 3000","攻撃力 1000","攻撃力 2000","攻撃力 3000","攻撃力 1000","攻撃力 2000","攻撃力 3000","攻撃力 1000","攻撃力 1000"};
+		String[] defence = {"防御力　500","防御力　600","防御力　700","防御力　500","防御力　600","防御力　700","防御力　500","防御力　600","防御力　700","防御力　500","防御力　500"};
 		
+		String[] explain = {"あああああああああじあああああああああじあああああああああじ",
+								"バス","飛行機","タクシー","自転車","歩行","クラウン","小山","渡辺","利光","河津",
+							};			
+		
+				
 		List<CardData> objects = new ArrayList<CardData>();
-		for(int i=0;i<str.length;i++){
+		for(int i=0;i<name.length;i++){
 			CardData object = new CardData();
 			object.setImagaData(bmp[i]);
-			object.setTextData(str[i]);
+			object.setNameData(name[i]);
+			object.setAtackData(atack[i]);
+			object.setDefenceData(defence[i]);
+			object.setExplainData(explain[i]);
+			
 			objects.add(object);
 		}
 		//SampleAdapter ad = new SampleAdapter(this,android.R.layout.simple_list_item_1,str);
@@ -144,6 +186,9 @@ public class DeckSelect extends Activity{
 		}
 		
 	}
+	
+	  
+	
 	
 
 }

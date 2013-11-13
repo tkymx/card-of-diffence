@@ -27,26 +27,29 @@ public class CardDataAdapter extends ArrayAdapter<CardData> {
 	 if (null == convertView) {
 	 convertView = layoutInflater_.inflate(R.layout.carddata_layout, null);
 	 }
-	 
+	
 	 // CustomDataのデータをViewの各Widgetにセットする
 	 ImageView imageView;
 	 imageView = (ImageView)convertView.findViewById(R.id.image);
 	 imageView.setImageBitmap(item.getImageData());
-	 
 	 TextView textView;
-	 textView = (TextView)convertView.findViewById(R.id.text);
-	 textView.setText(item.getTextData());
+	 textView = (TextView)convertView.findViewById(R.id.name);
+	 textView.setText(item.getNameData());
+	 textView.setTextSize(Const.ry(0.04));
 	 TextView textView1;
-	 textView1 = (TextView)convertView.findViewById(R.id.text1);
-	 textView1.setText(item.getTextData());
+	 textView1 = (TextView)convertView.findViewById(R.id.atack);
+	 textView1.setText(item.getAtackData());
+	 textView1.setTextSize(Const.ry(0.025));
 	 TextView textView2;
-	 textView2 = (TextView)convertView.findViewById(R.id.text2);
-	 textView2.setText(item.getTextData());
+	 textView2 = (TextView)convertView.findViewById(R.id.defence);
+	 textView2.setText(item.getDefenceData());
+	 textView2.setTextSize(Const.ry(0.025));
 	 TextView textView3;
-	 textView3 = (TextView)convertView.findViewById(R.id.text3);
-	 textView3.setText(item.getTextData());
+	 textView3 = (TextView)convertView.findViewById(R.id.explain);
+	 textView3.setText(item.getExplainData());
+	 textView3.setTextSize(Const.ry(0.015));
 	 
-	 
+	 convertView.setBackgroundResource(R.drawable.list); 
 	 return convertView;
 	 }
 	}

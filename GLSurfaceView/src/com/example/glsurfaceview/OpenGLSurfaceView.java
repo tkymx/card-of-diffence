@@ -87,10 +87,10 @@ public class OpenGLSurfaceView extends GLSurfaceView{
 	@Override
 	public boolean onTouchEvent( MotionEvent event )
 	{
-		//Intent intent = new Intent();
+		Intent intent = new Intent();
 		//intent.setClass(c, com.example.glsurfaceview.DeckSelect.class);
-		//intent.setClassName("com.example.select", "com.example.glsurfaceview.DeckSelect");
-		//c.startActivity(intent);
+		intent.setClass(c, com.example.glsurfaceview.StageSelect.class);
+		c.startActivity(intent);
 
 		Touch touch = Touch.getInstance();
 		
