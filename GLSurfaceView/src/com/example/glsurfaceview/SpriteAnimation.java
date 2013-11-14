@@ -53,6 +53,15 @@ public class SpriteAnimation extends Sprite {
 		animeNowTime = 1;
 	}
 	
+	//テクスチャのセットをする
+	public void SetTexture( Texture tex )
+	{
+		super.SetTexture(tex);
+		
+		//終了を消す
+		isEnd = false;
+	}	
+	
 	// 更新処理
 	@Override
 	public boolean Update()

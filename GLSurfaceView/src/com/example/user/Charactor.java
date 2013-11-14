@@ -38,10 +38,34 @@ public abstract class Charactor extends SpriteAnimation {
 	public void setValue_maxhp(int value_maxhp){this.value_maxhp = value_maxhp;}
 	public int getValue_attack() {return value_attack;}
 	public void setValue_attack(int value_attack) {this.value_attack = value_attack;}	
-	public Charactor_State getState() {return state;}
-	public void setState(Charactor_State state) {this.state = state;}		
 	public int getValue_moveSpeed() {return value_moveSpeed;}
 	public void setValue_moveSpeed(int value_moveSpeed) {this.value_moveSpeed = value_moveSpeed;}
+
+	//状態のセット
+	public Charactor_State getState() {return state;}
+	public void setState(Charactor_State state) 
+	{
+		this.state = state;
+		
+		//状態によってテクスチャを変える
+		if( state == Charactor_State.WALK_STATE )
+		{
+			//テクスチャのセット
+			SetTexture(walkTexture);			
+		}
+		else if( state == Charactor_State.ATTACK_STATE )
+		{
+			//攻撃をセット
+			SetTexture(attackBeforeTexture);			
+		}
+		else if( state == Charactor_State.ATTACK_AFTER_STATE )
+		{
+			//攻撃後をセット
+			SetTexture(attackAfterTexture);			
+		}
+		
+	}		
+	
 	
 	//コンストラクタ
 	public Charactor( int hp , int attack , int speed , int walk_id , int attak_before_id , int attak_after_id )
@@ -117,6 +141,7 @@ public abstract class Charactor extends SpriteAnimation {
 	}
 	private void move()
 	{
+	
 		//城にアタックするかどうかを決めたフラグ
 		boolean castle_attack_flag = false;
 		
@@ -198,10 +223,7 @@ public abstract class Charactor extends SpriteAnimation {
 		}
 	}	
 	protected void attack_state()
-	{
-		//攻撃をセット
-		SetTexture(attackBeforeTexture);
-		
+	{	
 		//終わっていたら攻撃して次へ
 		if( isEnd )
 		{
@@ -211,8 +233,7 @@ public abstract class Charactor extends SpriteAnimation {
 	}
 	protected void attack_after_state()
 	{
-		//攻撃後をセット
-		SetTexture(attackAfterTexture);
+
 
 		//終わっていたら攻撃して次へ
 		if( isEnd )

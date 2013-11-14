@@ -25,15 +25,15 @@ public class PlayerAppear extends Sprite {
 		
 		if( liney == Const.LINE_1_Y)
 		{
-			player.Init( Const.LINE_LEFT_1_X  , Const.LINE_1_Y , Const.LINE_1_W , Const.LINE_1_W , 3 , 1 , 10 , R.drawable.walk , Const.SpriteType.TYPE_PLAYER.getValue() );			
+			player.Init( Const.LINE_LEFT_1_X  , Const.LINE_1_Y , Const.LINE_1_W , Const.LINE_1_W , 3 , 1 , 5 , R.drawable.walk , Const.SpriteType.TYPE_PLAYER.getValue() );			
 		}
 		else if( liney == Const.LINE_2_Y)
 		{
-			player.Init( Const.LINE_LEFT_2_X  , Const.LINE_2_Y , Const.LINE_2_W , Const.LINE_2_W , 3 , 1 , 10 , R.drawable.walk , Const.SpriteType.TYPE_PLAYER.getValue() );			
+			player.Init( Const.LINE_LEFT_2_X  , Const.LINE_2_Y , Const.LINE_2_W , Const.LINE_2_W , 3 , 1 , 5 , R.drawable.walk , Const.SpriteType.TYPE_PLAYER.getValue() );			
 		}
 		else if( liney == Const.LINE_3_Y)
 		{
-			player.Init( Const.LINE_LEFT_3_X  , Const.LINE_3_Y , Const.LINE_3_W , Const.LINE_3_W , 3 , 1 , 10 , R.drawable.walk , Const.SpriteType.TYPE_PLAYER.getValue() );			
+			player.Init( Const.LINE_LEFT_3_X  , Const.LINE_3_Y , Const.LINE_3_W , Const.LINE_3_W , 3 , 1 , 5 , R.drawable.walk , Const.SpriteType.TYPE_PLAYER.getValue() );			
 		}
 		
 		return player;

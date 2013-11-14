@@ -18,6 +18,8 @@ public class AnimationEffect extends SpriteAnimation {
 		return s;
 	}
 	
+	
+	
 	// XVˆ—
 	@Override
 	public boolean Update()
