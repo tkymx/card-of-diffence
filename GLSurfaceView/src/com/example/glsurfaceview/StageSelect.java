@@ -100,13 +100,13 @@ public class StageSelect extends Activity{
 		
 		for(int i=0;i<sv.length;i++){			
 			sv[i] = new StageView(this,i+1,stage[i]);			
-			sv[i].setOnClickListener(new SampleStageViewClickLisnear());
+			sv[i].setOnTouchListener(new SampleTL());
 			vf.addView(sv[i]);						
 		}
 		
 		//基本的なクリックリスナー
 		
-		vf.setOnTouchListener(new SampleTL());
+		//vf.setOnTouchListener(new SampleTL());
 		right.setOnClickListener(new SampleClickListener());
 		left.setOnClickListener(new SampleClickListener());
 		deck.setOnClickListener(new SampleClickListener());
@@ -163,7 +163,9 @@ class SampleClickListener implements android.view.View.OnClickListener{
 		{
 			//デッキ表示のインテントの発行
 			Intent intent = new Intent();
-			intent.setClass( OpenGLSurfaceView.c , com.example.glsurfaceview.DeckSelect.class);
+			//intent.setClass( OpenGLSurfaceView.c , com.example.glsurfaceview.DeckSelect.class);
+			intent.setClass( OpenGLSurfaceView.c , com.example.glsurfaceview.DeckEdit.class);
+			
 			OpenGLSurfaceView.c.startActivity(intent);							
 		}		
 		
@@ -183,8 +185,8 @@ class SampleTL implements OnTouchListener{
 			if(x-20>e.getX()){
 				TranslateAnimation inanim = new TranslateAnimation(sv[0].getWidth(),0,0,0);
 				TranslateAnimation outanim = new TranslateAnimation(0,-sv[0].getWidth(),0,0);
-				inanim.setDuration(1000);
-				outanim.setDuration(1000);
+				inanim.setDuration(100);
+				outanim.setDuration(100);
 				vf.setInAnimation(inanim);
 				vf.setOutAnimation(outanim);
 				
@@ -192,11 +194,22 @@ class SampleTL implements OnTouchListener{
 			}else if(x+20<e.getX()){
 				TranslateAnimation inanim = new TranslateAnimation(-sv[0].getWidth(),0,0,0);
 				TranslateAnimation outanim = new TranslateAnimation(0,sv[0].getWidth(),0,0);
-				inanim.setDuration(1000);
-				outanim.setDuration(1000);
+				inanim.setDuration(100);
+				outanim.setDuration(100);
 				vf.setInAnimation(inanim);
 				vf.setOutAnimation(outanim);
 				vf.showPrevious();
+			}else if(x-20<=e.getX() && x+20>=e.getX()){
+				if( v instanceof StageView )
+				{
+					
+					//ステージの移動
+					((StageView)v).moveStage();
+					
+					//終了
+					finish();
+					
+				}
 			}
 		}
 		return true;
