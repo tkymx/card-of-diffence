@@ -2,21 +2,26 @@ package com.example.glsurfaceview;
 
 import java.util.Random;
 
+import com.example.data.DataBase;
+import com.example.user.Stage;
+
 
 
 import android.content.Context;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.graphics.Canvas;
 import android.graphics.Color;
 import android.graphics.Paint;
+import android.graphics.Rect;
 import android.view.View;
 
 public class StageView extends View {
-	final int NUM =100;
-	Ball[] bl = new Ball[NUM];
-	Paint p = new Paint();
 	
-	//ステージ番号
-	int stageNumber;	
+	Bitmap stageGraph = null;
+	
+	//ステージ番号//////////////////////////////////
+	int stageNumber;		
 	public int getStageNumber() {
 		return stageNumber;
 	}
@@ -24,41 +29,45 @@ public class StageView extends View {
 		this.stageNumber = stageNumber;
 	}
 	
+	//ステージ情報///////////////////////////////////
+	Stage stage = null;
+	public Stage getStage() {
+		return stage;
+	}
+	public void setStage(Stage stage) {
+		this.stage = stage;
+	}
 	
-	
-	public StageView(Context cn,int sn){
+	public StageView(Context cn,int sn,Stage s){
 		super(cn);
-		Random rn = new Random();
-		for(int i=0;i<NUM;i++){
-			bl[i] = new Ball();
-			bl[i].x=rn.nextInt(600);
-			bl[i].y=rn.nextInt(800);
-			bl[i].r=rn.nextInt(256);
-			bl[i].g=rn.nextInt(256);
-			bl[i].b=rn.nextInt(256);
-		}
-		
 		//ステージ番号を入れる
 		stageNumber = sn;
+		
+		//ステージの設定
+		stage = s;
+		
+		//画像取得
+		stageGraph = BitmapFactory.decodeResource(getResources(), stage.getStage_select_image_id() );
 		
 	}
 	public void onDraw(Canvas cs){
 		super.onDraw(cs);
-		for(int i=0;i<NUM;i++){
-			p.setColor(Color.rgb(bl[i].r, bl[i].g, bl[i].b));
-			cs.drawCircle(bl[i].x, bl[i].y, 10, p);			
-		}
+
+		//背景画像の表示
+		cs.drawBitmap(stageGraph, new Rect(0, 0, stageGraph.getWidth(), stageGraph.getHeight() ), new Rect(0, 0, cs.getWidth(), cs.getHeight() ), new Paint());
 		
 		cs.drawText("ステージ"+getStageNumber(), 100, 100, new Paint());
-		
-	}
-	class Ball{
-		int x,y,r,g,b;
+
 	}
 	
 	//ステージを移動する
 	public void moveStage()
 	{
+		
+		//ステージの設定
+		DataBase.setPresentStage(stage);
+		
+		//ゲームの開始
 		SceneManager.ChangeScene( SceneManager.gameKey );
 	}
 }

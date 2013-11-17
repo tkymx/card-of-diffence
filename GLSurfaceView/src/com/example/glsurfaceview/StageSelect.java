@@ -3,6 +3,7 @@ package com.example.glsurfaceview;
 import java.util.Random;
 
 import com.example.glsurfaceview.DeckSelect.SampleClickListener;
+import com.example.user.Stage;
 
 
 import android.app.Activity;
@@ -88,8 +89,17 @@ public class StageSelect extends Activity{
 		left.setText("左");
 		deck.setText("デッキ編集");
 		
+		//ステージの情報
+		String str[] = {"enemy1","enemy1","enemy1","enemy1","enemy1","enemy1","enemy1","enemy1","enemy1","enemy1","enemy1"};
+		Stage stage[] = 
+		{
+			new Stage(R.drawable.game_start, R.drawable.map, R.drawable.enemy_castle , R.drawable.player_castle, 2, str),
+			new Stage(R.drawable.game_start, R.drawable.map, R.drawable.enemy_castle, R.drawable.player_castle, 3, str),
+			new Stage(R.drawable.game_start, R.drawable.map, R.drawable.enemy_castle, R.drawable.player_castle, 3, str)			
+		};
+		
 		for(int i=0;i<sv.length;i++){			
-			sv[i] = new StageView(this,i+1);			
+			sv[i] = new StageView(this,i+1,stage[i]);			
 			sv[i].setOnClickListener(new SampleStageViewClickLisnear());
 			vf.addView(sv[i]);						
 		}

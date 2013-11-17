@@ -4,6 +4,7 @@ import java.util.ArrayList;
 
 import com.example.data.CardInformation.Card_Kind;
 import com.example.glsurfaceview.R;
+import com.example.user.Stage;
 
 
 /**
@@ -26,6 +27,9 @@ public class DataBase {
 	private static ArrayList<String> myCards;
 	//自分のデッキ
 	private static String[] myDecks;
+	
+	//自分のステージの情報
+	private static Stage presentStage;
 
 	//保持しているカードの処理/////////////////////////////////////////////////////////////////////////////
 	
@@ -64,8 +68,15 @@ public class DataBase {
 		myCards.add(deck);
 	}
 	
-	//基本的にな処理////////////////////////////////////////////////////////////////////////
+	//ステージの処理////////////////////////////////////////////////////////////////////////
+	public static Stage getPresentStage() {
+		return presentStage;
+	}
+	public static void setPresentStage(Stage presentStage) {
+		DataBase.presentStage = presentStage;
+	}	
 	
+	//基本的にな処理////////////////////////////////////////////////////////////////////////
 	public static void Init()
 	{
 		//全てのカード
@@ -76,6 +87,9 @@ public class DataBase {
 		myCards = new ArrayList<String>();
 		//自分のデッキ
 		myDecks = new String[11];	
+		
+		//はじめはステージ情報は無し
+		presentStage = null;
 	}
 	
 	public static void LoadData()
