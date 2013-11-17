@@ -1,11 +1,9 @@
 package com.example.glsurfaceview;
 
-import android.app.Activity;
 import com.example.data.DataBase;
 import android.content.Context;
-import android.content.Intent;
+import android.content.res.Resources.Theme;
 import android.opengl.GLSurfaceView;
-import android.provider.MediaStore;
 import android.view.MotionEvent;
 
 public class OpenGLSurfaceView extends GLSurfaceView{
@@ -52,10 +50,10 @@ public class OpenGLSurfaceView extends GLSurfaceView{
 			@Override
 			public void run() {
 				// TODO Auto-generated method stub
-				// 更新スレッド
-				while( !isHalt )
-				{				
-					while( thread != null )
+				// 更新スレッド	
+				while( thread != null )
+				{
+					if( !isHalt )
 					{
 						Scene scene = sceneManager.GetScene();
 						
@@ -77,27 +75,19 @@ public class OpenGLSurfaceView extends GLSurfaceView{
 						}
 						catch(Exception e)
 						{
-						}					
-					}	
-				}
+						}
+					}
+				}	
 			}
 		} );
 		
 		thread.start();
 	}
-
-	public void halt()
-	{
-		isHalt = true;
-		thread.interrupt();
-	}	
 	
 	// タッチイベントの処理
 	@Override
 	public boolean onTouchEvent( MotionEvent event )
 	{
-
-
 		Touch touch = Touch.getInstance();
 		
 		touch.Update(event);
@@ -108,12 +98,13 @@ public class OpenGLSurfaceView extends GLSurfaceView{
 	@Override
 	public void onResume()
 	{
+		isHalt = false;
 	}
 	  
 	@Override
 	public void onPause()
 	{
-		halt();
+		isHalt = true;
+		thread.interrupt();
 	}	
-	
 }
