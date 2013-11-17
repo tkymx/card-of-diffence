@@ -22,6 +22,7 @@ public class GameScene extends Scene {
 	private Pause pause = null;
 	
 	private StartNotify notify = null;
+	private Score score = null;
 	
 	// コンストラクタ
 	public GameScene()
@@ -53,7 +54,7 @@ public class GameScene extends Scene {
 		ec.Init(Const.rx(0.84), Const.ry(0.175), Const.rw(0.265), Const.rh(0.8), R.drawable.enemy_castle, Const.SpriteType.TYPE_CASLE.getValue());
 
 		// スコア生成
-		Score.getInstance().Init();
+		score = Score.Create();
 		
 		//カードの配置
 		Deck deck = new Deck();
