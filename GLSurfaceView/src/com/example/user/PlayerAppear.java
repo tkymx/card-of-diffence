@@ -1,5 +1,6 @@
 package com.example.user;
 
+import com.example.data.CharactorInfomation;
 import com.example.glsurfaceview.Const;
 import com.example.glsurfaceview.R;
 import com.example.glsurfaceview.Sprite;
@@ -21,7 +22,7 @@ public class PlayerAppear extends Sprite {
 	public static Player CreatePlayer( int liney , String playername )
 	{
 		//そのうちに名前で判断したプレイヤーを表示するようにする。
-		Player player = new Player(10,1,2 , R.drawable.walk , R.drawable.image1 , R.drawable.image2);
+		Player player = CharactorInfomation.GetPlayerFromName(playername);
 		
 		if( liney == Const.LINE_1_Y)
 		{

@@ -30,9 +30,7 @@ public class DamageMagicCard extends MagicCard {
 		
 		//使用不可だったら
 		if( !isUse )
-		{
-			//ここで、数秒まつなどの設定が必要になる
-			
+		{			
 			//次の許可をする
 			permitUse();					
 		}

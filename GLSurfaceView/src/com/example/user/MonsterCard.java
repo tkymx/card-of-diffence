@@ -5,22 +5,28 @@ import com.example.glsurfaceview.Touch;
 
 public class MonsterCard extends Card {
 	
+	//自分のキャラクタの名前
+	String name;
+	
 	//自分が作成したキャラクタの情報
 	Charactor charactor;
 	
 	//生成メソッド
-	public static MonsterCard CreateMonsterCard( int left, int top, int width, int height, int id,int need )
+	public static MonsterCard CreateMonsterCard( int left, int top, int width, int height, int id,int need , String name )
 	{
-		MonsterCard mc = new MonsterCard(left, top, width, height, id,need);
+		MonsterCard mc = new MonsterCard(left, top, width, height, id,need , name);
 		return mc;
 	}
 	
 	//コンストラクタ
-	protected MonsterCard(int left, int top, int width, int height, int id ,int need) {
-		super(left, top, width, height, id ,need);
+	protected MonsterCard(int left, int top, int width, int height, int id ,int need , String name) {
+		super(left, top, width, height, id ,need );
 		
 		//キャラクターを始め無しにする
 		charactor = null;
+		
+		//名前のセット
+		this.name = name;
 	}
 	
 
@@ -62,15 +68,15 @@ public class MonsterCard extends Card {
 			//列によって表示する。
 			if( y > Const.LINE_1_Y )
 			{
-				charactor = PlayerAppear.CreatePlayer( Const.LINE_1_Y , "" );					
+				charactor = PlayerAppear.CreatePlayer( Const.LINE_1_Y , name );					
 			}
 			else if( y > Const.LINE_2_Y )
 			{
-				charactor = PlayerAppear.CreatePlayer( Const.LINE_2_Y , "" );										
+				charactor = PlayerAppear.CreatePlayer( Const.LINE_2_Y , name );										
 			}
 			else if( y > Const.LINE_3_Y )
 			{					
-				charactor = PlayerAppear.CreatePlayer( Const.LINE_3_Y , "" );					
+				charactor = PlayerAppear.CreatePlayer( Const.LINE_3_Y , name );					
 			}
 			else
 			{

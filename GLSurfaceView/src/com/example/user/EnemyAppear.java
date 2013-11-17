@@ -1,5 +1,6 @@
 package com.example.user;
 
+import com.example.data.CharactorInfomation;
 import com.example.glsurfaceview.Const;
 import com.example.glsurfaceview.R;
 import com.example.glsurfaceview.Sprite;
@@ -20,9 +21,9 @@ public class EnemyAppear extends Sprite {
 		if( System.currentTimeMillis() - time >= 10000 )
 		{
 			//“GƒLƒƒƒ‰‚ğ”z’u
-			CreateEnemy( Const.LINE_1_Y , "" );
-			CreateEnemy( Const.LINE_2_Y , "" );
-			CreateEnemy( Const.LINE_3_Y , "" );					
+			CreateEnemy( Const.LINE_1_Y , "enemy1" );
+			CreateEnemy( Const.LINE_2_Y , "enemy1" );
+			CreateEnemy( Const.LINE_3_Y , "enemy1" );					
 			
 			time = System.currentTimeMillis();
 		}
@@ -34,7 +35,7 @@ public class EnemyAppear extends Sprite {
 		//–¼‘O‚Å‰æ‘œ‚ğ”»’f‚·‚é
 		int id = R.drawable.walk_enemy;
 		//“Gî•ñ
-		Enemy enemy = new Enemy(10,1,-2 , R.drawable.walk_enemy , R.drawable.image1 , R.drawable.image2);
+		Enemy enemy = CharactorInfomation.GetEnemyFromName(playername);
 		
 		if( liney == Const.LINE_1_Y)
 		{
