@@ -5,12 +5,12 @@ public class Score {
 	private int score, scoreFigure;
 	private int scoreNum = Const.MAX_SCORE_NUM;
 	private Sprite[] sprite = new Sprite[scoreNum]; 
-	private static Score instance = new Score();
 	private int width = MainActivity.width / 20;
 	private int height = MainActivity.height / 5;
 	private int firstPosX = MainActivity.width - ( width * scoreNum );
 	private int firstPosY = MainActivity.height;
 	
+	// コンストラクタ
 	private Score()
 	{
 		Number n = Number.getInstance();
@@ -32,6 +32,7 @@ public class Score {
 		}
 	}
 	
+	// 初期化
 	public void Init()
 	{
 		Number n = Number.getInstance();
@@ -43,14 +44,20 @@ public class Score {
 		}
 	}
 	
+	// 生成
+	public static Score Create()
+	{
+		Score score = new Score();
+		
+		score.Init();
+		
+		return score;
+	}
+	
+	// 更新
 	public void Update()
 	{
 		addScore(1);
-	}
-	
-	public static Score getInstance()
-	{
-		return instance;
 	}
 	
 	// スコアの追加
