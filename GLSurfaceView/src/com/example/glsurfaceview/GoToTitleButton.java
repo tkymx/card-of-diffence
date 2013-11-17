@@ -18,6 +18,8 @@ public class GoToTitleButton extends Button {
 	
 	public void onUpdate()
 	{
+		super.Update();
+		
 		// ƒ^ƒbƒ`‚³‚ê‚Ä‚¢‚é‚Æ‚«
 		if( getTouch() )
 		{

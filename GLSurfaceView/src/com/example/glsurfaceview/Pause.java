@@ -24,7 +24,7 @@ public class Pause {
 		y = MainActivity.height / 10;
 		
 		// ポーズボタンの生成
-		pauseButton = Button.Create(x*9, y*2, x, y, R.drawable.pause_base);
+		pauseButton = Button.Create(x*9, y*2, x, x, R.drawable.pause_botton);
 		
 		// 下地の生成
 		baseImage = Sprite.Create(0, 0, MainActivity.width, MainActivity.height, R.drawable.pause_base, SpriteType.TYPE_TEXT.getValue());

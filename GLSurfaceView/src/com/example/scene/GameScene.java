@@ -4,6 +4,7 @@ import javax.microedition.khronos.opengles.GL10;
 
 import com.example.glsurfaceview.Const;
 import com.example.glsurfaceview.MainActivity;
+import com.example.glsurfaceview.OpenGLSurfaceView;
 import com.example.glsurfaceview.Pause;
 import com.example.glsurfaceview.R;
 import com.example.glsurfaceview.Scene;
@@ -14,10 +15,13 @@ import com.example.user.EnemyCastle;
 import com.example.user.Map;
 import com.example.user.PlayerAppear;
 import com.example.user.PlayerCastle;
+import com.example.user.StartNotify;
 
 public class GameScene extends Scene {
 	
-	private Pause pause;
+	private Pause pause = null;
+	
+	private StartNotify notify = null;
 	
 	// コンストラクタ
 	public GameScene()
@@ -55,7 +59,15 @@ public class GameScene extends Scene {
 		Deck deck = new Deck();
 		deck.appear( Const.SpriteType.TYPE_CARD.getValue() );
 		
+		//一時停止
 		pause = new Pause();
+		
+		//ゲームの通知
+		notify = StartNotify.Create();
+		
+		//ゲームを止める
+		OpenGLSurfaceView.GameStop();
+		
 	}
 
 	@Override
@@ -65,14 +77,35 @@ public class GameScene extends Scene {
 	}
 
 	@Override
-	public void onUpdate() {
-		// TODO Auto-generated method stub
-		pause.Update();
+	public void Update() {
+		
+		
+		//多分スレット外でシーンの遷移が入った際に
+		//pauseがインスタンス化される前に呼び出されているためだと思われる。		
+		
+		if(notify != null)
+		{
+			if(notify.Update()==false)
+			{
+				notify = null;
+			}
+		}
+		else
+		{
+			super.Update();			
+		}
+		
+		if(pause != null)
+		{
+			pause.Update();
+			
+		}
 	}
 
 	@Override
-	public void onDraw(GL10 gl) {
-		// TODO Auto-generated method stub
+	public void Draw(GL10 gl) {
+		
+		super.Draw(gl);
 		
 	}
 

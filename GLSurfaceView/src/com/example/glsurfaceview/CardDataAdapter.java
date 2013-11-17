@@ -20,36 +20,39 @@ public class CardDataAdapter extends ArrayAdapter<CardData> {
 	 
 	 @Override
 	 public View getView(int position, View convertView, ViewGroup parent) {
-	 // 特定の行(position)のデータを得る
+	 
+		 // 特定の行(position)のデータを得る
 		 CardData item = (CardData)getItem(position);
-	 
-	 // convertViewは使い回しされている可能性があるのでnullの時だけ新しく作る
-	 if (null == convertView) {
-	 convertView = layoutInflater_.inflate(R.layout.carddata_layout, null);
-	 }
-	
-	 // CustomDataのデータをViewの各Widgetにセットする
-	 ImageView imageView;
-	 imageView = (ImageView)convertView.findViewById(R.id.image);
-	 imageView.setImageBitmap(item.getImageData());
-	 TextView textView;
-	 textView = (TextView)convertView.findViewById(R.id.name);
-	 textView.setText(item.getNameData());
-	 textView.setTextSize(Const.ry(0.04));
-	 TextView textView1;
-	 textView1 = (TextView)convertView.findViewById(R.id.atack);
-	 textView1.setText(item.getAtackData());
-	 textView1.setTextSize(Const.ry(0.025));
-	 TextView textView2;
-	 textView2 = (TextView)convertView.findViewById(R.id.defence);
-	 textView2.setText(item.getDefenceData());
-	 textView2.setTextSize(Const.ry(0.025));
-	 TextView textView3;
-	 textView3 = (TextView)convertView.findViewById(R.id.explain);
-	 textView3.setText(item.getExplainData());
-	 textView3.setTextSize(Const.ry(0.015));
-	 
-	 convertView.setBackgroundResource(R.drawable.list); 
-	 return convertView;
+		 
+		 // convertViewは使い回しされている可能性があるのでnullの時だけ新しく作る
+		 if (null == convertView) 
+		 {			 
+			 convertView = layoutInflater_.inflate(R.layout.carddata_layout, null);
+		 }
+		
+		 // CustomDataのデータをViewの各Widgetにセットする
+		 ImageView imageView;
+		 imageView = (ImageView)convertView.findViewById(R.id.image);
+		 imageView.setImageBitmap(item.getImageData());
+		 TextView textView;
+		 textView = (TextView)convertView.findViewById(R.id.name);
+		 textView.setText(item.getNameData());
+		 textView.setTextSize(Const.ry(0.04));
+		 TextView textView1;
+		 textView1 = (TextView)convertView.findViewById(R.id.atack);
+		 textView1.setText(item.getAtackData());
+		 textView1.setTextSize(Const.ry(0.025));
+		 TextView textView2;
+		 textView2 = (TextView)convertView.findViewById(R.id.defence);
+		 textView2.setText(item.getDefenceData());
+		 textView2.setTextSize(Const.ry(0.025));
+		 TextView textView3;
+		 textView3 = (TextView)convertView.findViewById(R.id.explain);
+		 textView3.setText(item.getExplainData());
+		 textView3.setTextSize(Const.ry(0.015));
+		 
+		 convertView.setBackgroundResource(R.drawable.list); 
+		 
+		 return convertView;
 	 }
 	}

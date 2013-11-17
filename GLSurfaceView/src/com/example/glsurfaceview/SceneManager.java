@@ -12,10 +12,12 @@ public class SceneManager {
 	private static SceneManager instance = new SceneManager();
 	private boolean isCreate = false; 
 	private static Scene onScene;
+
 	public static final int titleKey = 0;
 	public static final int gameKey = 1;
 	public static final int resultKey = 2;
 	public static final int clearKey = 3;
+	public static final int gameoverKey = 4;
 	
 	public static SceneManager getInstance()
 	{
@@ -84,7 +86,7 @@ public class SceneManager {
 			
 			break;
 			
-		case resultKey:
+		case gameoverKey:
 			onScene = new GameOverScene();
 			
 			break;

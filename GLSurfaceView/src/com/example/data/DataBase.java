@@ -80,9 +80,10 @@ public class DataBase {
 	{
 		//ここで、デッキの初期化処理などを行う
 		
-		//デッキへカードの種類の投稿を行う		
+		///////////////////////////////////////
+		//デッキの種類の追加
+		///////////////////////////////////////
 		
-		//モンスター
 		CardInformation.SetCardInforation(
 				CardInformation.CreateCardInformation("monster1","monsterCard1",10,10,Card_Kind.Monster,R.drawable.moster_card_1,2));
 		CardInformation.SetCardInforation(
@@ -102,24 +103,30 @@ public class DataBase {
 		CardInformation.SetCardInforation(
 				CardInformation.CreateCardInformation("monster9","monsterCard9",10,10,Card_Kind.Monster,R.drawable.moster_card_9,1));
 		CardInformation.SetCardInforation(
-				CardInformation.CreateCardInformation("trap","trapCard",10,-1,Card_Kind.Trap,R.drawable.trap_card,1));
+				CardInformation.CreateCardInformation("trap","trapCard",10,-1,Card_Kind.DamageTrap,R.drawable.trap_card,1));
 		CardInformation.SetCardInforation(
-				CardInformation.CreateCardInformation("magic","magicCard",10,-1,Card_Kind.Magic,R.drawable.magic_card,1));		
+				CardInformation.CreateCardInformation("magic","magicCard",10,-1,Card_Kind.DmageMagic,R.drawable.magic_card,1));		
 		
-		//自分のカードへ追加する
+		///////////////////////////////////////
+		//自分の保持しているカードの追加
+		///////////////////////////////////////
+
+		AddMyCards("monster1");
 		AddMyCards("monster2");
-		AddMyCards("monster2");
-		AddMyCards("monster2");
-		AddMyCards("monster2");
-		AddMyCards("monster2");
-		AddMyCards("monster2");
-		AddMyCards("monster2");
-		AddMyCards("monster2");
-		AddMyCards("monster2");
+		AddMyCards("monster3");
+		AddMyCards("monster4");
+		AddMyCards("monster5");
+		AddMyCards("monster6");
+		AddMyCards("monster7");
+		AddMyCards("monster8");
+		AddMyCards("monster9");
 		AddMyCards("trap");
 		AddMyCards("magic");
 		
-		//自分のカードからデッキに加える
+		///////////////////////////////////////
+		//一応、自分のカードから自分のデッキへの追加
+		///////////////////////////////////////
+		
 		for(int i = 0;i< 11;i++)
 		{
 			//デッキに追加していくたびに保持カードが減っていくため０でいい

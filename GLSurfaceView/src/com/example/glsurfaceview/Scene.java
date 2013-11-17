@@ -12,7 +12,6 @@ public abstract class Scene {
 	public abstract void Init();
 	public abstract void Uninit();
 	
-	public abstract void onUpdate();
 	public void Update()
 	{
 		//シーンの通常更新にこれが設置される
@@ -39,10 +38,7 @@ public abstract class Scene {
 				}
 			}		
 		}
-		
-		onUpdate();
 	}
-	public abstract void onDraw( GL10 gl );
 	public void Draw( GL10 gl )
 	{
 		for( int i = 0; i < Const.SpriteType.TYPE_MAX.getValue(); i++ )
@@ -59,7 +55,6 @@ public abstract class Scene {
 					sp.DrawSprite(gl);
 				}
 			}
-		}			
-		onDraw(gl);
+		}		
 	}
 }

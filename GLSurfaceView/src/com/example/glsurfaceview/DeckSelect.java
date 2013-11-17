@@ -63,7 +63,7 @@ public class DeckSelect extends Activity{
 		cardNameText = new TextView(this);
 		
 		ll.addView(rl,new LinearLayout.LayoutParams(Const.rx(0.4), Const.ry(1)));
-		ll.addView(lv,new LinearLayout.LayoutParams(Const.rx(0.55), Const.ry(1)));
+		ll.addView(lv,new LinearLayout.LayoutParams(Const.rx(0.6), Const.ry(1)));
 		ll.setBackgroundResource(R.drawable.background);
 		okButton.setText("OK");
 		backButton.setText("–ß‚é");

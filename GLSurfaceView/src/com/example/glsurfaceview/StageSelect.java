@@ -27,7 +27,7 @@ import android.widget.TextView;
 import android.widget.ViewFlipper;
 import android.widget.Button;
 
-public class StageSelect extends Activity {
+public class StageSelect extends Activity{
 	public ViewFlipper vf;
 	public float x;
 	public StageView[] sv = new StageView[3];
@@ -88,39 +88,74 @@ public class StageSelect extends Activity {
 		left.setText("左");
 		deck.setText("デッキ編集");
 		
-		for(int i=0;i<sv.length;i++){
-			sv[i] = new StageView(this);
-			vf.addView(sv[i]);
+		for(int i=0;i<sv.length;i++){			
+			sv[i] = new StageView(this,i+1);			
+			sv[i].setOnClickListener(new SampleStageViewClickLisnear());
+			vf.addView(sv[i]);						
 		}
+		
+		//基本的なクリックリスナー
+		
 		vf.setOnTouchListener(new SampleTL());
 		right.setOnClickListener(new SampleClickListener());
 		left.setOnClickListener(new SampleClickListener());
+		deck.setOnClickListener(new SampleClickListener());
 		
 	}
 	////
 	
+//ステージが押された時の処理
+class SampleStageViewClickLisnear implements android.view.View.OnClickListener{	
+
+	public void onClick(View v) {
+		
+		//ステージだったら移動して終了
+		if( v instanceof StageView )
+		{
+			
+			//ステージの移動
+			((StageView)v).moveStage();
+			
+			//終了
+			finish();
+			
+		}
+		
+	}
+}	
+	
 
 class SampleClickListener implements android.view.View.OnClickListener{
 	
-	public void onClick(View v) {
-		if(v.equals(right)){
+	public void onClick(View v) 
+	{
+		if(v.equals(right))
+		{
 			TranslateAnimation inanim = new TranslateAnimation(-sv[0].getWidth(),0,0,0);
 			TranslateAnimation outanim = new TranslateAnimation(0,sv[0].getWidth(),0,0);
-			inanim.setDuration(1000);
-			outanim.setDuration(1000);
+			inanim.setDuration(100);
+			outanim.setDuration(100);
 			vf.setInAnimation(inanim);
 			vf.setOutAnimation(outanim);
 			vf.showPrevious();
-		}else if(v.equals(left)){
+		}
+		else if(v.equals(left))
+		{
 			TranslateAnimation inanim = new TranslateAnimation(sv[0].getWidth(),0,0,0);
 			TranslateAnimation outanim = new TranslateAnimation(0,-sv[0].getWidth(),0,0);
-			inanim.setDuration(1000);
-			outanim.setDuration(1000);
+			inanim.setDuration(100);
+			outanim.setDuration(100);
 			vf.setInAnimation(inanim);
 			vf.setOutAnimation(outanim);
-			vf.showNext();
-			
+			vf.showNext();			
 		}
+		else if( v.equals(deck) )
+		{
+			//デッキ表示のインテントの発行
+			Intent intent = new Intent();
+			intent.setClass( OpenGLSurfaceView.c , com.example.glsurfaceview.DeckSelect.class);
+			OpenGLSurfaceView.c.startActivity(intent);							
+		}		
 		
 	}
 	

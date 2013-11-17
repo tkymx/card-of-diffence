@@ -41,7 +41,10 @@ public class Game extends Scene {
 	}
 
 	@Override
-	public void onUpdate() {
+	public void Update() {
+		
+		super.Update();
+		
 		// TODO Auto-generated method stub
 		
 		for( int i = 0; i < Const.SpriteType.TYPE_MAX.getValue(); i++ )
@@ -63,7 +66,9 @@ public class Game extends Scene {
 	}
 
 	@Override
-	public void onDraw(GL10 gl) {
-		// TODO Auto-generated method stub
+	public void Draw(GL10 gl) {
+		
+		super.Draw(gl);
+		
 	}
 }

@@ -1,6 +1,5 @@
 package com.example.glsurfaceview;
 
-import com.example.select.*;
 import android.app.Activity;
 import com.example.data.DataBase;
 import android.content.Context;
@@ -54,8 +53,8 @@ public class OpenGLSurfaceView extends GLSurfaceView{
 					Scene scene = sceneManager.GetScene();
 					
 					// NULLÇÃÇ∆Ç´
-					if( scene!= null ) {
-					
+					if( scene!= null ) {		
+						
 						scene.Update();											
 						
 						//ì¸óÕÇÃèâä˙âª
@@ -83,10 +82,7 @@ public class OpenGLSurfaceView extends GLSurfaceView{
 	@Override
 	public boolean onTouchEvent( MotionEvent event )
 	{
-		Intent intent = new Intent();
-		//intent.setClass(c, com.example.glsurfaceview.DeckSelect.class);
-//		intent.setClass(c, com.example.glsurfaceview.StageSelect.class);
-//		c.startActivity(intent);
+
 
 		Touch touch = Touch.getInstance();
 		

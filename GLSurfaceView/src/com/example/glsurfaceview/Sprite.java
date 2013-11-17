@@ -443,11 +443,7 @@ public class Sprite {
 	{
 		for( int i = 0; i < maxSpriteListNum; i++ )
 		{
-			for( int j = 0; j < spriteList.get(i).size(); j++ )
-			{
-				// ƒŠƒXƒg‚©‚ç‚Í‚¸‚·
-				spriteList.get(i).get(j).remove();
-			}
+			spriteList.get(i).clear();
 		}
 	}
 	

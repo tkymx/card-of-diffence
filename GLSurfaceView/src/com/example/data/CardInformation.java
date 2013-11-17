@@ -20,7 +20,7 @@ import com.example.user.MonsterCard;
 
 public class CardInformation {
 
-	enum Card_Kind{ Monster , Trap , Magic }
+	enum Card_Kind{ Monster , DamageTrap , DmageMagic }
 	
 	//Šî–{î•ñ////////////////////////////////////////////
 	
@@ -132,11 +132,11 @@ public class CardInformation {
 		{
 			return MonsterCard.CreateMonsterCard(l, t, w, h, card_id, need);
 		}
-		else if( kind == Card_Kind.Trap )
+		else if( kind == Card_Kind.DamageTrap )
 		{
 			return DamageTrapCard.CreateDamageTrapCard(l, t, w, h, card_id, need);				
 		}
-		else if( kind == Card_Kind.Magic )
+		else if( kind == Card_Kind.DmageMagic )
 		{				
 			return DamageMagicCard.CreateDamageMagicCard(l, t, w, h, card_id, need);
 		}

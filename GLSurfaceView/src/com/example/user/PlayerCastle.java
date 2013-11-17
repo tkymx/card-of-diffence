@@ -2,6 +2,7 @@ package com.example.user;
 
 import com.example.glsurfaceview.Const;
 import com.example.glsurfaceview.R;
+import com.example.glsurfaceview.SceneManager;
 import com.example.glsurfaceview.Sprite;
 
 /**
@@ -28,8 +29,15 @@ public class PlayerCastle extends Castle {
 	// 更新処理
 	public boolean Update()
 	{
+		//最終的には城にも状態を持たせて、城で爆発が起こった後に敗北などの文字が出現し、ゲームが終了する予定
+		
 		//死んでたら消す
-		if( hp <= 0 )return false;		
+		if( hp <= 0 )
+		{
+			//ゲームオーバー画面に移動
+			SceneManager.ChangeScene( SceneManager.gameoverKey );
+			return false;		
+		}
 		
 		return true;		
 	}	
