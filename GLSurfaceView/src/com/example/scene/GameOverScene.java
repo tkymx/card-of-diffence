@@ -14,34 +14,35 @@ public class GameOverScene extends Scene {
 
 	@Override
 	public void Init() {
-
+		
 		//”wŒi‰æ‘œ
 		Sprite.Create(0, 0, Const.rx(1), Const.ry(1) , R.drawable.pause_base, SpriteType.TYPE_BG.getValue()).GetTexture().SetColor(1, 0, 0, 1);
 
+		
 	}
 
 	@Override
 	public void Uninit() {
 		// TODO Auto-generated method stub
-
+		
 	}
 
 	@Override
 	public void Update() {
-
+		
 		super.Update();
 		
 		if( Touch.getInstance().IsTouch() )
 		{
 			SceneManager.ChangeScene( SceneManager.titleKey );
-		}	
+		}
 		
 	}
 
 	@Override
 	public void Draw(GL10 gl) {
 		
-		super.Update();
+		super.Draw(gl);
 		
 	}
 }
