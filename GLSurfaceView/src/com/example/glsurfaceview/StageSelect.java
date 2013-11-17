@@ -90,13 +90,14 @@ public class StageSelect extends Activity{
 		
 		for(int i=0;i<sv.length;i++){			
 			sv[i] = new StageView(this,i+1);			
-			sv[i].setOnClickListener(new SampleStageViewClickLisnear());
+			//sv[i].setOnClickListener(new SampleStageViewClickLisnear());
+			sv[i].setOnTouchListener(new SampleTL());
 			vf.addView(sv[i]);						
 		}
 		
 		//基本的なクリックリスナー
 		
-		vf.setOnTouchListener(new SampleTL());
+		//vf.setOnTouchListener(new SampleTL());
 		right.setOnClickListener(new SampleClickListener());
 		left.setOnClickListener(new SampleClickListener());
 		deck.setOnClickListener(new SampleClickListener());
@@ -187,6 +188,17 @@ class SampleTL implements OnTouchListener{
 				vf.setInAnimation(inanim);
 				vf.setOutAnimation(outanim);
 				vf.showPrevious();
+			}else if(x-20<=e.getX() && x+20>=e.getX()){
+				if( v instanceof StageView )
+				{
+					
+					//ステージの移動
+					((StageView)v).moveStage();
+					
+					//終了
+					finish();
+					
+				}
 			}
 		}
 		return true;

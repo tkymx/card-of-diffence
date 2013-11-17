@@ -27,6 +27,7 @@ import android.view.ViewGroup;
 import android.view.Window;
 import android.view.View.OnClickListener;
 import android.view.WindowManager;
+import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.ImageView;
@@ -34,6 +35,7 @@ import android.widget.LinearLayout;
 import android.widget.ListView;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
+import android.widget.AdapterView.OnItemClickListener;
 
 public class DeckSelect extends Activity{
 	OpenGLSurfaceView surface;
@@ -43,6 +45,8 @@ public class DeckSelect extends Activity{
 	ListView lv;//リストビュー　右のスクロールできるやつ
 	RelativeLayout rl;//左の詳細情報の部分
 	TextView cardNameText,atackText,defenceText,explainText;//テキストビュー達
+	List<CardData> objects;
+	ImageView card;
 	 private final static int WC = LinearLayout.LayoutParams.WRAP_CONTENT;//?????
 	 
 	public void onCreate(Bundle savedInstanceState){
@@ -106,7 +110,7 @@ public class DeckSelect extends Activity{
 		
 		Bitmap image2;
 		image2 = BitmapFactory.decodeResource(getResources(), R.drawable.card);	
-		ImageView card = new ImageView(this);
+		card = new ImageView(this);
 		card.setImageBitmap(image2);
 		atackText.setBackgroundResource(R.drawable.list);
 		defenceText.setBackgroundResource(R.drawable.list); 
@@ -136,7 +140,7 @@ public class DeckSelect extends Activity{
 							};			
 		
 				
-		List<CardData> objects = new ArrayList<CardData>();
+		 objects = new ArrayList<CardData>();
 		for(int i=0;i<name.length;i++){
 			CardData object = new CardData();
 			object.setImagaData(bmp[i]);
@@ -150,11 +154,34 @@ public class DeckSelect extends Activity{
 		//SampleAdapter ad = new SampleAdapter(this,android.R.layout.simple_list_item_1,str);
 		CardDataAdapter ad = new CardDataAdapter(this,0,objects);
 		lv.setAdapter(ad);
+		lv.setOnItemClickListener(new SampleItemClickLixtener());
+		
 		
 		
 		
 		okButton.setOnClickListener(new SampleClickListener());
 	}
+	/////
+	class SampleItemClickLixtener implements OnItemClickListener{
+
+		@Override
+		public void onItemClick(AdapterView<?> arg0, View arg1, int arg2,
+				long arg3) {
+			CardData selectCard = objects.get(arg2);
+			atackText.setText(selectCard.getAtackData());
+			defenceText.setText(selectCard.getDefenceData());
+			explainText.setText(selectCard.getExplainData());
+			cardNameText.setText(selectCard.getNameData());
+			card.setImageBitmap(selectCard.getImageData());
+			
+					//(String) ((TextView)arg1).getText();
+			
+			
+		}
+		
+	}
+	
+	/////
 	class SampleClickListener implements android.view.View.OnClickListener{
 		Intent it;
 		public void onClick(View v) {
