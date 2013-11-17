@@ -36,20 +36,8 @@ public class Pause {
 	// 更新処理
 	public void Update()
 	{
-		// ボタンをタッチされているとき
-		if( pauseButton.isTouch )
-		{
-			goToTitle.texture.SetColor(0, 0, 0, 1);
-			baseImage.texture.SetColor(0.5f, 0.5f, 0.5f, 0.5f);
-			
-			onPause = true;
-			
-			//処理を止める
-			OpenGLSurfaceView.GameStop();
-			
-		}
 		// 暫定的な処理
-		else if( onPause )
+		if( onPause )
 		{			
 			goToTitle.onUpdate();
 			
@@ -64,6 +52,18 @@ public class Pause {
 				OpenGLSurfaceView.GameStart();
 			}
 		}
+		// ボタンをタッチされているとき
+		else if( pauseButton.isTouch )
+		{
+			goToTitle.texture.SetColor(0, 0, 0, 1);
+			baseImage.texture.SetColor(0.5f, 0.5f, 0.5f, 0.5f);
+			
+			onPause = true;
+			
+			//処理を止める
+			OpenGLSurfaceView.GameStop();
+			
+		}		
 	}
 	
 	// ポーズ中かどうかの取得

@@ -233,12 +233,15 @@ public abstract class Charactor extends SpriteAnimation {
 	}
 	protected void attack_after_state()
 	{
-
-
 		//I‚í‚Á‚Ä‚¢‚½‚çUŒ‚‚µ‚ÄŸ‚Ö
 		if( isEnd )
 		{
+			//•à‚«‚Ö
 			setState( Charactor_State.WALK_STATE );
+			
+			//‘ÎÛ‚Ì•ÏX
+			attackTarget = null;
+			castleTarget = null;
 		}
 	}
 	
