@@ -154,7 +154,9 @@ class SampleClickListener implements android.view.View.OnClickListener{
 		{
 			//デッキ表示のインテントの発行
 			Intent intent = new Intent();
-			intent.setClass( OpenGLSurfaceView.c , com.example.glsurfaceview.DeckSelect.class);
+			//intent.setClass( OpenGLSurfaceView.c , com.example.glsurfaceview.DeckSelect.class);
+			intent.setClass( OpenGLSurfaceView.c , com.example.glsurfaceview.DeckEdit.class);
+			
 			OpenGLSurfaceView.c.startActivity(intent);							
 		}		
 		
