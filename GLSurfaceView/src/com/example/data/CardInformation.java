@@ -25,11 +25,8 @@ public class CardInformation {
 	//基本情報////////////////////////////////////////////
 	
 	private String name;
-	private String explain;
 	private int need;
-	private int card_id;
-	private int attack;
-	private int deffence;	
+	private int card_id;	
 	private Card_Kind kind;
 	
 	public int getNeed() {
@@ -49,24 +46,6 @@ public class CardInformation {
 	}
 	public void setName(String name) {
 		this.name = name;
-	}
-	public String getExplain() {
-		return explain;
-	}
-	public void setExplain(String explain) {
-		this.explain = explain;
-	}
-	public int getAttack() {
-		return attack;
-	}
-	public void setAttack(int attack) {
-		this.attack = attack;
-	}
-	public int getDeffence() {
-		return deffence;
-	}
-	public void setDeffence(int deffence) {
-		this.deffence = deffence;
 	}
 	public Card_Kind getKind() {
 		return kind;
@@ -102,9 +81,9 @@ public class CardInformation {
 		
 		return ci.getCard(l, t, w, h);
 	}
-	public static CardInformation CreateCardInformation(  String name,String explain,int attack,int deffence,Card_Kind kind,int id,int need )
+	public static CardInformation CreateCardInformation(  String name,Card_Kind kind,int id,int need )
 	{
-		return new CardInformation( name , explain , attack , deffence , kind , id , need );
+		return new CardInformation( name , kind , id , need );
 	}	
 	//初期化
 	public static void Init()
@@ -114,12 +93,9 @@ public class CardInformation {
 	
 	//コンストラクタ情報////////////////////////////////////////////
 	
-	private CardInformation( String name,String explain,int attack,int deffence,Card_Kind kind,int id,int need  )
+	private CardInformation( String name,Card_Kind kind,int id,int need  )
 	{
 		this.name = name;
-		this.explain = explain;
-		this.attack = attack;
-		this.deffence = deffence;
 		this.kind = kind;
 		this.card_id = id;
 		this.need = need;
@@ -130,7 +106,7 @@ public class CardInformation {
 	{
 		if( kind == Card_Kind.Monster )
 		{
-			return MonsterCard.CreateMonsterCard(l, t, w, h, card_id, need);
+			return MonsterCard.CreateMonsterCard(l, t, w, h, card_id, need,name);
 		}
 		else if( kind == Card_Kind.DamageTrap )
 		{

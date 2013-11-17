@@ -69,6 +69,8 @@ public class DataBase {
 	public static void Init()
 	{
 		//全てのカード
+		CharactorInfomation.Init();
+		//全てのカード
 		CardInformation.Init();
 		//自分のカード
 		myCards = new ArrayList<String>();
@@ -81,31 +83,56 @@ public class DataBase {
 		//ここで、デッキの初期化処理などを行う
 		
 		///////////////////////////////////////
+		//キャラクタの追加を行う
+		///////////////////////////////////////		
+		CharactorInfomation.AddCharactor(
+				CharactorInfomation.Create("monster1","monsterCard1",10,10,1, 2, R.drawable.walk, R.drawable.image1, R.drawable.image2 ) );
+		CharactorInfomation.AddCharactor(
+				CharactorInfomation.Create("monster2","monsterCard2",10,10,1, 2, R.drawable.walk, R.drawable.image1, R.drawable.image2 ) );
+		CharactorInfomation.AddCharactor(
+				CharactorInfomation.Create("monster3","monsterCard3",10,10,1, 2, R.drawable.walk, R.drawable.image1, R.drawable.image2 ) );
+		CharactorInfomation.AddCharactor(
+				CharactorInfomation.Create("monster4","monsterCard4",10,10,1, 2, R.drawable.walk, R.drawable.image1, R.drawable.image2 ) );
+		CharactorInfomation.AddCharactor(
+				CharactorInfomation.Create("monster5","monsterCard5",10,10,1, 2, R.drawable.walk, R.drawable.image1, R.drawable.image2 ) );
+		CharactorInfomation.AddCharactor(
+				CharactorInfomation.Create("monster6","monsterCard6",10,10,1, 2, R.drawable.walk, R.drawable.image1, R.drawable.image2 ) );
+		CharactorInfomation.AddCharactor(
+				CharactorInfomation.Create("monster7","monsterCard7",10,10,1, 2, R.drawable.walk, R.drawable.image1, R.drawable.image2 ) );
+		CharactorInfomation.AddCharactor(
+				CharactorInfomation.Create("monster8","monsterCard8",10,10,1, 2, R.drawable.walk, R.drawable.image1, R.drawable.image2 ) );
+		CharactorInfomation.AddCharactor(
+				CharactorInfomation.Create("monster9","monsterCard9",10,10,1, 2, R.drawable.walk, R.drawable.image1, R.drawable.image2 ) );
+		
+		CharactorInfomation.AddCharactor(
+				CharactorInfomation.Create("enemy1","enemyCard1",10,10,1, 2, R.drawable.walk_enemy, R.drawable.image1, R.drawable.image2 ) );
+		
+		///////////////////////////////////////
 		//デッキの種類の追加
 		///////////////////////////////////////
 		
 		CardInformation.SetCardInforation(
-				CardInformation.CreateCardInformation("monster1","monsterCard1",10,10,Card_Kind.Monster,R.drawable.moster_card_1,2));
+				CardInformation.CreateCardInformation("monster1",Card_Kind.Monster,R.drawable.moster_card_1,2));
 		CardInformation.SetCardInforation(
-				CardInformation.CreateCardInformation("monster2","monsterCard2",10,10,Card_Kind.Monster,R.drawable.moster_card_2,1));
+				CardInformation.CreateCardInformation("monster2",Card_Kind.Monster,R.drawable.moster_card_2,1));
 		CardInformation.SetCardInforation(
-				CardInformation.CreateCardInformation("monster3","monsterCard3",10,10,Card_Kind.Monster,R.drawable.moster_card_3,1));
+				CardInformation.CreateCardInformation("monster3",Card_Kind.Monster,R.drawable.moster_card_3,1));
 		CardInformation.SetCardInforation(
-				CardInformation.CreateCardInformation("monster4","monsterCard4",10,10,Card_Kind.Monster,R.drawable.moster_card_4,1));
+				CardInformation.CreateCardInformation("monster4",Card_Kind.Monster,R.drawable.moster_card_4,1));
 		CardInformation.SetCardInforation(
-				CardInformation.CreateCardInformation("monster5","monsterCard5",10,10,Card_Kind.Monster,R.drawable.moster_card_5,1));
+				CardInformation.CreateCardInformation("monster5",Card_Kind.Monster,R.drawable.moster_card_5,1));
 		CardInformation.SetCardInforation(
-				CardInformation.CreateCardInformation("monster6","monsterCard6",10,10,Card_Kind.Monster,R.drawable.moster_card_6,1));
+				CardInformation.CreateCardInformation("monster6",Card_Kind.Monster,R.drawable.moster_card_6,1));
 		CardInformation.SetCardInforation(
-				CardInformation.CreateCardInformation("monster7","monsterCard7",10,10,Card_Kind.Monster,R.drawable.moster_card_7,1));
+				CardInformation.CreateCardInformation("monster7",Card_Kind.Monster,R.drawable.moster_card_7,1));
 		CardInformation.SetCardInforation(
-				CardInformation.CreateCardInformation("monster8","monsterCard8",10,10,Card_Kind.Monster,R.drawable.moster_card_8,1));
+				CardInformation.CreateCardInformation("monster8",Card_Kind.Monster,R.drawable.moster_card_8,1));
 		CardInformation.SetCardInforation(
-				CardInformation.CreateCardInformation("monster9","monsterCard9",10,10,Card_Kind.Monster,R.drawable.moster_card_9,1));
+				CardInformation.CreateCardInformation("monster9",Card_Kind.Monster,R.drawable.moster_card_9,1));
 		CardInformation.SetCardInforation(
-				CardInformation.CreateCardInformation("trap","trapCard",10,-1,Card_Kind.DamageTrap,R.drawable.trap_card,1));
+				CardInformation.CreateCardInformation("trap",Card_Kind.DamageTrap,R.drawable.trap_card,1));
 		CardInformation.SetCardInforation(
-				CardInformation.CreateCardInformation("magic","magicCard",10,-1,Card_Kind.DmageMagic,R.drawable.magic_card,1));		
+				CardInformation.CreateCardInformation("magic",Card_Kind.DmageMagic,R.drawable.magic_card,1));		
 		
 		///////////////////////////////////////
 		//自分の保持しているカードの追加
