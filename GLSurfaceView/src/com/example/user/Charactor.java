@@ -284,14 +284,14 @@ public abstract class Charactor extends SpriteAnimation {
 	//UŒ‚Às
 	public void ActionAttack()
 	{
-		//é‚ª—Dæ‡ˆÊ‚ª‚‚¢
-		if( castleTarget != null )
-		{
-			castleTarget.Damage(this);
-		}
-		else if( attackTarget != null )
+		//“G‚ª—Dæ‡ˆÊ‚ª‚‚¢
+		if( attackTarget != null )
 		{
 			attackTarget.Damage(this);			
+		}
+		else if( castleTarget != null )
+		{
+			castleTarget.Damage(this);
 		}
 	}
 	
