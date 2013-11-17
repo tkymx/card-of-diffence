@@ -24,7 +24,8 @@ import com.example.user.Stage;
 public class DataBase {
 
 	//自分のカード
-	private static ArrayList<String> myCards;
+	//private static ArrayList<String> myCards;
+	public static ArrayList<String> myCards;
 	//自分のデッキ
 	private static String[] myDecks;
 	
