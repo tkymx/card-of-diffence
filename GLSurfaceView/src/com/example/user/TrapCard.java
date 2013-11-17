@@ -16,8 +16,6 @@ public abstract class TrapCard extends Card {
 	{
 		if(super.Update()==false)return false;
 		
-		//ˆê’èŠÔŒã‚É‚µ‚æ‚¤‚©‚É‚·‚é
-		
 		return true;		
 	}	
 	

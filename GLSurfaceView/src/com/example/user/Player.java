@@ -8,8 +8,8 @@ import com.example.user.Charactor.Charactor_State;
 
 public class Player extends Charactor {
 
-	public Player(int hp, int attack ,int speed) {
-		super(hp, attack,speed);
+	public Player(int hp, int attack, int speed,int wi,int abi,int afi) {
+		super(hp, attack, speed, wi, abi, afi);
 		// TODO Auto-generated constructor stub
 	}
 

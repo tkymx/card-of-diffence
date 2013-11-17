@@ -16,9 +16,11 @@ public class OpenGLSurfaceView extends GLSurfaceView{
 	private Thread thread;
 	public static Context c;
 
+	//ストップフラグのせってい
 	private static boolean stopflag;
 	public static void GameStop(){stopflag = true;};
 	public static void GameStart(){stopflag = false;};
+	public static boolean IsGameStop(){return stopflag;};	
 
 	public OpenGLSurfaceView(Context context) 
 	{
@@ -33,15 +35,13 @@ public class OpenGLSurfaceView extends GLSurfaceView{
 		// レンダラーの設定
 		setRenderer( renderer );
 		
-		// シーンマネージャーの生成
-		sceneManager = SceneManager.getInstance();
-		
-		//ストップフラグ
-		GameStart();
 		
 		//データベースの初期化処理などを行う
 		DataBase.Init();
-		DataBase.LoadData();
+		DataBase.LoadData();		
+		
+		// シーンマネージャーの生成
+		sceneManager = SceneManager.getInstance();
 		
 		thread = new Thread( new Runnable() {
 			
@@ -51,31 +51,27 @@ public class OpenGLSurfaceView extends GLSurfaceView{
 				// 更新スレッド
 				while( thread != null )
 				{
-					if( !stopflag )
-					{
-						Scene scene = sceneManager.GetScene();
+					Scene scene = sceneManager.GetScene();
+					
+					// NULLのとき
+					if( scene!= null ) {
+					
+						scene.Update();											
 						
-						// NULLのとき
-						if( scene!= null ) {
-						
-							// 更新処理
-							scene.Update();											
-	
-							//入力の初期化
-							Touch touch = Touch.getInstance();
-							touch.UpdateEnd();
-						}
-						
-						// 例外処理
-						try
-						{
-							// 60FPSで更新
-							Thread.sleep( 1000 / 60 );
-						}
-						catch(Exception e)
-						{
-						}
+						//入力の初期化
+						Touch touch = Touch.getInstance();
+						touch.UpdateEnd();
 					}
+					
+					// 例外処理
+					try
+					{
+						// 60FPSで更新
+						Thread.sleep( 1000 / 60 );
+					}
+					catch(Exception e)
+					{
+					}					
 				}	
 			}
 		} );
@@ -89,8 +85,8 @@ public class OpenGLSurfaceView extends GLSurfaceView{
 	{
 		Intent intent = new Intent();
 		//intent.setClass(c, com.example.glsurfaceview.DeckSelect.class);
-		intent.setClass(c, com.example.glsurfaceview.StageSelect.class);
-		c.startActivity(intent);
+//		intent.setClass(c, com.example.glsurfaceview.StageSelect.class);
+//		c.startActivity(intent);
 
 		Touch touch = Touch.getInstance();
 		

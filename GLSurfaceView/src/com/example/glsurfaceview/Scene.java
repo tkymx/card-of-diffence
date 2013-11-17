@@ -15,26 +15,31 @@ public abstract class Scene {
 	public abstract void onUpdate();
 	public void Update()
 	{
-		for( int i = 0; i < Const.SpriteType.TYPE_MAX.getValue(); i++ )
-		{
-			LinkedList<Sprite> list = Sprite.spriteList.get(i);
-			
-			// リストに登録されているシーンの数分ループ
-			for( int j = 0; j < list.size(); j++ )
+		//シーンの通常更新にこれが設置される
+		if( !OpenGLSurfaceView.IsGameStop() )
+		{	
+			for( int i = 0; i < Const.SpriteType.TYPE_MAX.getValue(); i++ )
 			{
-				// 使用中のとき
-				if( list.get(j).GetUse() == true )
+				LinkedList<Sprite> list = Sprite.spriteList.get(i);
+				
+				// リストに登録されているシーンの数分ループ
+				for( int j = 0; j < list.size(); j++ )
 				{
-					Sprite sp = list.get(j);
-					
-					//fasleが帰ってきたら消す
-					if(sp.Update()==false)
+					// 使用中のとき
+					if( list.get(j).GetUse() == true )
 					{
-						sp.remove();
+						Sprite sp = list.get(j);
+						
+						//fasleが帰ってきたら消す
+						if(sp.Update()==false)
+						{
+							sp.remove();
+						}
 					}
 				}
-			}
-		}		
+			}		
+		}
+		
 		onUpdate();
 	}
 	public abstract void onDraw( GL10 gl );
