@@ -57,6 +57,9 @@ public abstract class Card extends Sprite {
 	}	
 	
 	//継承先からしか生産できない
+	protected Card(  )
+	{		
+	}
 	protected Card( int left , int top, int width , int height , int id , int need )
 	{
 		//しようかにする
@@ -251,5 +254,16 @@ public abstract class Card extends Sprite {
 	{
 		return isUse;
 	}
+	
+	/*
+	 * カードが選択画面に表示されている時の表示についての抽象関数を作成しておく
+	 */
+	
+
+	/*
+	 * カードが作成された時の作成抽象関数を作っておく
+	 */
+	public abstract Card Create( int left , int top, int width , int height , int id , String name , int need  );
+	
 	
 }

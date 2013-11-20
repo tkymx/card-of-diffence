@@ -11,6 +11,7 @@ public abstract class MagicCard extends Card {
 		
 	
 	//コンストラクタ
+	protected MagicCard(){}
 	protected MagicCard( int left, int top, int width, int height, int id,int need) {
 		super(left, top, width, height, id,need);		
 	}

@@ -39,4 +39,19 @@ public class DamageTrapCard extends TrapCard {
 		
 	}
 	
+	/*
+	 * 
+	 * とりあえずcardからcreateを呼ばせて自分自身を作成するための仮データみたいなもん
+	 * 
+	 */
+	protected DamageTrapCard(){/*何もしない*/}
+	public static DamageTrapCard CreateDamageTrapCard(){ return new DamageTrapCard();}		
+	@Override
+	public Card Create(int left, int top, int width, int height, int id,String name, int need) {
+
+		DamageTrapCard mc = new DamageTrapCard(left, top, width, height, id ,need);
+		
+		return mc;
+	}		
+	
 }

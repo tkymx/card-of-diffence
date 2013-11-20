@@ -54,5 +54,20 @@ public class DamageMagicCard extends MagicCard {
 		}
 				
 	}
+	
+	/*
+	 * 
+	 * とりあえずcardからcreateを呼ばせて自分自身を作成するための仮データみたいなもん
+	 * 
+	 */
+	protected DamageMagicCard(){/*何もしない*/}
+	public static DamageMagicCard CreateDamageMagicCard(){ return new DamageMagicCard();}	
+	@Override
+	public Card Create(int left, int top, int width, int height, int id,String name, int need) {
+
+		DamageMagicCard mc = new DamageMagicCard(left, top, width, height, id ,need);
+		
+		return mc;
+	}	
 
 }

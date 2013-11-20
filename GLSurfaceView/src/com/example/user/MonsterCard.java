@@ -10,14 +10,14 @@ public class MonsterCard extends Card {
 	
 	//自分が作成したキャラクタの情報
 	Charactor charactor;
-	
+		
 	//生成メソッド
 	public static MonsterCard CreateMonsterCard( int left, int top, int width, int height, int id,int need , String name )
 	{
 		MonsterCard mc = new MonsterCard(left, top, width, height, id,need , name);
 		return mc;
 	}
-	
+
 	//コンストラクタ
 	protected MonsterCard(int left, int top, int width, int height, int id ,int need , String name) {
 		super(left, top, width, height, id ,need );
@@ -97,6 +97,21 @@ public class MonsterCard extends Card {
 		//キャラクタをnullにする
 		charactor = null;
 		
+	}
+
+	/*
+	 * 
+	 * とりあえずcardからcreateを呼ばせて自分自身を作成するための仮データみたいなもん
+	 * 
+	 */
+	protected MonsterCard()	{/*何もしない*/}
+	public static MonsterCard CreateMonsterCard(){ return new MonsterCard();}	
+	@Override
+	public Card Create(int left, int top, int width, int height, int id,String name, int need) {
+
+		MonsterCard mc = new MonsterCard(left, top, width, height, id,need , name);		
+		
+		return mc;
 	}
 	
 }

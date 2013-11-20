@@ -2,6 +2,8 @@ package com.example.data;
 
 import java.util.HashMap;
 
+import android.app.ApplicationErrorReport.CrashInfo;
+
 import com.example.user.Card;
 import com.example.user.DamageMagicCard;
 import com.example.user.DamageTrapCard;
@@ -19,15 +21,13 @@ import com.example.user.MonsterCard;
  */
 
 public class CardInformation {
-
-	enum Card_Kind{ Monster , DamageTrap , DmageMagic }
 	
 	//基本情報////////////////////////////////////////////
 	
 	private String name;
 	private int need;
 	private int card_id;	
-	private Card_Kind kind;
+	private Card kind;
 	
 	public int getNeed() {
 		return need;
@@ -47,10 +47,10 @@ public class CardInformation {
 	public void setName(String name) {
 		this.name = name;
 	}
-	public Card_Kind getKind() {
+	public Card getKind() {
 		return kind;
 	}
-	public void setKind(Card_Kind kind) {
+	public void setKind(Card kind) {
 		this.kind = kind;
 	}
 	public static HashMap<String, CardInformation> getCards() {
@@ -81,7 +81,7 @@ public class CardInformation {
 		
 		return ci.getCard(l, t, w, h);
 	}
-	public static CardInformation CreateCardInformation(  String name,Card_Kind kind,int id,int need )
+	public static CardInformation CreateCardInformation(  String name,Card kind,int id,int need )
 	{
 		return new CardInformation( name , kind , id , need );
 	}	
@@ -93,7 +93,7 @@ public class CardInformation {
 	
 	//コンストラクタ情報////////////////////////////////////////////
 	
-	private CardInformation( String name,Card_Kind kind,int id,int need  )
+	private CardInformation( String name,Card kind,int id,int need  )
 	{
 		this.name = name;
 		this.kind = kind;
@@ -104,19 +104,8 @@ public class CardInformation {
 	//カード情報からカードを取得
 	public Card getCard(int l, int t,int w,int h )
 	{
-		if( kind == Card_Kind.Monster )
-		{
-			return MonsterCard.CreateMonsterCard(l, t, w, h, card_id, need,name);
-		}
-		else if( kind == Card_Kind.DamageTrap )
-		{
-			return DamageTrapCard.CreateDamageTrapCard(l, t, w, h, card_id, need);				
-		}
-		else if( kind == Card_Kind.DmageMagic )
-		{				
-			return DamageMagicCard.CreateDamageMagicCard(l, t, w, h, card_id, need);
-		}
-		return null;		
+		//基本的にカードだけの情報として、カードクラスに描画部分をになってもらうのもいいかもしれない		
+		return kind.Create(l, t, w, h, card_id, name, need);
 	}
 	
 	
