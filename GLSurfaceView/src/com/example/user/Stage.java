@@ -7,6 +7,9 @@ public class Stage {
 	private int stage_enemy_castle_id;
 	private int stage_player_castle_id;
 
+	//レベル
+	private int level;
+
 	//クリア後に行けるようになるステージ番号
 	private int clear_stage_number;
 	
@@ -61,16 +64,26 @@ public class Stage {
 		this.enemyDeck = enemyDeck;
 	}
 	
+	public int getLevel() {
+		return level;
+	}
+
+	public void setLevel(int level) {
+		this.level = level;
+	}	
+	
 	
 	//ステージの情報
-	public Stage(int ssii,int sbii,int seci,int spci,int csn,String[] ed)
+	public Stage(int ssii,int sbii,int seci,int spci,int csn,int level,String[] ed)
 	{
 		stage_select_image_id = ssii;
 		stage_background_image_id = sbii;
 		stage_enemy_castle_id = seci;
 		stage_player_castle_id = spci;
 		
-		clear_stage_number = csn;
+		this.level = level;
+		
+		clear_stage_number = csn;		
 		
 		enemyDeck = new String[11];
 		for(int i=0;i<11;i++)

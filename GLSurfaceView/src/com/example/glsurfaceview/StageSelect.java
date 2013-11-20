@@ -93,9 +93,9 @@ public class StageSelect extends Activity{
 		String str[] = {"enemy1","enemy1","enemy1","enemy1","enemy1","enemy1","enemy1","enemy1","enemy1","enemy1","enemy1"};
 		Stage stage[] = 
 		{
-			new Stage(R.drawable.game_start, R.drawable.map, R.drawable.enemy_castle , R.drawable.player_castle, 2, str),
-			new Stage(R.drawable.image1, R.drawable.effect, R.drawable.enemy_castle, R.drawable.player_castle, 3, str),
-			new Stage(R.drawable.image2, R.drawable.explain, R.drawable.enemy_castle, R.drawable.player_castle, 3, str)			
+			new Stage(R.drawable.game_start, R.drawable.map, R.drawable.enemy_castle , R.drawable.player_castle, 2, 1 , str),
+			new Stage(R.drawable.image1, R.drawable.effect, R.drawable.enemy_castle, R.drawable.player_castle, 3, 2 , str),
+			new Stage(R.drawable.image2, R.drawable.explain, R.drawable.enemy_castle, R.drawable.player_castle, 3, 3 , str)			
 		};
 		
 		for(int i=0;i<sv.length;i++){			
