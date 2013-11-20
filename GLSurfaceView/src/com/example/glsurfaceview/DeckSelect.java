@@ -7,6 +7,8 @@ import java.util.Random;
 
 
 import com.example.*;
+import com.example.data.CardInformation;
+import com.example.data.DataBase;
 import com.example.glsurfaceview.Const;
 import com.example.glsurfaceview.Text;
 
@@ -38,68 +40,73 @@ import android.widget.TextView;
 import android.widget.AdapterView.OnItemClickListener;
 
 public class DeckSelect extends Activity{
-	OpenGLSurfaceView surface;
-	public static int width, height;
-	Button okButton;//デッキ採用決定ボタン
-	Button backButton;//戻るボタン
-	ListView lv;//リストビュー　右のスクロールできるやつ
-	RelativeLayout rl;//左の詳細情報の部分
-	TextView cardNameText,atackText,defenceText,explainText;//テキストビュー達
-	List<CardData> objects;
-	ImageView card;
-	 private final static int WC = LinearLayout.LayoutParams.WRAP_CONTENT;//?????
+	
+	Button okButton;		//デッキ採用決定ボタン
+	Button backButton;		//戻るボタン
+	ListView lv;			//リストビュー　右のスクロールできるやつ
+	TextView cardNameText,atackText,defenceText,explainText;	//左の詳細画面に使うテキストビュー達
+	ImageView card;			//左の詳細画面に使うキャラのImageView
+	
+	List<CardData> objects;	//CardDataクラスのリスト これをCardInfomation使った何かに変える
+	List<CardInformation> cardList;
+	
+	LinearLayout ll;		//全体を覆うレイアウト
+	RelativeLayout rl;		//左の詳細情報の部分のレイアウト
+	
+	RelativeLayout.LayoutParams okParam;//パラメータ
+	RelativeLayout.LayoutParams backParam;
+	RelativeLayout.LayoutParams atackTextParam;
+	RelativeLayout.LayoutParams defenceTextParam;
+	RelativeLayout.LayoutParams explainTextParam;
+	RelativeLayout.LayoutParams cardNameTextParam;
+	RelativeLayout.LayoutParams cardParam;
 	 
 	public void onCreate(Bundle savedInstanceState){
 		super.onCreate(savedInstanceState);
 		requestWindowFeature(Window.FEATURE_NO_TITLE);
 		
-		
-		LinearLayout ll = new LinearLayout(this);
+		//いろいろ生成
+		ll = new LinearLayout(this);
 		ll.setOrientation(LinearLayout.HORIZONTAL);
-		setContentView(ll);
 		lv = new ListView(this);
 		rl = new RelativeLayout(this);
-		okButton = new Button(this);
-		backButton = new Button(this);
+		cardNameText = new TextView(this);
+		card = new ImageView(this);
 		atackText = new TextView(this);
 		defenceText = new TextView(this);
 		explainText = new TextView(this);
-		cardNameText = new TextView(this);
+		okButton = new Button(this);
+		backButton = new Button(this);
 		
-		ll.addView(rl,new LinearLayout.LayoutParams(Const.rx(0.4), Const.ry(1)));
-		ll.addView(lv,new LinearLayout.LayoutParams(Const.rx(0.6), Const.ry(1)));
-		ll.setBackgroundResource(R.drawable.background);
+		/*左画面の初期セット*/
+		cardNameText.setText("ティガレックス");
+		atackText.setText("攻撃力　53万");
+		defenceText.setText("防御力　1");
+		explainText.setText("やばいやつぐはははははは\nははははははははははは\nはははははははははははははは");
 		okButton.setText("OK");
 		backButton.setText("戻る");
-		cardNameText.setText("ティガレックス");
-		cardNameText.setBackgroundResource(R.drawable.name); 
+		//とりあえず適当な画像で初期設定
+		Bitmap image2;
+		image2 = BitmapFactory.decodeResource(getResources(), R.drawable.card);	
+		card.setImageBitmap(image2);
+		
+		
+		//テキストサイズ設定
 		cardNameText.setTextSize(Const.ry(0.030));
-		atackText.setText("攻撃力　53万");
-		atackText.setTextSize(Const.ry(0.020));
-		atackText.setBackgroundResource(R.drawable.atack); 
-		defenceText.setText("防御力　1");
+		atackText.setTextSize(Const.ry(0.020));	
 		defenceText.setTextSize(Const.ry(0.020));
-		defenceText.setBackgroundResource(R.drawable.defence); 
-		explainText.setText("やばいやつぐはははははは\nははははははははははは\nはははははははははははははは");
 		explainText.setTextSize(Const.ry(0.010));
-		explainText.setBackgroundResource(R.drawable.explain); 
 		
-		RelativeLayout.LayoutParams okParam = new RelativeLayout.LayoutParams(Const.rx(0.1), Const.ry(0.1));
-		RelativeLayout.LayoutParams backParam = new RelativeLayout.LayoutParams(Const.rx(0.1), Const.ry(0.1));
-		RelativeLayout.LayoutParams atackTextParam = new RelativeLayout.LayoutParams(Const.rx(0.15), Const.ry(0.1));
-		RelativeLayout.LayoutParams defenceTextParam = new RelativeLayout.LayoutParams(Const.rx(0.15), Const.ry(0.1));
-		RelativeLayout.LayoutParams explainTextParam = new RelativeLayout.LayoutParams(Const.rx(0.3), Const.ry(0.2));
-		RelativeLayout.LayoutParams cardNameTextParam = new RelativeLayout.LayoutParams(Const.rx(0.3), Const.ry(0.1));
-		RelativeLayout.LayoutParams cardParam = new RelativeLayout.LayoutParams(Const.rx(0.2), Const.ry(0.3));
+		//パラメータ生成、大きさの設定
+		cardNameTextParam = new RelativeLayout.LayoutParams(Const.rx(0.3), Const.ry(0.1));
+		cardParam = new RelativeLayout.LayoutParams(Const.rx(0.2), Const.ry(0.3));
+		atackTextParam = new RelativeLayout.LayoutParams(Const.rx(0.15), Const.ry(0.1));
+		defenceTextParam = new RelativeLayout.LayoutParams(Const.rx(0.15), Const.ry(0.1));
+		explainTextParam = new RelativeLayout.LayoutParams(Const.rx(0.3), Const.ry(0.2));
+		okParam = new RelativeLayout.LayoutParams(Const.rx(0.1), Const.ry(0.1));
+		backParam = new RelativeLayout.LayoutParams(Const.rx(0.1), Const.ry(0.1));
 		
-		/*okParam.setMargins(Const.rx(0.05), Const.ry(0.8),Const.rx(0.15),Const.ry(0.995));
-		backParam.setMargins(Const.rx(0.25), Const.ry(0.8),Const.rx(0.35),Const.ry(0.995));
-		atackTextParam.setMargins(Const.rx(0.05), Const.ry(0.6),Const.rx(0.2),Const.ry(0.7));
-		defenceTextParam.setMargins(Const.rx(0.25), Const.ry(0.6),Const.rx(0.4),Const.ry(0.7));
-		explainTextParam.setMargins(Const.rx(0.05), Const.ry(0.7),Const.rx(0.25),Const.ry(0.8));
-		cardNameTextParam.setMargins(Const.rx(0.05), Const.ry(0.25),Const.rx(0.35),Const.ry(0.55));
-		cardParam.setMargins(Const.rx(0.1), Const.ry(0.1),Const.rx(0.35),Const.ry(0.55));*/
-		
+		//パラメータで場所の指定
 		cardNameTextParam.setMargins(Const.rx(0.05), Const.ry(0.05),0,0);
 		cardParam.setMargins(Const.rx(0.1), Const.ry(0.2),0,0);
 		atackTextParam.setMargins(Const.rx(0.05), Const.ry(0.50),0,0);
@@ -108,39 +115,23 @@ public class DeckSelect extends Activity{
 		okParam.setMargins(Const.rx(0.05), Const.ry(0.8),0,0);
 		backParam.setMargins(Const.rx(0.25), Const.ry(0.8),0,0);
 		
-		Bitmap image2;
-		image2 = BitmapFactory.decodeResource(getResources(), R.drawable.card);	
-		card = new ImageView(this);
-		card.setImageBitmap(image2);
-		atackText.setBackgroundResource(R.drawable.list);
-		defenceText.setBackgroundResource(R.drawable.list); 
-		explainText.setBackgroundResource(R.drawable.list); 
-		
-		
-		rl.addView(cardNameText, cardNameTextParam);
-		rl.addView(okButton, okParam);
-		rl.addView(backButton,backParam);
-		rl.addView(atackText,atackTextParam);
-		rl.addView(defenceText,defenceTextParam);
-		rl.addView(explainText,explainTextParam);
-		
-		rl.addView(card, cardParam);
-		
-		String[] name = {"車","バス","飛行機","タクシー","自転車","歩行","クラウン","小山","渡辺","利光","河津",
-						};
-		Bitmap image1;
-        image1 = BitmapFactory.decodeResource(getResources(), R.drawable.atack);
-		Bitmap[] bmp = {image1,image1,image1,image1,image1,image1,image1,image1,image1,image1,image1,
-						};
+	/*新しいデータベースで作ってみた*/
+		//cardList = new ArrayList<CardInformation>();
+		DataBase.LoadData();
+		CardDataAdapter ad = new CardDataAdapter(this,0,DataBase.myCards);
+		lv.setAdapter(ad);
+	
+	
+	/*とりあえず適当にデータベース代わりの配列を作った*/
+		/*String[] name = {"車","バス","飛行機","タクシー","自転車","歩行","クラウン","小山","渡辺","利光","河津",};
+		Bitmap image1 = BitmapFactory.decodeResource(getResources(), R.drawable.atack);
+		Bitmap[] bmp = {image1,image1,image1,image1,image1,image1,image1,image1,image1,image1,image1,};
 		String[] atack = {"攻撃力 1000","攻撃力 2000","攻撃力 3000","攻撃力 1000","攻撃力 2000","攻撃力 3000","攻撃力 1000","攻撃力 2000","攻撃力 3000","攻撃力 1000","攻撃力 1000"};
 		String[] defence = {"防御力　500","防御力　600","防御力　700","防御力　500","防御力　600","防御力　700","防御力　500","防御力　600","防御力　700","防御力　500","防御力　500"};
+		String[] explain = {"あああああああああじあああああああああじあああああああああじ","バス","飛行機","タクシー","自転車","歩行","クラウン","小山","渡辺","利光","河津",};			
 		
-		String[] explain = {"あああああああああじあああああああああじあああああああああじ",
-								"バス","飛行機","タクシー","自転車","歩行","クラウン","小山","渡辺","利光","河津",
-							};			
 		
-				
-		 objects = new ArrayList<CardData>();
+		objects = new ArrayList<CardData>();
 		for(int i=0;i<name.length;i++){
 			CardData object = new CardData();
 			object.setImagaData(bmp[i]);
@@ -149,70 +140,87 @@ public class DeckSelect extends Activity{
 			object.setDefenceData(defence[i]);
 			object.setExplainData(explain[i]);
 			
-			objects.add(object);
+			objects.add(object);//上の配列からCardDataクラスのリストを生成
 		}
-		//SampleAdapter ad = new SampleAdapter(this,android.R.layout.simple_list_item_1,str);
+		//アダプターセット
 		CardDataAdapter ad = new CardDataAdapter(this,0,objects);
 		lv.setAdapter(ad);
-		lv.setOnItemClickListener(new SampleItemClickLixtener());
+	/*データベース終わり*/
 		
 		
+		//バックグラウンド画像設定
+		ll.setBackgroundResource(R.drawable.background);
+		cardNameText.setBackgroundResource(R.drawable.name); 
+		atackText.setBackgroundResource(R.drawable.atack);
+		defenceText.setBackgroundResource(R.drawable.defence);
+		explainText.setBackgroundResource(R.drawable.explain); 
+		atackText.setBackgroundResource(R.drawable.list);
+		defenceText.setBackgroundResource(R.drawable.list); 
+		explainText.setBackgroundResource(R.drawable.list); 
 		
+		//いろいろセット
+		setContentView(ll);
+		ll.addView(rl,new LinearLayout.LayoutParams(Const.rx(0.4), Const.ry(1)));
+		ll.addView(lv,new LinearLayout.LayoutParams(Const.rx(0.6), Const.ry(1)));
+		rl.addView(cardNameText, cardNameTextParam);
+		rl.addView(card, cardParam);
+		rl.addView(atackText,atackTextParam);
+		rl.addView(defenceText,defenceTextParam);
+		rl.addView(explainText,explainTextParam);
+		rl.addView(okButton, okParam);
+		rl.addView(backButton,backParam);
 		
 		okButton.setOnClickListener(new SampleClickListener());
+		backButton.setOnClickListener(new SampleClickListener());
+		lv.setOnItemClickListener(new SampleItemClickListener());
 	}
-	/////
-	class SampleItemClickLixtener implements OnItemClickListener{
+	
+	///////////////////////以下、リスナ///////////////////////////////
+	class SampleItemClickListener implements OnItemClickListener{
 
 		@Override
 		public void onItemClick(AdapterView<?> arg0, View arg1, int arg2,
 				long arg3) {
-			CardData selectCard = objects.get(arg2);
-			atackText.setText(selectCard.getAtackData());
-			defenceText.setText(selectCard.getDefenceData());
-			explainText.setText(selectCard.getExplainData());
-			cardNameText.setText(selectCard.getNameData());
-			card.setImageBitmap(selectCard.getImageData());
-			
-					//(String) ((TextView)arg1).getText();
-			
-			
+			String selectedCard = DataBase.myCards.get(arg2);
+			card.setImageResource(CardInformation.GetCardInformaionFromName(selectedCard).getCard_id());
+			atackText.setText(CardInformation.GetCardInformaionFromName(selectedCard).getName());		
+			defenceText.setText(CardInformation.GetCardInformaionFromName(selectedCard).getName());
+			explainText.setText(CardInformation.GetCardInformaionFromName(selectedCard).getName());
+			cardNameText.setText(CardInformation.GetCardInformaionFromName(selectedCard).getName());	
+			/*CardData selectCard = objects.get(arg2);			/*ListViewのタッチされた部分に相当するCardDataを、
+																	CArdDataのArrayListから持ってきてる*//*
+			atackText.setText(selectCard.getAtackData());		//CardDataクラスのメソッドを使って、セットし直す
+			defenceText.setText(selectCard.getDefenceData());	//CardDataクラスのメソッドを使って、セットし直す
+			explainText.setText(selectCard.getExplainData());	//CardDataクラスのメソッドを使って、セットし直す
+			cardNameText.setText(selectCard.getNameData());		//CardDataクラスのメソッドを使って、セットし直す
+			card.setImageBitmap(selectCard.getImageData());		//CardDataクラスのメソッドを使って、セットし直す
+			*/
 		}
-		
 	}
 	
-	/////
+	
 	class SampleClickListener implements android.view.View.OnClickListener{
-		Intent it;
 		public void onClick(View v) {
-			it = new Intent();
-			it.setAction(Intent.ACTION_VIEW);
-			it.setData(Uri.parse("tel:12345678"));
-			startActivity(it);
-			
-		}
-		
-	}
-	class SampleAdapter extends ArrayAdapter{
-
-		public SampleAdapter(Context context, int textViewResourceId,
-				Object[] objects) {
-			super(context, textViewResourceId, objects);
-			// TODO 自動生成されたコンストラクター・スタブ
-		}
-		public View getView(int pos,View convView,ViewGroup parent){
-			String s = "------"+(String)((ListView)parent).getItemAtPosition(pos);
-			TextView t = new TextView(getBaseContext());
-			t.setText(pos + s);
-			
-			if(pos%2==0){
-				t.setBackgroundColor(Color.GRAY);
+			if(v.equals(okButton))
+			{
+				Intent intent = new Intent();
+				intent.setClass( OpenGLSurfaceView.c , com.example.glsurfaceview.DeckEdit.class);
+				
+				OpenGLSurfaceView.c.startActivity(intent);
+				finish();
 			}
-			return t;
-			
+			else if(v.equals(backButton))
+			{
+				Intent intent = new Intent();
+				intent.setClass( OpenGLSurfaceView.c , com.example.glsurfaceview.DeckEdit.class);
+				
+				OpenGLSurfaceView.c.startActivity(intent);
+				finish();
+			}
 		}
 		
 	}
+
 	
 	  
 	

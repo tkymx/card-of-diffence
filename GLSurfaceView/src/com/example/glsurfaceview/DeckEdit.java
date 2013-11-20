@@ -4,34 +4,42 @@ import java.util.ArrayList;
 import java.util.List;
 import android.widget.Button;
 import android.app.Activity;
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.Gravity;
+import android.view.View;
 import android.view.Window;
+import android.view.animation.TranslateAnimation;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 public class DeckEdit extends Activity {
-	public static final int THE_NUMBER_OF_DECK = 11;//デッキの枚数　今11枚
 	
-	TextView title;//「デッキ編集画面」という文字
-	TextView instruct;//「カードをタッチして、デッキを編集しよう！」
+	/*ここでは、CardDataは書いてはあるけど何にも使ってないです*/
+	
+	public static final int THE_NUMBER_OF_DECK = 11;		//デッキの枚数　今11枚
+	
+	TextView title;			//「デッキ編集画面」という文字
+	TextView instruct;		//「カードをタッチして、デッキを編集しよう！」
 	List<CardData> deckList;//自分のデッキのリストデータ　今はCardDataクラスのList 下でArrayListとして生成してる
-	ImageView[] member = new ImageView[THE_NUMBER_OF_DECK];//表示する11枚のImageView
-	Button back;//戻る　ボタン
+	ImageView[] member = new ImageView[THE_NUMBER_OF_DECK];	//表示する11枚のImageView
+	Button back;			//戻る　ボタン
 	
-	LinearLayout ll;//全体を覆うLayout
-	LinearLayout topRow;//上段のLayout
-	LinearLayout bottomRow;//下段Layout
+	LinearLayout ll;		//全体を覆うLayout
+	LinearLayout topRow;	//デッキ上段のLayout
+	LinearLayout middleRow;	//デッキ下段Layout
+	LinearLayout bottomRow;	//画面の一番下のLayout
 	
-	LinearLayout.LayoutParams LayoutParam;
+	
 	LinearLayout.LayoutParams titleParam;//パラメーター
 	LinearLayout.LayoutParams topParam;//パラメーター
+	LinearLayout.LayoutParams middleParam;//パラメーター
 	LinearLayout.LayoutParams bottomParam;//パラメーター
 	LinearLayout.LayoutParams backParam;//パラメーター
 	LinearLayout.LayoutParams imageParam;//パラメーター
-	
+	LinearLayout.LayoutParams instructParam;//パラメーター
 	
 	
 	public void onCreate(Bundle savedInstanceState){
@@ -45,37 +53,54 @@ public class DeckEdit extends Activity {
 		topRow = new LinearLayout(this);
 		topRow.setOrientation(LinearLayout.HORIZONTAL);
 		topRow.setGravity(Gravity.CENTER);
+		middleRow = new LinearLayout(this);
+		middleRow.setOrientation(LinearLayout.HORIZONTAL);
+		middleRow.setGravity(Gravity.CENTER);
 		bottomRow = new LinearLayout(this);
 		bottomRow.setOrientation(LinearLayout.HORIZONTAL);
-		bottomRow.setGravity(Gravity.CENTER);
 		
 	//パラメータ
 		//大きさ設定
-			
 		titleParam = new LinearLayout.LayoutParams(Const.rx(0.5), Const.ry(0.2));
 		topParam = new LinearLayout.LayoutParams(Const.rx(0.9), Const.ry(0.3));
-		bottomParam = new LinearLayout.LayoutParams(Const.rx(0.9), Const.ry(0.3));
-		backParam = new LinearLayout.LayoutParams(Const.rx(0.3), Const.ry(0.1));
+		middleParam = new LinearLayout.LayoutParams(Const.rx(0.9), Const.ry(0.3));
+		bottomParam = new LinearLayout.LayoutParams(Const.rx(0.95), Const.ry(0.1));
+		instructParam = new LinearLayout.LayoutParams(Const.rx(0.6), Const.ry(0.1));
+		backParam = new LinearLayout.LayoutParams(Const.rx(0.2), Const.ry(0.1));
 		imageParam = new LinearLayout.LayoutParams(Const.rx(0.1), Const.ry(0.25));
+		
 		//イメージの間隔設定
 		imageParam.setMargins(Const.rx(0.05), Const.ry(0.05), 0, Const.ry(0.05));
-		topParam.setMargins(Const.rx(0.05), Const.ry(0.05),Const.rx(0.05), Const.ry(0.05));
-		bottomParam.setMargins(Const.rx(0.05), Const.ry(0.05),Const.rx(0.05), Const.ry(0.05));
+		//他間隔設定
+		titleParam.setMargins(Const.rx(0.025),Const.ry(0.01),0, 0);
+		topParam.setMargins(Const.rx(0.03), 0,Const.rx(0.05), 0);
+		middleParam.setMargins(Const.rx(0.03), 0,Const.rx(0.05), 0);
+		bottomParam.setMargins(0, 0,Const.rx(0.05), 0);
+		instructParam.setMargins(Const.rx(0.1), 0,Const.rx(0.05), 0);
 		
-		//他生成
+	//他生成
 		title = new TextView(this);
 		instruct = new TextView(this);
-		deckList = new ArrayList<CardData>();
+		deckList = new ArrayList<CardData>();//今はこれ使ってないです
 		back = new Button(this);
 		for(int i=0;i<THE_NUMBER_OF_DECK;i++){
 			member[i] = new ImageView(this);
-			member[i].setImageResource(R.drawable.list);
-			if(i<5)topRow.addView(member[i],imageParam);
-			if(i>4)bottomRow.addView(member[i],imageParam);
+			
+			member[i].setImageResource(R.drawable.list);   //今は全部同じ画像
+			if(i<5)topRow.addView(member[i],imageParam);   //始めの5枚を上の段に
+			if(i>4)middleRow.addView(member[i],imageParam);//残りを下の段に表示
+			member[i].setOnClickListener(new SampleClickListener());
 			
 		}
+		back.setOnClickListener(new SampleClickListener());
+		
+		//テキストのサイズとか
 		title.setText("デッキ編集画面");
+		title.setTextSize(Const.rx(0.035));
+		instruct.setText("カードをタッチして、デッキを編集しよう！");
+		instruct.setTextSize(Const.rx(0.015));
 		back.setText("戻る");
+		back.setTextSize(Const.rx(0.02));
 		
 		
 		
@@ -83,13 +108,37 @@ public class DeckEdit extends Activity {
 		setContentView(ll);
 		ll.addView(title,titleParam);
 		ll.addView(topRow,topParam);
+		ll.addView(middleRow,middleParam);
 		ll.addView(bottomRow,bottomParam);
-		ll.addView(back,backParam);
+		bottomRow.addView(instruct,instructParam);
+		bottomRow.addView(back,backParam);
 		
-	
+		//バックの写真セット
+		ll.setBackgroundResource(R.drawable.background);
+		topRow.setBackgroundResource(R.drawable.explain);
+		middleRow.setBackgroundResource(R.drawable.explain);
+		instruct.setBackgroundResource(R.drawable.back);
 		
+	}
+	class SampleClickListener implements android.view.View.OnClickListener{
 		
-		
+		public void onClick(View v) 
+		{
+			if(v instanceof ImageView)
+			{
+				Intent intent = new Intent();
+				intent.setClass( OpenGLSurfaceView.c , com.example.glsurfaceview.DeckSelect.class);
+				
+				OpenGLSurfaceView.c.startActivity(intent);
+				finish();
+			}
+			else if(v.equals(back))
+			{
+				finish();
+			}
+			
+			
+		}
 		
 	}
 }
