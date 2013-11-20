@@ -30,7 +30,7 @@ public class DataBase {
 	//private static ArrayList<String> myCards;
 	public static ArrayList<String> myCards;
 	//自分のデッキ
-	private static String[] myDecks;
+	public static String[] myDecks;
 	
 	//自分のステージの情報
 	private static Stage presentStage;
@@ -177,11 +177,27 @@ public class DataBase {
 		//一応、自分のカードから自分のデッキへの追加
 		///////////////////////////////////////
 		
+		/*
 		for(int i = 0;i< 11;i++)
 		{
 			//デッキに追加していくたびに保持カードが減っていくため０でいい
-			SwapMyDecksFromMyCards(i, 0);
-		}
+			//SwapMyDecksFromMyCards(i, 0);
+		}*/
+		
+		//デッキに直接追加する　11/20日 myCards関係でぬるぽが出る応急処置
+		myDecks[0]="monster1";
+		myDecks[1]="monster2";
+		myDecks[2]="monster3";
+		myDecks[3]="monster4";
+		myDecks[4]="monster5";
+		myDecks[5]="monster6";
+		myDecks[6]="monster7";
+		myDecks[7]="monster8";
+		myDecks[8]="monster9";
+		myDecks[9]="magic";
+		myDecks[10]="trap";
+		
+		
 		
 	}	
 	

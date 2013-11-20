@@ -89,7 +89,12 @@ public class CardDataAdapter extends ArrayAdapter<String> {
 		 {			 
 			 convertView = layoutInflater_.inflate(R.layout.carddata_layout, null);
 		 }
-		
+		 if(item==null){
+			 TextView textView = (TextView)convertView.findViewById(R.id.name);
+			 textView.setText("何かおかしいよ！");
+			 textView.setTextSize(Const.ry(0.04));
+			 return convertView;
+		 }else{
 		 // CustomDataのデータをViewの各Widgetにセットする
 		 ImageView imageView;
 		 imageView = (ImageView)convertView.findViewById(R.id.image);
@@ -114,6 +119,8 @@ public class CardDataAdapter extends ArrayAdapter<String> {
 		 convertView.setBackgroundResource(R.drawable.list); 
 		 
 		 return convertView;
+		 }
 	 }
-	}
+		 
+}
 

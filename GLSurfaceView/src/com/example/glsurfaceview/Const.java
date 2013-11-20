@@ -50,6 +50,8 @@ public class Const {
 	// スコアの最大数表示数
 	public static final int MAX_SCORE_NUM = 8;
 	
+	public static final int THE_NUMBER_OF_DECK = 11;
+	
 	public enum SpriteType
 	{
 		TYPE_OTHER( 0 ),
