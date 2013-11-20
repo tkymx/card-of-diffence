@@ -4,6 +4,11 @@ public class Const {
 	
 	//列の位置（相対値）
 	
+	// ラインの番号
+	public static final int LINE1 = 1;
+	public static final int LINE2 = 2;
+	public static final int LINE3 = 3;
+	
 	//左側の発生する位置とその時の大きさ（右の終点）
 	public static final int LINE_1_Y = ry(0.57);
 	public static final int LINE_2_Y = ry(0.38);

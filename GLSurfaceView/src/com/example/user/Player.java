@@ -59,7 +59,4 @@ public class Player extends Charactor {
 				10, 1, 1, R.drawable.effect, Const.SpriteType.TYPE_EFFECT.getValue());
 
 	}
-
-	
-
 }
