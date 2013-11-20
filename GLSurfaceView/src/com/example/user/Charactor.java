@@ -12,6 +12,8 @@ public abstract class Charactor extends SpriteAnimation {
 
 	//状態の管理
 	enum Charactor_State{ WALK_STATE , ATTACK_STATE , ATTACK_AFTER_STATE };
+	
+	private int lineNum;
 		
 	//体力や攻撃力
 	int value_hp;
@@ -310,4 +312,17 @@ public abstract class Charactor extends SpriteAnimation {
 	{
 		return value_hp <= 0;
 	}
+	
+	// ラインのセット
+	public void setLineNum( int line )
+	{
+		lineNum = line;
+	}
+
+	// ラインの番号取得
+	public int getLineNum()
+	{
+		return lineNum;
+	}
+
 }
