@@ -46,6 +46,8 @@ public class DeckSelect extends Activity{
 	ListView lv;			//リストビュー　右のスクロールできるやつ
 	TextView cardNameText,atackText,defenceText,explainText;	//左の詳細画面に使うテキストビュー達
 	ImageView card;			//左の詳細画面に使うキャラのImageView
+	String selectedDeckCard;//DeckEdit画面で、タッチしたデッキのカード　の名前
+	String selectedNewDeckCard;//これから選択する、新たにデッキに追加するカード　の名前
 	
 	List<CardData> objects;	//CardDataクラスのリスト これをCardInfomation使った何かに変える
 	List<CardInformation> cardList;
@@ -77,18 +79,16 @@ public class DeckSelect extends Activity{
 		explainText = new TextView(this);
 		okButton = new Button(this);
 		backButton = new Button(this);
+		selectedDeckCard = getIntent().getStringExtra("name");
 		
-		/*左画面の初期セット*/
-		cardNameText.setText("ティガレックス");
-		atackText.setText("攻撃力　53万");
-		defenceText.setText("防御力　1");
-		explainText.setText("やばいやつぐはははははは\nははははははははははは\nはははははははははははははは");
-		okButton.setText("OK");
-		backButton.setText("戻る");
-		//とりあえず適当な画像で初期設定
-		Bitmap image2;
-		image2 = BitmapFactory.decodeResource(getResources(), R.drawable.card);	
-		card.setImageBitmap(image2);
+		//左画面の初期設定
+		String initCard = DataBase.GetMyCards(0);
+		selectedNewDeckCard=initCard;
+		card.setImageResource(CardInformation.GetCardInformaionFromName(initCard).getCard_id());
+		atackText.setText(CardInformation.GetCardInformaionFromName(initCard).getName());		
+		defenceText.setText(CardInformation.GetCardInformaionFromName(initCard).getName());
+		explainText.setText(CardInformation.GetCardInformaionFromName(initCard).getName());
+		cardNameText.setText(CardInformation.GetCardInformaionFromName(initCard).getName());
 		
 		
 		//テキストサイズ設定
@@ -96,6 +96,8 @@ public class DeckSelect extends Activity{
 		atackText.setTextSize(Const.ry(0.020));	
 		defenceText.setTextSize(Const.ry(0.020));
 		explainText.setTextSize(Const.ry(0.010));
+		okButton.setText("OK");
+		backButton.setText("戻る");
 		
 		//パラメータ生成、大きさの設定
 		cardNameTextParam = new RelativeLayout.LayoutParams(Const.rx(0.3), Const.ry(0.1));
@@ -115,7 +117,7 @@ public class DeckSelect extends Activity{
 		okParam.setMargins(Const.rx(0.05), Const.ry(0.8),0,0);
 		backParam.setMargins(Const.rx(0.25), Const.ry(0.8),0,0);
 		
-	/*新しいデータベースで作ってみた*/
+		//アダプターセット
 		CardDataAdapter ad = new CardDataAdapter(this,0,DataBase.GetMyCards());
 		lv.setAdapter(ad);
 	
@@ -127,8 +129,6 @@ public class DeckSelect extends Activity{
 		String[] atack = {"攻撃力 1000","攻撃力 2000","攻撃力 3000","攻撃力 1000","攻撃力 2000","攻撃力 3000","攻撃力 1000","攻撃力 2000","攻撃力 3000","攻撃力 1000","攻撃力 1000"};
 		String[] defence = {"防御力　500","防御力　600","防御力　700","防御力　500","防御力　600","防御力　700","防御力　500","防御力　600","防御力　700","防御力　500","防御力　500"};
 		String[] explain = {"あああああああああじあああああああああじあああああああああじ","バス","飛行機","タクシー","自転車","歩行","クラウン","小山","渡辺","利光","河津",};			
-		
-		
 		objects = new ArrayList<CardData>();
 		for(int i=0;i<name.length;i++){
 			CardData object = new CardData();
@@ -137,12 +137,8 @@ public class DeckSelect extends Activity{
 			object.setAtackData(atack[i]);
 			object.setDefenceData(defence[i]);
 			object.setExplainData(explain[i]);
-			
 			objects.add(object);//上の配列からCardDataクラスのリストを生成
 		}
-		//アダプターセット
-		CardDataAdapter ad = new CardDataAdapter(this,0,objects);
-		lv.setAdapter(ad);
 	/*データベース終わり*/
 		
 		
@@ -173,26 +169,21 @@ public class DeckSelect extends Activity{
 		lv.setOnItemClickListener(new SampleItemClickListener());
 	}
 	
+	
 	///////////////////////以下、リスナ///////////////////////////////
 	class SampleItemClickListener implements OnItemClickListener{
 
 		@Override
-		public void onItemClick(AdapterView<?> arg0, View arg1, int arg2,
-				long arg3) {
+		public void onItemClick(AdapterView<?> arg0, View arg1, int arg2,long arg3) {
+			
 			String selectedCard = DataBase.GetMyCards(arg2);
+			selectedNewDeckCard = selectedCard;
 			card.setImageResource(CardInformation.GetCardInformaionFromName(selectedCard).getCard_id());
 			atackText.setText(CardInformation.GetCardInformaionFromName(selectedCard).getParameter1());		
 			defenceText.setText(CardInformation.GetCardInformaionFromName(selectedCard).getparameter2());
 			explainText.setText(CardInformation.GetCardInformaionFromName(selectedCard).getExplain());
 			cardNameText.setText(CardInformation.GetCardInformaionFromName(selectedCard).getName());	
-			/*CardData selectCard = objects.get(arg2);			/*ListViewのタッチされた部分に相当するCardDataを、
-																	CArdDataのArrayListから持ってきてる*//*
-			atackText.setText(selectCard.getAtackData());		//CardDataクラスのメソッドを使って、セットし直す
-			defenceText.setText(selectCard.getDefenceData());	//CardDataクラスのメソッドを使って、セットし直す
-			explainText.setText(selectCard.getExplainData());	//CardDataクラスのメソッドを使って、セットし直す
-			cardNameText.setText(selectCard.getNameData());		//CardDataクラスのメソッドを使って、セットし直す
-			card.setImageBitmap(selectCard.getImageData());		//CardDataクラスのメソッドを使って、セットし直す
-			*/
+			
 		}
 	}
 	
@@ -201,6 +192,18 @@ public class DeckSelect extends Activity{
 		public void onClick(View v) {
 			if(v.equals(okButton))
 			{
+				Intent intent = new Intent();
+				int d=0;
+				intent.setClass( OpenGLSurfaceView.c , com.example.glsurfaceview.DeckEdit.class);
+				for(int i=0;i<Const.THE_NUMBER_OF_DECK;i++){
+					
+					if(DataBase.GetMyDeck(i).equals(selectedDeckCard))d=i;
+					
+				}
+					int c=DataBase.GetMyCards().indexOf(selectedNewDeckCard);
+					DataBase.SwapMyDecksFromMyCards(d,c);
+				
+				OpenGLSurfaceView.c.startActivity(intent);
 				finish();
 			}
 			else if(v.equals(backButton))

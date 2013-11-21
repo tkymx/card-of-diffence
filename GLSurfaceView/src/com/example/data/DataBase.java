@@ -80,6 +80,14 @@ public class DataBase {
 		
 		if( deck != null )myCards.add(deck);		
 	}
+	public static String GetMyDeck( int location )
+	{
+		return myDecks[location];
+	}	
+	public static String[] GetMyDeck()
+	{
+		return myDecks;
+	}		
 	
 	//ステージの処理////////////////////////////////////////////////////////////////////////
 	public static Stage getPresentStage() {
@@ -224,11 +232,14 @@ public class DataBase {
 		//一応、自分のカードから自分のデッキへの追加
 		///////////////////////////////////////
 		
+		
 		for(int i = 0;i< 11;i++)
 		{
 			//デッキに追加していくたびに保持カードが減っていくため０でいい
 			SwapMyDecksFromMyCards(i, 0);
 		}
+		
+		
 		
 		///////////////////////////////////////
 		//ステージの追加

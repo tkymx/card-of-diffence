@@ -2,6 +2,10 @@ package com.example.glsurfaceview;
 
 import java.util.ArrayList;
 import java.util.List;
+
+import com.example.data.CardInformation;
+import com.example.data.DataBase;
+
 import android.widget.Button;
 import android.app.Activity;
 import android.content.Intent;
@@ -25,6 +29,7 @@ public class DeckEdit extends Activity {
 	TextView instruct;		//「カードをタッチして、デッキを編集しよう！」
 	List<CardData> deckList;//自分のデッキのリストデータ　今はCardDataクラスのList 下でArrayListとして生成してる
 	ImageView[] member = new ImageView[THE_NUMBER_OF_DECK];	//表示する11枚のImageView
+	String[] memberName = new String[THE_NUMBER_OF_DECK];  //Deckにはいってるカードの名前をいれる
 	Button back;			//戻る　ボタン
 	
 	LinearLayout ll;		//全体を覆うLayout
@@ -45,6 +50,7 @@ public class DeckEdit extends Activity {
 	public void onCreate(Bundle savedInstanceState){
 		super.onCreate(savedInstanceState);
 		requestWindowFeature(Window.FEATURE_NO_TITLE);
+		
 		
 	//いろいろ生成する
 		//レイアウトの生成&設定
@@ -86,11 +92,14 @@ public class DeckEdit extends Activity {
 		for(int i=0;i<THE_NUMBER_OF_DECK;i++){
 			member[i] = new ImageView(this);
 			
-			member[i].setImageResource(R.drawable.list);   //今は全部同じ画像
+			String selectedCard = DataBase.GetMyDeck(i);
+			member[i].setImageResource(CardInformation.GetCardInformaionFromName(selectedCard).getCard_id());
+			memberName[i] = CardInformation.GetCardInformaionFromName(selectedCard).getName();
+			
 			if(i<5)topRow.addView(member[i],imageParam);   //始めの5枚を上の段に
 			if(i>4)middleRow.addView(member[i],imageParam);//残りを下の段に表示
 			member[i].setOnClickListener(new SampleClickListener());
-			
+		
 		}
 		back.setOnClickListener(new SampleClickListener());
 		
@@ -124,19 +133,17 @@ public class DeckEdit extends Activity {
 		
 		public void onClick(View v) 
 		{
-			if(v instanceof ImageView)
-			{
-				Intent intent = new Intent();
-				intent.setClass( OpenGLSurfaceView.c , com.example.glsurfaceview.DeckSelect.class);
-				
-				OpenGLSurfaceView.c.startActivity(intent);
-			}
-			else if(v.equals(back))
-			{
-				finish();
-			}
+			if(v.equals(back))finish();
+			for(int i=0;i<THE_NUMBER_OF_DECK;i++){
 			
-			
+				if(v.equals(member[i]) ){
+					Intent intent = new Intent();
+					intent.setClass( OpenGLSurfaceView.c , com.example.glsurfaceview.DeckSelect.class);
+					intent.putExtra("name", memberName[i]);		//どのカードをタッチしたかの情報を、DeckSelectクラスに送る
+					OpenGLSurfaceView.c.startActivity(intent);
+					finish();
+				}
+			}
 		}
 		
 	}
