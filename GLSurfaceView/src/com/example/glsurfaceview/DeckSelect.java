@@ -85,9 +85,9 @@ public class DeckSelect extends Activity{
 		String initCard = DataBase.GetMyCards(0);
 		selectedNewDeckCard=initCard;
 		card.setImageResource(CardInformation.GetCardInformaionFromName(initCard).getCard_id());
-		atackText.setText(CardInformation.GetCardInformaionFromName(initCard).getName());		
-		defenceText.setText(CardInformation.GetCardInformaionFromName(initCard).getName());
-		explainText.setText(CardInformation.GetCardInformaionFromName(initCard).getName());
+		atackText.setText(CardInformation.GetCardInformaionFromName(initCard).getParameter1());		
+		defenceText.setText(CardInformation.GetCardInformaionFromName(initCard).getparameter2());
+		explainText.setText(CardInformation.GetCardInformaionFromName(initCard).getExplain());
 		cardNameText.setText(CardInformation.GetCardInformaionFromName(initCard).getName());
 		
 		
@@ -208,6 +208,10 @@ public class DeckSelect extends Activity{
 			}
 			else if(v.equals(backButton))
 			{
+				Intent intent = new Intent();
+				intent.setClass( OpenGLSurfaceView.c , com.example.glsurfaceview.DeckEdit.class);
+				OpenGLSurfaceView.c.startActivity(intent);
+				
 				finish();
 			}
 		}

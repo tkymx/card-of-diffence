@@ -200,6 +200,11 @@ public class DataBase {
 				CardInformation.CreateCardInformation("trap",dtc,R.drawable.trap_card,1));
 		CardInformation.SetCardInforation(
 				CardInformation.CreateCardInformation("magic",dmc,R.drawable.magic_card,1));		
+
+		//敵用のカード
+		CardInformation.SetCardInforation(
+				CardInformation.CreateCardInformation("enemy1",mc,R.drawable.moster_card_1,1));
+		
 		
 		///////////////////////////////////////
 		//自分の保持しているカードの追加
