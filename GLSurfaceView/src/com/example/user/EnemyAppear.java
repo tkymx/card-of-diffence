@@ -3,7 +3,9 @@ package com.example.user;
 import java.util.LinkedList;
 import java.util.Random;
 
+import com.example.data.CardInformation;
 import com.example.data.CharactorInfomation;
+import com.example.data.DataBase;
 import com.example.glsurfaceview.Const;
 import com.example.glsurfaceview.R;
 import com.example.glsurfaceview.Sprite;
@@ -15,13 +17,26 @@ public class EnemyAppear extends Sprite {
 	private int eline1, eline2, eline3;
 	private int playerLineNum, enemyLineNum;
 	private Random rand = new Random(); 
-    private int ran; 
+    private int ran, waitRan; 
+    private String[] name;
+    private Stage prevStage;
+    private MonsterCard[] enemyCard;
+    private int stageLevel;
 	
 	// 初期化処理
 	public void Init()
 	{		
 		time = 0;
-		ran = rand.nextInt( 4 ); 
+		waitRan = 0;
+		ran = rand.nextInt( 4 );
+		prevStage = DataBase.getPresentStage();
+		name = prevStage.getEnemyDeck();
+		stageLevel = prevStage.getLevel();
+		
+		for( int i = 0; i < name.length; i++ )
+		{
+			enemyCard[i] = ( MonsterCard )CardInformation.GetCardFromName(name[i], 0, 0, 0, 0);
+		}
 	}
 	
 	// 更新処理
@@ -30,7 +45,7 @@ public class EnemyAppear extends Sprite {
 		if( System.currentTimeMillis() - time >= 10000 )
 		{
 			//敵キャラを配置
-			CreateEnemy( Const.LINE_1_Y , "enemy1" );
+			enemyCard[0].SetCharactor( CreateEnemy( Const.LINE_1_Y , "enemy1" ) );
 			CreateEnemy( Const.LINE_2_Y , "enemy1" );
 			CreateEnemy( Const.LINE_3_Y , "enemy1" );					
 			
@@ -39,9 +54,10 @@ public class EnemyAppear extends Sprite {
 		return true;		
 	}
 	
+	// 更新処理
 	public boolean Update()
 	{	
-		if( System.currentTimeMillis() - time >= 6000 )
+		if( System.currentTimeMillis() - time >= 4500 )
 		{				
 			// プレイヤーがどのラインに何体いるか調べる
 			serchPlayerLine();
@@ -52,18 +68,38 @@ public class EnemyAppear extends Sprite {
 			// プレイヤーより数が少ない時
 			if( enemyLineNum <= playerLineNum )
 			{
-				// 一番プレイヤーの多いラインを出す
-				switch( serchPlayerLineMaxNum() )
+				// エネミーカードの枚数分
+				for( int i = 0; i < enemyCard.length; i++ )
 				{
-				case Const.LINE1:
-					CreateEnemy( Const.LINE_1_Y , "enemy1" );
-					break;
-				case Const.LINE2:
-					CreateEnemy( Const.LINE_2_Y , "enemy1" );
-					break;
-				case Const.LINE3:
-					CreateEnemy( Const.LINE_3_Y , "enemy1" );
-					break;
+					// 使用していないとき
+					if( !enemyCard[i].isUse )
+					{
+						ran = rand.nextInt(11);				// 取得するカードの番号を乱数で取得
+						Enemy enemy = null;
+						
+						// 一番プレイヤーの多いラインに出す
+						switch( serchPlayerLineMaxNum() )
+						{
+						case Const.LINE1:
+							enemy = CreateEnemy( Const.LINE_1_Y , name[ran] );
+							break;
+						case Const.LINE2:
+							enemy = CreateEnemy( Const.LINE_2_Y , name[ran] );
+							break;
+						case Const.LINE3:
+							enemy = CreateEnemy( Const.LINE_3_Y , name[ran] );
+							break;
+						}
+						
+						// nullでないとき
+						if( enemy != null )
+						{
+							// キャラクターのセット
+							enemyCard[i].SetCharactor(enemy);
+						}
+						
+						break;
+					}
 				}
 			}
 			
@@ -73,7 +109,7 @@ public class EnemyAppear extends Sprite {
 		return true;
 	}
 	
-	public static void CreateEnemy( int liney , String playername )
+	public static Enemy CreateEnemy( int liney , String playername )
 	{
 		//名前で画像を判断する
 		int id = R.drawable.walk_enemy;
@@ -95,6 +131,8 @@ public class EnemyAppear extends Sprite {
 			enemy.Init( Const.LINE_RIGHT_3_X  , Const.LINE_3_Y , Const.LINE_3_W , Const.LINE_3_W , 3 , 1 , 5 , id , Const.SpriteType.TYPE_ENEMY.getValue() );			
 			enemy.setLineNum(Const.LINE3);
 		}
+		
+		return enemy;
 	}	
 	
 	// プレイヤーのいるラインを調べる

@@ -114,4 +114,10 @@ public class MonsterCard extends Card {
 		return mc;
 	}
 	
+	// キャラクターの設定
+	public void SetCharactor( Charactor card )
+	{
+		charactor = card;
+	}
+	
 }
