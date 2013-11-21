@@ -141,5 +141,11 @@ public class MonsterCard extends Card {
 		CharactorInfomation ci = CharactorInfomation.GetCharactorInformation(name);		
 		return "速度　  = " + ci.getSpeed();
 	}		
+
+	// キャラクターの設定
+	public void SetCharactor( Charactor card )
+	{
+		charactor = card;
+	}
 	
 }
