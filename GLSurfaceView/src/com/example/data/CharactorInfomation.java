@@ -113,6 +113,11 @@ public class CharactorInfomation {
 		charahash.put(chara.getName(), chara);
 	}
 	
+	public static CharactorInfomation GetCharactorInformation( String name )
+	{
+		return charahash.get(name);
+	}
+	
 	public static Player GetPlayerFromName( String name )
 	{
 		CharactorInfomation ci = charahash.get(name);		

@@ -258,6 +258,10 @@ public abstract class Card extends Sprite {
 	/*
 	 * カードが選択画面に表示されている時の表示についての抽象関数を作成しておく
 	 */
+	public abstract String GetNameForList(String name);
+	public abstract String GetExplainForList(String name);
+	public abstract String GetParameter1ForList(String name);
+	public abstract String GetParameter2ForList(String name);
 	
 
 	/*

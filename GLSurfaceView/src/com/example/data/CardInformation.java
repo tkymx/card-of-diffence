@@ -42,7 +42,7 @@ public class CardInformation {
 		this.card_id = card_id;
 	}
 	public String getName() {
-		return name;
+		return kind.GetNameForList(name);
 	}
 	public void setName(String name) {
 		this.name = name;
@@ -53,12 +53,7 @@ public class CardInformation {
 	public void setKind(Card kind) {
 		this.kind = kind;
 	}
-	public static HashMap<String, CardInformation> getCards() {
-		return cards;
-	}
-	public static void setCards(HashMap<String, CardInformation> cards) {
-		CardInformation.cards = cards;
-	}
+	
 	
 	//静的な情報////////////////////////////////////////////
 	
@@ -106,6 +101,20 @@ public class CardInformation {
 	{
 		//基本的にカードだけの情報として、カードクラスに描画部分をになってもらうのもいいかもしれない		
 		return kind.Create(l, t, w, h, card_id, name, need);
+	}
+	
+	//読み込み可能なデータの取得////////////////////////////////////////////
+	public String getExplain()
+	{
+		return kind.GetExplainForList(name);
+	}
+	public String getParameter1()
+	{
+		return kind.GetParameter1ForList(name);
+	}
+	public String getparameter2()
+	{
+		return kind.GetParameter2ForList(name);		
 	}
 	
 	

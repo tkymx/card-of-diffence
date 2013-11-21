@@ -61,6 +61,7 @@ package com.example.glsurfaceview;
 import java.util.List;
 
 import com.example.data.CardInformation;
+import com.example.user.Card;
 
 import android.content.Context;
 import android.view.LayoutInflater;
@@ -100,6 +101,29 @@ public class CardDataAdapter extends ArrayAdapter<String> {
 		 textView.setTextSize(Const.ry(0.04));
 		 TextView textView1;
 		 textView1 = (TextView)convertView.findViewById(R.id.atack);
+		 textView1.setText(CardInformation.GetCardInformaionFromName(item).getParameter1());
+		 textView1.setTextSize(Const.ry(0.025));
+		 TextView textView2;
+		 textView2 = (TextView)convertView.findViewById(R.id.defence);
+		 textView2.setText(CardInformation.GetCardInformaionFromName(item).getparameter2());
+		 textView2.setTextSize(Const.ry(0.025));
+		 TextView textView3;
+		 textView3 = (TextView)convertView.findViewById(R.id.explain);
+		 textView3.setText(CardInformation.GetCardInformaionFromName(item).getExplain());
+		 textView3.setTextSize(Const.ry(0.015));
+		 
+		 
+/*		 
+		 // CustomDataのデータをViewの各Widgetにセットする
+		 ImageView imageView;
+		 imageView = (ImageView)convertView.findViewById(R.id.image);
+		 imageView.setImageResource(CardInformation.GetCardInformaionFromName(item).getCard_id());
+		 TextView textView;
+		 textView = (TextView)convertView.findViewById(R.id.name);
+		 textView.setText(CardInformation.GetCardInformaionFromName(item).getName());
+		 textView.setTextSize(Const.ry(0.04));
+		 TextView textView1;
+		 textView1 = (TextView)convertView.findViewById(R.id.atack);
 		 textView1.setText(CardInformation.GetCardInformaionFromName(item).getName());
 		 textView1.setTextSize(Const.ry(0.025));
 		 TextView textView2;
@@ -110,7 +134,7 @@ public class CardDataAdapter extends ArrayAdapter<String> {
 		 textView3 = (TextView)convertView.findViewById(R.id.explain);
 		 textView3.setText(CardInformation.GetCardInformaionFromName(item).getName());
 		 textView3.setTextSize(Const.ry(0.015));
-		 
+*/		 
 		 convertView.setBackgroundResource(R.drawable.list); 
 		 
 		 return convertView;

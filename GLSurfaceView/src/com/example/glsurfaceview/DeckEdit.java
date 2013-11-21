@@ -130,7 +130,6 @@ public class DeckEdit extends Activity {
 				intent.setClass( OpenGLSurfaceView.c , com.example.glsurfaceview.DeckSelect.class);
 				
 				OpenGLSurfaceView.c.startActivity(intent);
-				finish();
 			}
 			else if(v.equals(back))
 			{

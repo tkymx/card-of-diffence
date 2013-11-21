@@ -27,13 +27,13 @@ import com.example.user.Stage;
 public class DataBase {
 
 	//自分のカード
-	//private static ArrayList<String> myCards;
-	public static ArrayList<String> myCards;
+	private static ArrayList<String> myCards;
 	//自分のデッキ
 	private static String[] myDecks;
 	
 	//自分のステージの情報
 	private static Stage presentStage;
+	private static int 	 presentStageNum;
 
 	//保持しているカードの処理/////////////////////////////////////////////////////////////////////////////
 	
@@ -42,6 +42,14 @@ public class DataBase {
 	{
 		myCards.add(str);
 	}
+	public static String GetMyCards( int location )
+	{
+		return myCards.get(location);
+	}	
+	public static ArrayList<String> GetMyCards()
+	{
+		return myCards;
+	}	
 	public static void DeleteMyCards( int location )
 	{
 		myCards.remove(location);
@@ -69,7 +77,8 @@ public class DataBase {
 		
 		//入れ替え
 		myDecks[ locationDeck ] = card;
-		myCards.add(deck);
+		
+		if( deck != null )myCards.add(deck);		
 	}
 	
 	//ステージの処理////////////////////////////////////////////////////////////////////////
@@ -80,6 +89,18 @@ public class DataBase {
 		DataBase.presentStage = presentStage;
 	}	
 	
+	//クリアした時にステージ数を増やす
+	public static int getPresentStageNum() {
+		return presentStageNum;
+	}
+	public static void setPresentStageNum(int presentStageNum) {
+		//次のステージ数が今のステージ数より大きければそのままセット
+		if( DataBase.presentStageNum < presentStageNum )
+		{
+			DataBase.presentStageNum = presentStageNum;
+		}
+	}
+	
 	//基本的にな処理////////////////////////////////////////////////////////////////////////
 	public static void Init()
 	{
@@ -87,6 +108,11 @@ public class DataBase {
 		CharactorInfomation.Init();
 		//全てのカード
 		CardInformation.Init();
+		//パラメータカードの初期化
+		ParameterCardInfomatoin.Init();
+		//ステージの初期化
+		StageInformaion.Init();
+		
 		//自分のカード
 		myCards = new ArrayList<String>();
 		//自分のデッキ
@@ -124,6 +150,16 @@ public class DataBase {
 		
 		CharactorInfomation.AddCharactor(
 				CharactorInfomation.Create("enemy1","enemyCard1",10,1,1, 2, R.drawable.walk_enemy, R.drawable.image1, R.drawable.image2 ) );
+		
+
+		///////////////////////////////////////
+		//魔法、トラップの追加を行う
+		///////////////////////////////////////		
+		ParameterCardInfomatoin.AddParameterCard(
+				ParameterCardInfomatoin.Create("magic", "DamageMagicCard1", -1, 10));
+		ParameterCardInfomatoin.AddParameterCard(
+				ParameterCardInfomatoin.Create("trap", "DamageTrapCard1", 0, 10));
+	
 		
 		///////////////////////////////////////
 		//デッキの種類の追加
@@ -172,6 +208,17 @@ public class DataBase {
 		AddMyCards("monster9");
 		AddMyCards("trap");
 		AddMyCards("magic");
+		AddMyCards("monster1");
+		AddMyCards("monster2");
+		AddMyCards("monster3");
+		AddMyCards("monster4");
+		AddMyCards("monster5");
+		AddMyCards("monster6");
+		AddMyCards("monster7");
+		AddMyCards("monster8");
+		AddMyCards("monster9");
+		AddMyCards("trap");
+		AddMyCards("magic");		
 		
 		///////////////////////////////////////
 		//一応、自分のカードから自分のデッキへの追加
@@ -182,6 +229,27 @@ public class DataBase {
 			//デッキに追加していくたびに保持カードが減っていくため０でいい
 			SwapMyDecksFromMyCards(i, 0);
 		}
+		
+		///////////////////////////////////////
+		//ステージの追加
+		///////////////////////////////////////		
+		String str[] = {"enemy1","enemy1","enemy1","enemy1","enemy1","enemy1","enemy1","enemy1","enemy1","enemy1","enemy1"};
+		Stage stage[] = 
+		{
+			new Stage(R.drawable.game_start, R.drawable.map, R.drawable.enemy_castle , R.drawable.player_castle, 2, 1 , str),
+			new Stage(R.drawable.image1, R.drawable.effect, R.drawable.enemy_castle, R.drawable.player_castle, 3, 2 , str),
+			new Stage(R.drawable.image2, R.drawable.explain, R.drawable.enemy_castle, R.drawable.player_castle, 3, 3 , str)			
+		};		
+		for(int i = 0;i<stage.length;i++)
+		{
+			StageInformaion.AddStage(stage[i]);
+		}
+		
+		///////////////////////////////////////
+		//ステージははじめ１から始まる
+		///////////////////////////////////////		
+		presentStageNum = 1;
+		
 		
 	}	
 	

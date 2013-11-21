@@ -116,9 +116,7 @@ public class DeckSelect extends Activity{
 		backParam.setMargins(Const.rx(0.25), Const.ry(0.8),0,0);
 		
 	/*新しいデータベースで作ってみた*/
-		//cardList = new ArrayList<CardInformation>();
-		DataBase.LoadData();
-		CardDataAdapter ad = new CardDataAdapter(this,0,DataBase.myCards);
+		CardDataAdapter ad = new CardDataAdapter(this,0,DataBase.GetMyCards());
 		lv.setAdapter(ad);
 	
 	
@@ -181,11 +179,11 @@ public class DeckSelect extends Activity{
 		@Override
 		public void onItemClick(AdapterView<?> arg0, View arg1, int arg2,
 				long arg3) {
-			String selectedCard = DataBase.myCards.get(arg2);
+			String selectedCard = DataBase.GetMyCards(arg2);
 			card.setImageResource(CardInformation.GetCardInformaionFromName(selectedCard).getCard_id());
-			atackText.setText(CardInformation.GetCardInformaionFromName(selectedCard).getName());		
-			defenceText.setText(CardInformation.GetCardInformaionFromName(selectedCard).getName());
-			explainText.setText(CardInformation.GetCardInformaionFromName(selectedCard).getName());
+			atackText.setText(CardInformation.GetCardInformaionFromName(selectedCard).getParameter1());		
+			defenceText.setText(CardInformation.GetCardInformaionFromName(selectedCard).getparameter2());
+			explainText.setText(CardInformation.GetCardInformaionFromName(selectedCard).getExplain());
 			cardNameText.setText(CardInformation.GetCardInformaionFromName(selectedCard).getName());	
 			/*CardData selectCard = objects.get(arg2);			/*ListViewのタッチされた部分に相当するCardDataを、
 																	CArdDataのArrayListから持ってきてる*//*
@@ -203,18 +201,10 @@ public class DeckSelect extends Activity{
 		public void onClick(View v) {
 			if(v.equals(okButton))
 			{
-				Intent intent = new Intent();
-				intent.setClass( OpenGLSurfaceView.c , com.example.glsurfaceview.DeckEdit.class);
-				
-				OpenGLSurfaceView.c.startActivity(intent);
 				finish();
 			}
 			else if(v.equals(backButton))
 			{
-				Intent intent = new Intent();
-				intent.setClass( OpenGLSurfaceView.c , com.example.glsurfaceview.DeckEdit.class);
-				
-				OpenGLSurfaceView.c.startActivity(intent);
 				finish();
 			}
 		}

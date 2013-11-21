@@ -2,6 +2,8 @@ package com.example.glsurfaceview;
 
 import java.util.Random;
 
+import com.example.data.DataBase;
+import com.example.data.StageInformaion;
 import com.example.glsurfaceview.DeckSelect.SampleClickListener;
 import com.example.user.Stage;
 
@@ -89,17 +91,9 @@ public class StageSelect extends Activity{
 		left.setText("左");
 		deck.setText("デッキ編集");
 		
-		//ステージの情報
-		String str[] = {"enemy1","enemy1","enemy1","enemy1","enemy1","enemy1","enemy1","enemy1","enemy1","enemy1","enemy1"};
-		Stage stage[] = 
-		{
-			new Stage(R.drawable.game_start, R.drawable.map, R.drawable.enemy_castle , R.drawable.player_castle, 2, 1 , str),
-			new Stage(R.drawable.image1, R.drawable.effect, R.drawable.enemy_castle, R.drawable.player_castle, 3, 2 , str),
-			new Stage(R.drawable.image2, R.drawable.explain, R.drawable.enemy_castle, R.drawable.player_castle, 3, 3 , str)			
-		};
-		
-		for(int i=0;i<sv.length;i++){			
-			sv[i] = new StageView(this,i+1,stage[i]);			
+		//ステージの追加
+		for(int i=0;i<DataBase.getPresentStageNum();i++){			
+			sv[i] = new StageView(this,i+1, StageInformaion.GetStage(i) );			
 			sv[i].setOnTouchListener(new SampleTL());
 			vf.addView(sv[i]);						
 		}

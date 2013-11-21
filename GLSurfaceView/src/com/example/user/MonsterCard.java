@@ -1,5 +1,7 @@
 package com.example.user;
 
+import com.example.data.CharactorInfomation;
+import com.example.data.ParameterCardInfomatoin;
 import com.example.glsurfaceview.Const;
 import com.example.glsurfaceview.Touch;
 
@@ -113,5 +115,31 @@ public class MonsterCard extends Card {
 		
 		return mc;
 	}
+	
+	@Override
+	public String GetNameForList(String name) {
+		return name;
+	}
+
+
+	@Override
+	public String GetExplainForList(String name) {
+		CharactorInfomation ci = CharactorInfomation.GetCharactorInformation(name);		
+		return ci.getExplation();
+	}
+
+
+	@Override
+	public String GetParameter1ForList(String name) {
+		CharactorInfomation ci = CharactorInfomation.GetCharactorInformation(name);		
+		return "çUåÇóÕ  = " + ci.getAttack();
+	}
+
+
+	@Override
+	public String GetParameter2ForList(String name) {
+		CharactorInfomation ci = CharactorInfomation.GetCharactorInformation(name);		
+		return "ë¨ìxÅ@  = " + ci.getSpeed();
+	}		
 	
 }

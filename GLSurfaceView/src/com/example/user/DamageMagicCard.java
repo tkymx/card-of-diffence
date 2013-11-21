@@ -1,5 +1,6 @@
 package com.example.user;
 
+import com.example.data.ParameterCardInfomatoin;
 import com.example.glsurfaceview.Const;
 import com.example.glsurfaceview.Sprite;
 
@@ -68,6 +69,43 @@ public class DamageMagicCard extends MagicCard {
 		DamageMagicCard mc = new DamageMagicCard(left, top, width, height, id ,need);
 		
 		return mc;
+	}
+
+
+	@Override
+	public String GetNameForList(String name) {
+		return name;
+	}
+
+
+	@Override
+	public String GetExplainForList(String name) {
+		ParameterCardInfomatoin pci = ParameterCardInfomatoin.GetMagicCard(name);
+		return pci.getExplation();
+	}
+
+
+	@Override
+	public String GetParameter1ForList(String name) {
+		ParameterCardInfomatoin pci = ParameterCardInfomatoin.GetMagicCard(name);
+		
+		//-1なら全体攻撃
+		if( pci.getParameter1() == -1 )
+		{
+			return "全体魔法";
+		}
+		//それ以外なら単体攻撃
+		else
+		{
+			return "単体魔法";
+		}
+	}
+
+
+	@Override
+	public String GetParameter2ForList(String name) {
+		ParameterCardInfomatoin pci = ParameterCardInfomatoin.GetMagicCard(name);
+		return "攻撃力  = " + pci.getParameter2();
 	}	
 
 }

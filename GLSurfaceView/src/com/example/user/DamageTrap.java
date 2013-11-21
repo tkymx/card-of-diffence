@@ -18,9 +18,9 @@ public class DamageTrap extends Trap {
 	int damage;
 	
 	// 生成 これ推奨
-	public static DamageTrap CreateDamageTrap( int line, int x )
+	public static DamageTrap CreateDamageTrap( int line, int x , int d )
 	{		
-		DamageTrap trap = new DamageTrap();
+		DamageTrap trap = new DamageTrap(d);
 		
 		//ラインの選択
 		int width = 0;
@@ -36,11 +36,11 @@ public class DamageTrap extends Trap {
 	}	
 	
 	//コンストラクタ
-	protected DamageTrap(){
+	protected DamageTrap(int d){
 		super();
 		
 		//攻撃力のセット
-		damage = 10;
+		damage = d;
 	}
 	
 	@Override
