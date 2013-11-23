@@ -32,6 +32,8 @@ public class Sprite {
 	protected boolean bUse;
 	protected float m_width, m_height;
 	protected int spriteType = Const.SpriteType.TYPE_OTHER.getValue();
+	
+	private boolean isDelete;
 		
 
 	public float getM_width() {
@@ -130,6 +132,7 @@ public class Sprite {
 		appear( SpriteType );
 		
 		bUse = true;
+		isDelete = false;
 	}
 	
 	// 初期化処理
@@ -140,6 +143,7 @@ public class Sprite {
 		appear( SpriteType );
 		
 		bUse = true;
+		isDelete = false;
 	}
 	
 	// 初期化処理
@@ -156,6 +160,7 @@ public class Sprite {
 		appear( SpriteType );
 		
 		bUse = true;
+		isDelete = false;
 	}
 	
 	// 初期化処理
@@ -172,6 +177,7 @@ public class Sprite {
 			appear( SpriteType );
 			
 			bUse = true;
+			isDelete = false;
 		}
 	
 	// 後処理
@@ -417,8 +423,7 @@ public class Sprite {
 	// リストからはずす
 	public void remove()
 	{
-		// リストから自身を削除
-		spriteList.get(spriteType).remove(this);
+		isDelete = true;
 	}
 	
 	// リストからすべて外す
@@ -502,4 +507,8 @@ public class Sprite {
 		return false;		
 	}
 	
+	public boolean getDelete()
+	{
+		return isDelete;
+	}
 }
