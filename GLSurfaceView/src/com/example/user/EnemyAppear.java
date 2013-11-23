@@ -42,7 +42,7 @@ public class EnemyAppear extends Sprite {
 	}
 	
 	// 更新処理
-	public boolean Update()//Damy()
+	public boolean UpdateDamy()
 	{
 		if( System.currentTimeMillis() - time >= 10000 )
 		{
@@ -57,7 +57,7 @@ public class EnemyAppear extends Sprite {
 	}
 	
 	// 更新処理
-	public boolean UpdateDummy()
+	public boolean Update()
 	{	
 		if( System.currentTimeMillis() - time >= 4500 )
 		{				
