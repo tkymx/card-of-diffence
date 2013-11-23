@@ -436,6 +436,9 @@ public class Sprite {
 	{
 		// リストから自身を削除
 		spriteList.get(spriteType).remove(this);
+		
+		//消すとき
+		Uninit();
 	}
 	
 	// リストからすべて外す

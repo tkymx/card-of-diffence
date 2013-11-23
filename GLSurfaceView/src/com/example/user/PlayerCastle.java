@@ -24,6 +24,8 @@ public class PlayerCastle extends Castle {
 	// ‰Šú‰»ˆ—
 	public void Init()
 	{
+		//é‚ÌHP‚ğ•\¦
+		PlayerCastleHPBar.createPlayerCastleHPBar(this);
 	}
 	
 	// XVˆ—

@@ -17,6 +17,18 @@ public class Vector3 {
 	}
 
 	
+	public void setX(float x) {
+		this.x = x;
+	}
+
+	public void setY(float y) {
+		this.y = y;
+	}
+
+	public void setZ(float z) {
+		this.z = z;
+	}
+
 	public Vector3()
 	{
 		x = 0.0f;

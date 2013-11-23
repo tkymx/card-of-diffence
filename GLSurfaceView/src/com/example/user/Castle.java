@@ -19,10 +19,32 @@ public class Castle extends Sprite {
 	protected int hp;
 	protected int maxhp;
 	
+	public int getHp() {
+		return hp;
+	}
+
+	public void setHp(int hp) {
+		this.hp = hp;
+	}
+
+	public int getMaxhp() {
+		return maxhp;
+	}
+
+	public void setMaxhp(int maxhp) {
+		this.maxhp = maxhp;
+	}
+
 	public Castle(int h)
 	{
 		hp = maxhp = h;
 	}
+	
+	//Ž€‚ñ‚Å‚¢‚é‚©‚Ç‚¤‚©
+	boolean isDead()
+	{
+		return hp <= 0;
+	}	
 	
 	//UŒ‚‚ðŽó‚¯‚é
 	public void Damage( Charactor c )

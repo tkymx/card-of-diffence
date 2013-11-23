@@ -16,7 +16,8 @@ public class Player extends Charactor {
 	// 初期化処理
 	public void Init()
 	{
-		
+		//プレイヤーのHPバーを取得
+		PlayerHPBar.createPlayerHPBar(this);
 	}
 	
 

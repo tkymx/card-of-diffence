@@ -10,14 +10,31 @@ public class Score {
 	private int firstPosX = MainActivity.width - ( width * scoreNum );
 	private int firstPosY = MainActivity.height;
 	
+	
+	// 生成
+	public static Score Create(int fx , int fy , int w, int h)
+	{
+		Score score = new Score(fx,fy,w,h);
+		
+		score.Init();
+			
+		return score;
+	}	
+	
 	// コンストラクタ
-	private Score()
+	private Score(int fx , int fy , int w , int h)
 	{
 		Number n = Number.getInstance();
 		score = 0;
 		scoreFigure = 1;
 		
 		int posX;
+		
+		firstPosX = fx;
+		firstPosY = fy;
+		
+		width = w;
+		height = h;
 		
 		for( int i = 0; i < scoreNum; i++ )
 		{
@@ -43,16 +60,7 @@ public class Score {
 			sprite[i].texture.SetUV( n.getNumber(0) );
 		}
 	}
-	
-	// 生成
-	public static Score Create()
-	{
-		Score score = new Score();
-		
-		score.Init();
-		
-		return score;
-	}
+
 	
 	// 更新
 	public void Update()

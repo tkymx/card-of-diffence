@@ -23,7 +23,7 @@ public class EnemyCastle extends Castle {
 	// ‰Šú‰»ˆ—
 	public void Init()
 	{
-		
+		EnemyCastleHPBar.createEnemyCastleHPBar(this);
 	}
 	
 	// XVˆ—

@@ -1,5 +1,6 @@
 package com.example.user;
 
+import com.example.data.DataBase;
 import com.example.glsurfaceview.Const;
 import com.example.glsurfaceview.R;
 import com.example.glsurfaceview.Sprite;
@@ -23,6 +24,16 @@ public class Enemy extends Charactor {
 	// 初期化処理
 	public void Init()
 	{
+		//プレイヤーのHPバーを取得
+		EnemyHPBar.createEnemyHPBar(this);		
+	}
+	
+	@Override
+	public void Uninit() {
+		super.Uninit();
+		
+		//スコア追加
+		DataBase.addScore(100);
 		
 	}
 	

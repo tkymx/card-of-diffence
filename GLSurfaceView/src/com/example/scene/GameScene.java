@@ -10,6 +10,7 @@ import com.example.glsurfaceview.Pause;
 import com.example.glsurfaceview.R;
 import com.example.glsurfaceview.Scene;
 import com.example.glsurfaceview.Score;
+import com.example.user.CharactorHPBarSort;
 import com.example.user.Deck;
 import com.example.user.EnemyAppear;
 import com.example.user.EnemyCastle;
@@ -43,6 +44,10 @@ public class GameScene extends Scene {
 		//マップの表示
 		Map map = new Map();
 		map.Init(0, 0, MainActivity.width, MainActivity.height, stage.getStage_background_image_id() ,  Const.SpriteType.TYPE_BG.getValue() );
+	
+		//HPゲージのソートを行う
+		CharactorHPBarSort bar = new CharactorHPBarSort();
+		bar.appear( Const.SpriteType.TYPE_OTHER.getValue() );
 		
 		//プレイヤーについての出現処理を行いたい
 		PlayerAppear pa = new PlayerAppear();
@@ -54,18 +59,19 @@ public class GameScene extends Scene {
 		
 		
 		//城の配置
-		PlayerCastle pc = new PlayerCastle(10);
+		PlayerCastle pc = new PlayerCastle(100);
 		pc.Init(-Const.rx(0.12), Const.ry(0.17), Const.rw(0.28), Const.rh(0.8), stage.getStage_player_castle_id() , Const.SpriteType.TYPE_CASLE.getValue());
 		
-		EnemyCastle ec = new EnemyCastle(10);
+		EnemyCastle ec = new EnemyCastle(100);
 		ec.Init(Const.rx(0.84), Const.ry(0.175), Const.rw(0.265), Const.rh(0.8), stage.getStage_enemy_castle_id() , Const.SpriteType.TYPE_CASLE.getValue());
 
 		// スコア生成
-		score = Score.Create();
+		DataBase.setPresentScore( Score.Create( Const.rx(0.4) , Const.ry(0.95) , Const.rw(0.2)/Const.MAX_SCORE_NUM , Const.rh(0.07) ) );
 		
 		//カードの配置
 		Deck deck = new Deck();
-		deck.appear( Const.SpriteType.TYPE_CARD.getValue() );
+		deck.appear( Const.SpriteType.TYPE_OTHER.getValue() );
+			
 		
 		//一時停止
 		pause = new Pause();

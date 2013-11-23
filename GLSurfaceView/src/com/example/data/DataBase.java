@@ -3,6 +3,7 @@ package com.example.data;
 import java.util.ArrayList;
 
 import com.example.glsurfaceview.R;
+import com.example.glsurfaceview.Score;
 import com.example.user.DamageMagicCard;
 import com.example.user.DamageTrapCard;
 import com.example.user.MagicCard;
@@ -34,9 +35,13 @@ public class DataBase {
 	//自分のステージの情報
 	private static Stage presentStage;
 	private static int 	 presentStageNum;
+	
+	//今のスコア
+	private static Score presentScore;
 
 	//保持しているカードの処理/////////////////////////////////////////////////////////////////////////////
 	
+
 	//自分のカードの追加
 	public static void AddMyCards( String str )
 	{
@@ -109,6 +114,18 @@ public class DataBase {
 		}
 	}
 	
+	//スコア関係////////////////////////////////////////////////////////////////////////
+	
+	public static Score getPresentScore() {
+		return presentScore;
+	}
+	public static void addScore( int s ) {
+		presentScore.addScore(s);
+	}
+	public static void setPresentScore(Score presentScore) {
+		DataBase.presentScore = presentScore;
+	}	
+	
 	//基本的にな処理////////////////////////////////////////////////////////////////////////
 	public static void Init()
 	{
@@ -128,6 +145,9 @@ public class DataBase {
 		
 		//はじめはステージ情報は無し
 		presentStage = null;
+		
+		//はじめスコアはなし
+		presentScore = null;
 	}
 	
 	public static void LoadData()
