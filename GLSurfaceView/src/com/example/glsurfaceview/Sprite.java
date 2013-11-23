@@ -423,15 +423,13 @@ public class Sprite {
 	// リストからはずす
 	public void remove()
 	{
-<<<<<<< HEAD
 		// リストから自身を削除
 		spriteList.get(spriteType).remove(this);
 		
 		//消すとき
 		Uninit();
-=======
+		
 		isDelete = true;
->>>>>>> origin/2013/11/22-toshimitu
 	}
 	
 	// リストからすべて外す
