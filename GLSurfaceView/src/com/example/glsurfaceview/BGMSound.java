@@ -4,65 +4,149 @@ import android.media.MediaPlayer;
 
 public class BGMSound {
 	
-	private class BGM
+	// サウンド名
+	public enum SOUND
 	{
-		public String name;
-		public boolean isLoop;
-		public boolean isPlay;
+		SOUND_TITLE( 0 ),
+		SOUND_ENTER( 1 ),
+		SOUND_GAME( 2 ),
+		SOUND_TOUCH( 3 ),
+		SOUND_MAX( 4 );
 		
-		public BGM( String s, boolean loop )
+		private int value;
+		
+		private SOUND( int n )
 		{
-			name = s;
+			value = n;
+		}
+		
+		public int getValue()
+		{
+			return value;
+		}
+	};
+	
+	// サウンド情報用構造体
+	private class Info
+	{
+		public int ID;
+		public boolean isLoop;
+		
+		private Info( int id, boolean loop )
+		{
+			ID = id;
 			isLoop = loop;
-			isPlay = false;
 		}
 	}
 	
-	public static BGM[] BGMChoose = new BGM[1];
+	// サウンド情報
+	private Info[] soundID = {
+			new Info( R.raw.se02, false ),
+			new Info( R.raw.se03, false ),
+			new Info( R.raw.sample, true ),
+			new Info( R.raw.se01, false ),
+	};
 	
-	private static BGMSound Instance;
-	// 1BGMに対して1つ
-	private MediaPlayer player;							// プレイヤー
+	public class BGM
+	{
+		private boolean isLoop;
+		private MediaPlayer player;							// プレイヤー
+		private int nowPlay;
+		
+		public BGM( int id, boolean loop )
+		{
+			isLoop = loop;
+			nowPlay = 0;
+			
+			player = MediaPlayer.create(OpenGLSurfaceView.c, id);
+			player.setLooping(isLoop);
+		}
+		
+		public void Play()
+		{
+			player.seekTo(nowPlay);
+			player.start();
+		}
+		
+		public void Replay()
+		{
+			if( player.isPlaying() == true )
+			{
+				nowPlay = player.getCurrentPosition();
+				
+				player.seekTo(nowPlay);
+				player.start();
+			}
+		}
+		
+		public void Stop()
+		{
+			// 再生されているとき
+			if( player.isPlaying() == true )
+			{
+				player.pause();
+		
+				nowPlay = 0;
+			}
+		}
+		
+		public void StopPause()
+		{
+			if( player.isPlaying() == true )
+			{
+				nowPlay = player.getCurrentPosition();
+				
+				player.pause();
+			}
+		}
+	}
+	
+	
+	public static BGM[] BGMChoose = new BGM[SOUND.SOUND_MAX.getValue()];	// BGMの呼び出し配列	
+	private static BGMSound Instance = new BGMSound();						// インスタンス
 	
 	// インスタンス取得
-	public BGMSound getInstance()
+	public static BGMSound getInstance()
 	{
 		return Instance;
 	}
 
 	public BGMSound()
 	{
-		// メディアプレイヤーの生成
-		try
+		/*try
 		{
 			//player = MediaPlayer.create(OpenGLSurfaceView.c, R.id.action_settings);
-			player.setLooping(BGMChoose[0].isLoop);
+			//player.setLooping(BGMChoose[0].isLoop);
 		}
 		catch ( Exception e )
 		{
+		}*/
+	}
+	
+	public void loadBGM()
+	{
+		// メディアプレイヤーの生成
+		for( int i = 0; i < SOUND.SOUND_MAX.getValue(); i++ )
+		{
+			BGMChoose[i] = new BGM( soundID[i].ID, soundID[i].isLoop );
 		}
 	}
 	
-	public void Play( int id )
+	//　すべての再生を切る
+	public void stopAll()
 	{
-		// まだ再生されていないとき
-		if( BGMChoose[id].isPlay == false )
+		for( int i = 0; i < SOUND.SOUND_MAX.getValue(); i++ )
 		{
-			player.seekTo(0);
-			player.start();
-			
-			BGMChoose[id].isPlay = true;
+			BGMChoose[i].StopPause();
 		}
 	}
 	
-	public void Stop( int id )
+	// 再生しているものだけ再生
+	public void replayAll()
 	{
-		// 再生されているとき
-		if( BGMChoose[id].isPlay == true )
+		for( int i = 0; i < SOUND.SOUND_MAX.getValue(); i++ )
 		{
-			player.pause();
-			
-			BGMChoose[id].isPlay = false;
+			BGMChoose[i].Play();
 		}
 	}
 }

@@ -70,6 +70,12 @@ public class SurfaceRenderer implements Renderer {
         // テクスチャの再読み込み
      	TextureManager.ResumeAll();
      	Sprite.resumeAll();
+     	
+     	// デプスバッファのテストを無効にする
+     	gl.glDisable(GL10.GL_DEPTH_TEST);
+     	
+     	// ライトを無効にする
+     	gl.glDisable(GL10.GL_LIGHTING);
 	}
 	
 	Context GetContext()

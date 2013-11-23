@@ -4,6 +4,8 @@ import javax.microedition.khronos.opengles.GL10;
 
 import android.content.Intent;
 
+import com.example.glsurfaceview.BGMSound;
+import com.example.glsurfaceview.BGMSound.SOUND;
 import com.example.glsurfaceview.OpenGLSurfaceView;
 import com.example.glsurfaceview.Scene;
 import com.example.glsurfaceview.SceneManager;
@@ -34,7 +36,9 @@ public class TitleScene extends Scene {
 		{
 			Intent intent = new Intent();
 			intent.setClass( OpenGLSurfaceView.c , com.example.glsurfaceview.StageSelect.class);
-			OpenGLSurfaceView.c.startActivity(intent);						
+			OpenGLSurfaceView.c.startActivity(intent);
+			
+			BGMSound.BGMChoose[SOUND.SOUND_ENTER.getValue()].Play();
 		}
 	}
 

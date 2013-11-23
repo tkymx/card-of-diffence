@@ -32,6 +32,8 @@ public class Sprite {
 	protected boolean bUse;
 	protected float m_width, m_height;
 	protected int spriteType = Const.SpriteType.TYPE_OTHER.getValue();
+	
+	private boolean isDelete;
 		
 
 	public float getM_width() {
@@ -130,6 +132,7 @@ public class Sprite {
 		appear( SpriteType );
 		
 		bUse = true;
+		isDelete = false;
 	}
 	
 	// 初期化処理
@@ -140,6 +143,7 @@ public class Sprite {
 		appear( SpriteType );
 		
 		bUse = true;
+		isDelete = false;
 	}
 	
 	// 初期化処理
@@ -156,6 +160,7 @@ public class Sprite {
 		appear( SpriteType );
 		
 		bUse = true;
+		isDelete = false;
 	}
 	
 	// 初期化処理
@@ -172,6 +177,7 @@ public class Sprite {
 			appear( SpriteType );
 			
 			bUse = true;
+			isDelete = false;
 		}
 	
 	// 後処理
@@ -229,23 +235,6 @@ public class Sprite {
 	    	float[] color = texture.GetColor();
 	    	int size = vertexBuffer.GetVertexBufferSize();
 	    	int tex[] = texture.GetTextureBuffer();
-	    	
-	    	// 頂点配列を有効にする
-	    	gl.glEnableClientState( GL10.GL_VERTEX_ARRAY );
-	    	
-	    	// テクスチャを有効にする
-	    	gl.glEnableClientState( GL10.GL_TEXTURE_COORD_ARRAY );
-	    	
-	    	//gl.glActiveTexture(GL10.GL_TEXTURE0);
-	    	
-	    	// デプスバッファのテストを無効にする
-	     	gl.glDisable(GL10.GL_DEPTH_TEST);
-	     	
-	     	// ライトを無効にする
-	     	gl.glDisable(GL10.GL_LIGHTING);
-	     	
-	     	// テクスチャを有効にする
-	     	gl.glEnable(GL10.GL_TEXTURE_2D);
 	     	
 	     	// 1度だけ画像をopenglへ転送する
 	     	SetSprite(gl);
@@ -434,11 +423,15 @@ public class Sprite {
 	// リストからはずす
 	public void remove()
 	{
+<<<<<<< HEAD
 		// リストから自身を削除
 		spriteList.get(spriteType).remove(this);
 		
 		//消すとき
 		Uninit();
+=======
+		isDelete = true;
+>>>>>>> origin/2013/11/22-toshimitu
 	}
 	
 	// リストからすべて外す
@@ -522,4 +515,8 @@ public class Sprite {
 		return false;		
 	}
 	
+	public boolean getDelete()
+	{
+		return isDelete;
+	}
 }

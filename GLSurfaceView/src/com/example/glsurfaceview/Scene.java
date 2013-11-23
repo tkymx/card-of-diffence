@@ -36,7 +36,25 @@ public abstract class Scene {
 						}
 					}
 				}
-			}		
+			}
+			
+			for( int i = 0; i < Const.SpriteType.TYPE_MAX.getValue(); i++ )
+			{
+				LinkedList<Sprite> list = Sprite.spriteList.get(i);
+				
+				// リストに登録されているシーンの数分ループ
+				for( int j = 0; j < list.size(); j++ )
+				{
+					// 使用中のとき
+					if( list.get(j).getDelete() == true )
+					{
+						Sprite sp = list.get(j);
+						
+						// リストからはずす
+						list.remove(sp);
+					}
+				}
+			}
 		}
 	}
 	public void Draw( GL10 gl )
