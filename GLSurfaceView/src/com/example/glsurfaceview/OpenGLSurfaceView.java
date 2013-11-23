@@ -13,7 +13,7 @@ public class OpenGLSurfaceView extends GLSurfaceView{
 	private Thread thread;
 	public static Context c;
 
-	//ストップフラグのせってい
+	//ストップフラグの設定
 	private static boolean stopflag;
 	public static void GameStop(){stopflag = true;};
 	public static void GameStart(){stopflag = false;};
@@ -34,6 +34,8 @@ public class OpenGLSurfaceView extends GLSurfaceView{
 		// レンダラーの設定
 		setRenderer( renderer );
 		
+		// BGMの作成
+		BGMSound.getInstance().loadBGM();
 		
 		//データベースの初期化処理などを行う
 		DataBase.Init();
@@ -99,6 +101,7 @@ public class OpenGLSurfaceView extends GLSurfaceView{
 	public void onResume()
 	{
 		isHalt = false;
+		//BGMSound.getInstance().replayAll();
 	}
 	  
 	@Override
@@ -106,5 +109,6 @@ public class OpenGLSurfaceView extends GLSurfaceView{
 	{
 		isHalt = true;
 		thread.interrupt();
+		//BGMSound.getInstance().stopAll();
 	}	
 }

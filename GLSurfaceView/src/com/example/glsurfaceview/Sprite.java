@@ -229,23 +229,6 @@ public class Sprite {
 	    	float[] color = texture.GetColor();
 	    	int size = vertexBuffer.GetVertexBufferSize();
 	    	int tex[] = texture.GetTextureBuffer();
-	    	
-	    	// 頂点配列を有効にする
-	    	gl.glEnableClientState( GL10.GL_VERTEX_ARRAY );
-	    	
-	    	// テクスチャを有効にする
-	    	gl.glEnableClientState( GL10.GL_TEXTURE_COORD_ARRAY );
-	    	
-	    	//gl.glActiveTexture(GL10.GL_TEXTURE0);
-	    	
-	    	// デプスバッファのテストを無効にする
-	     	gl.glDisable(GL10.GL_DEPTH_TEST);
-	     	
-	     	// ライトを無効にする
-	     	gl.glDisable(GL10.GL_LIGHTING);
-	     	
-	     	// テクスチャを有効にする
-	     	gl.glEnable(GL10.GL_TEXTURE_2D);
 	     	
 	     	// 1度だけ画像をopenglへ転送する
 	     	SetSprite(gl);

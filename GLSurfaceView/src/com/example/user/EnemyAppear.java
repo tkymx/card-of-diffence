@@ -44,7 +44,7 @@ public class EnemyAppear extends Sprite {
 	// 更新処理
 	public boolean UpdateDamy()
 	{
-		if( System.currentTimeMillis() - time >= 10000 )
+		if( System.currentTimeMillis() - time >= 8000 + waitRan )
 		{
 			//敵キャラを配置
 			enemyCard[0].SetCharactor( CreateEnemy( Const.LINE_1_Y , "enemy1" ) );
@@ -59,8 +59,11 @@ public class EnemyAppear extends Sprite {
 	// 更新処理
 	public boolean Update()
 	{	
-		if( System.currentTimeMillis() - time >= 4500 )
+		if( ( System.currentTimeMillis() - time ) >= ( 2500 + waitRan ) )
 		{				
+			waitRan = rand.nextInt(2000);
+			waitRan -= 1000;
+			
 			// プレイヤーがどのラインに何体いるか調べる
 			serchPlayerLine();
 			
@@ -74,13 +77,16 @@ public class EnemyAppear extends Sprite {
 				for( int i = 0; i < enemyCard.length; i++ )
 				{
 					// 使用していないとき
-					if( !enemyCard[i].isUse )
+					if( enemyCard[i].isUse )
 					{
-						ran = rand.nextInt(11);				// 取得するカードの番号を乱数で取得
 						Enemy enemy = null;
+						//int playerMaxLine = serchPlayerLineMaxNum();
+						int compareLine = compareEnemyToPlayer();		// 一番出ているエネミーの数が少ないライン
+						
+						ran = rand.nextInt(11);							// 取得するカードの番号を乱数で取得
 						
 						// 一番プレイヤーの多いラインに出す
-						switch( serchPlayerLineMaxNum() )
+						switch( compareLine )
 						{
 						case Const.LINE1:
 							enemy = CreateEnemy( Const.LINE_1_Y , name[ran] );
@@ -178,7 +184,7 @@ public class EnemyAppear extends Sprite {
 		Enemy enemy;
 		eline1 = eline2 = eline3 = 0;
 		
-		// エネミーーサイズ分ループ
+		// エネミーサイズ分ループ
 		for( int i = 0; i < Sprite.spriteList.get( enemySize ).size(); i++ )
 		{
 			enemy = ( Enemy )list.get(i);
@@ -289,4 +295,76 @@ public class EnemyAppear extends Sprite {
 		}
 	}
 	
+	// エネミーとプレイヤーのラインを比較しエネミーの出ているのが少ないラインを返す
+	private int compareEnemyToPlayer()
+	{
+		int line1, line2, line3;
+		
+		line1 = pline1 - eline1;
+		line2 = pline2 - eline2;
+		line3 = pline3 - eline3;
+		
+		// すべてのlineが同じとき
+		if( ( line1 == line2 ) && ( line1 == line3 ) )
+		{
+			ran = rand.nextInt(3) + 1;
+			
+			return ran;
+		}
+		// 1と2が同じ時
+		else if( line1 == line2 )
+		{
+			// 1より3が大きいとき
+			if( line1 > line3 )
+			{
+				ran = rand.nextInt(2) + 1;
+				
+				return ran;
+			}
+			else
+			{
+				return Const.LINE3;
+			}
+		}
+		// 1と3が同じとき
+		else if( line1 == line3 )
+		{
+			// 2より1が大きい時
+			if( line1 > line2 )
+			{
+				ran = rand.nextInt(2);
+				
+				switch( ran )
+				{
+				case 0:
+					return Const.LINE1;
+				default :
+					return Const.LINE3;
+				}
+			}
+			else
+			{
+				return Const.LINE2;
+			}
+		}
+		// line1が一番大きいとき
+		else if( ( line1 > line2 ) && ( line1 > line3 ) )
+		{
+			return Const.LINE1;
+		}
+		// 2より1が大きいとき
+		else if( line1 > line2 )
+		{
+			return Const.LINE3;
+		}
+		// 3より1が大きい時
+		else if( line1 > line3 )
+		{
+			return Const.LINE2;
+		}
+		
+		ran = rand.nextInt(3) + 1;
+		
+		return ran;
+	}
 }
