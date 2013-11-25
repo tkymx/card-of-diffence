@@ -2,6 +2,7 @@ package com.example.glsurfaceview;
 
 import javax.microedition.khronos.opengles.GL10;
 
+import com.example.glsurfaceview.BGMSound.SOUND;
 import com.example.scene.ClearScene;
 import com.example.scene.GameOverScene;
 import com.example.scene.GameScene;
@@ -73,6 +74,7 @@ public class SceneManager {
 		// å„èàóù
 		onScene.Uninit();
 		Sprite.removeAll();
+		TextureManager.RemoveTextureAll();
 		
 		switch( Key )
 		{

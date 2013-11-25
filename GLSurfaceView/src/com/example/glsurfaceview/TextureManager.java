@@ -22,6 +22,13 @@ public class TextureManager {
 		IDList.add( s );
 	}
 	
+	// テクスチャの開放
+	public static void RemoveTextureAll()
+	{
+		Dictionary.clear();
+		IDList.clear();
+	}
+	
 	// テクスチャがすでにあるかの確認
 	public static boolean haveTexture( int id )
 	{
