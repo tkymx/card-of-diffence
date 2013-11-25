@@ -1,4 +1,4 @@
-package com.example.user;
+/*package com.example.user;
 import com.example.glsurfaceview.Const;
 import com.example.glsurfaceview.R;
 import com.example.glsurfaceview.SpriteAnimation;
@@ -57,5 +57,5 @@ public class Collapse extends SpriteAnimation{
 		
 		return true;
 	}
-}
+}*/
 

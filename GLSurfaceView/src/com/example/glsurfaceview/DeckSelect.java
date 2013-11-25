@@ -155,7 +155,7 @@ public class DeckSelect extends Activity{
 		//‚¢‚ë‚¢‚ëƒZƒbƒg
 		setContentView(ll);
 		ll.addView(rl,new LinearLayout.LayoutParams(Const.rx(0.4), Const.ry(1)));
-		ll.addView(lv,new LinearLayout.LayoutParams(Const.rx(0.6), Const.ry(1)));
+		ll.addView(lv,new LinearLayout.LayoutParams(Const.rx(0.6), Const.ry(0.95)));
 		rl.addView(cardNameText, cardNameTextParam);
 		rl.addView(card, cardParam);
 		rl.addView(atackText,atackTextParam);
@@ -200,6 +200,7 @@ public class DeckSelect extends Activity{
 					if(DataBase.GetMyDeck(i).equals(selectedDeckCard))d=i;
 					
 				}
+				d=getIntent().getIntExtra("num",0);
 					int c=DataBase.GetMyCards().indexOf(selectedNewDeckCard);
 					DataBase.SwapMyDecksFromMyCards(d,c);
 				
