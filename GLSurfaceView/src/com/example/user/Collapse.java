@@ -10,6 +10,7 @@ import com.example.user.Charactor.*;
 //城が崩壊したら崩壊のエフェクトを付ける
 
 public class Collapse extends SpriteAnimation{
+/*	
 	//生成
 	public static Collapse Create( float left, float top, float width, float height, int UVWidth, int UVHeight, int animeTime, int id, int SpriteType ){
 		Collapse s = new Collapse();
@@ -57,5 +58,6 @@ public class Collapse extends SpriteAnimation{
 		
 		return true;
 	}
+*/	
 }
 

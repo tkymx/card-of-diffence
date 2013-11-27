@@ -38,9 +38,27 @@ public class DataBase {
 	
 	//今のスコア
 	private static Score presentScore;
-
-	//保持しているカードの処理/////////////////////////////////////////////////////////////////////////////
 	
+	//勝ちかどうか
+	private static boolean win;
+	private static boolean result;
+
+	//勝ちかどうかの処理/////////////////////////////////////////////////////////////////////////////
+	
+	public static boolean isWin() {
+		return win;
+	}
+	public static void setWin(boolean win) {
+		DataBase.win = win;
+	}		
+	public static boolean isResult() {
+		return result;
+	}
+	public static void setResult(boolean result) {
+		DataBase.result = result;
+	}	
+	
+	//保持しているカードの処理/////////////////////////////////////////////////////////////////////////////
 
 	//自分のカードの追加
 	public static void AddMyCards( String str )

@@ -14,15 +14,23 @@ public class Score {
 	// 生成
 	public static Score Create(int fx , int fy , int w, int h)
 	{
-		Score score = new Score(fx,fy,w,h);
+		Score score = new Score(fx,fy,w,h,Const.SpriteType.TYPE_TEXT.getValue());
 		
 		score.Init();
 			
 		return score;
-	}	
+	}
+	public static Score Create(int fx , int fy , int w, int h,int type)
+	{
+		Score score = new Score(fx,fy,w,h,type);
+		
+		score.Init();
+			
+		return score;
+	}		
 	
 	// コンストラクタ
-	private Score(int fx , int fy , int w , int h)
+	private Score(int fx , int fy , int w , int h,int type)
 	{
 		Number n = Number.getInstance();
 		score = 0;
@@ -41,7 +49,7 @@ public class Score {
 			posX =  firstPosX + ( width * i );
 			
 			sprite[i] = Sprite.Create(posX, firstPosY, width, - height, 
-					n.getTextureID(), n.getNumber(0), Const.SpriteType.TYPE_TEXT.getValue());
+					n.getTextureID(), n.getNumber(0),type);
 			
 			sprite[i].texture.SetUV( n.getNumber(0) );
 			
@@ -65,7 +73,6 @@ public class Score {
 	// 更新
 	public void Update()
 	{
-		addScore(1);
 	}
 	
 	// スコアの追加

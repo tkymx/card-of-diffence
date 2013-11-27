@@ -2,6 +2,8 @@ package com.example.scene;
 
 import javax.microedition.khronos.opengles.GL10;
 
+import android.provider.ContactsContract.Contacts.Data;
+
 import com.example.data.DataBase;
 import com.example.glsurfaceview.Const;
 import com.example.glsurfaceview.MainActivity;
@@ -17,6 +19,7 @@ import com.example.user.EnemyCastle;
 import com.example.user.Map;
 import com.example.user.PlayerAppear;
 import com.example.user.PlayerCastle;
+import com.example.user.ResultNotify;
 import com.example.user.Stage;
 import com.example.user.StartNotify;
 
@@ -25,7 +28,7 @@ public class GameScene extends Scene {
 	private Pause pause = null;
 	
 	private StartNotify notify = null;
-	private Score score = null;
+	private ResultNotify rnotify = null;
 	
 	// コンストラクタ
 	public GameScene()
@@ -59,10 +62,10 @@ public class GameScene extends Scene {
 		
 		
 		//城の配置
-		PlayerCastle pc = new PlayerCastle(100);
+		PlayerCastle pc = new PlayerCastle(10);
 		pc.Init(-Const.rx(0.12), Const.ry(0.17), Const.rw(0.28), Const.rh(0.8), stage.getStage_player_castle_id() , Const.SpriteType.TYPE_CASLE.getValue());
 		
-		EnemyCastle ec = new EnemyCastle(100);
+		EnemyCastle ec = new EnemyCastle(10);
 		ec.Init(Const.rx(0.84), Const.ry(0.175), Const.rw(0.265), Const.rh(0.8), stage.getStage_enemy_castle_id() , Const.SpriteType.TYPE_CASLE.getValue());
 
 		// スコア生成
@@ -78,6 +81,11 @@ public class GameScene extends Scene {
 		
 		//ゲームの通知
 		notify = StartNotify.Create();
+		
+		//結果画面の表示について
+		rnotify = ResultNotify.Create();
+		//リザルト表示をオフにする
+		DataBase.setResult(false);
 		
 		//ゲームを止める
 		OpenGLSurfaceView.GameStop();
@@ -113,6 +121,12 @@ public class GameScene extends Scene {
 		{
 			pause.Update();
 			
+		}
+		
+		//リザルト画面
+		if( DataBase.isResult() )
+		{
+			rnotify.Update();
 		}
 	}
 

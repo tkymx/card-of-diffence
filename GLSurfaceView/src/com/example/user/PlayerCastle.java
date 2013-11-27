@@ -1,5 +1,6 @@
 package com.example.user;
 
+import com.example.data.DataBase;
 import com.example.glsurfaceview.Const;
 import com.example.glsurfaceview.R;
 import com.example.glsurfaceview.SceneManager;
@@ -36,8 +37,9 @@ public class PlayerCastle extends Castle {
 		//死んでたら消す
 		if( hp <= 0 )
 		{
-			//ゲームオーバー画面に移動
-			SceneManager.ChangeScene( SceneManager.gameoverKey );
+			//ゲームオーバーにする
+			DataBase.setResult(true);
+			DataBase.setWin(false);
 			return false;		
 		}
 		
