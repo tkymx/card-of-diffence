@@ -60,4 +60,3 @@ public class Collapse extends SpriteAnimation{
 	}
 */	
 }
-

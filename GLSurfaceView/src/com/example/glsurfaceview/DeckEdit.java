@@ -140,6 +140,7 @@ public class DeckEdit extends Activity {
 					Intent intent = new Intent();
 					intent.setClass( OpenGLSurfaceView.c , com.example.glsurfaceview.DeckSelect.class);
 					intent.putExtra("name", memberName[i]);		//どのカードをタッチしたかの情報を、DeckSelectクラスに送る
+					intent.putExtra("num", i);
 					OpenGLSurfaceView.c.startActivity(intent);
 					finish();
 				}
