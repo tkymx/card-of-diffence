@@ -5,13 +5,16 @@ import javax.microedition.khronos.opengles.GL10;
 import android.provider.ContactsContract.Contacts.Data;
 
 import com.example.data.DataBase;
+import com.example.glsurfaceview.BGMSound;
 import com.example.glsurfaceview.Const;
+import com.example.glsurfaceview.Evolution;
 import com.example.glsurfaceview.MainActivity;
 import com.example.glsurfaceview.OpenGLSurfaceView;
 import com.example.glsurfaceview.Pause;
 import com.example.glsurfaceview.R;
 import com.example.glsurfaceview.Scene;
 import com.example.glsurfaceview.Score;
+import com.example.glsurfaceview.BGMSound.SOUND;
 import com.example.user.CharactorHPBarSort;
 import com.example.user.Deck;
 import com.example.user.EnemyAppear;
@@ -29,6 +32,7 @@ public class GameScene extends Scene {
 	
 	private StartNotify notify = null;
 	private ResultNotify rnotify = null;
+	private Evolution evolution = null;
 	
 	// コンストラクタ
 	public GameScene()
@@ -37,6 +41,8 @@ public class GameScene extends Scene {
 
 	@Override
 	public void Init() {
+		
+		BGMSound.BGMChoose[SOUND.SOUND_GAME.getValue()].Play();
 		
 		//ステージ情報の取得
 		Stage stage = DataBase.getPresentStage();
@@ -74,7 +80,9 @@ public class GameScene extends Scene {
 		//カードの配置
 		Deck deck = new Deck();
 		deck.appear( Const.SpriteType.TYPE_OTHER.getValue() );
-			
+		
+		// 進化ボタン等の実装
+		evolution = new Evolution();
 		
 		//一時停止
 		pause = new Pause();
@@ -95,7 +103,7 @@ public class GameScene extends Scene {
 	@Override
 	public void Uninit() {
 		// TODO Auto-generated method stub
-
+		BGMSound.BGMChoose[SOUND.SOUND_GAME.getValue()].Stop();
 	}
 
 	@Override
@@ -114,6 +122,7 @@ public class GameScene extends Scene {
 		}
 		else
 		{
+			evolution.Update();
 			super.Update();			
 		}
 		
@@ -136,5 +145,4 @@ public class GameScene extends Scene {
 		super.Draw(gl);
 		
 	}
-
 }

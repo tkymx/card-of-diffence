@@ -12,7 +12,7 @@ import com.example.user.Charactor.*;
 public class Collapse extends SpriteAnimation{
 /*	
 	//ê∂ê¨
-	public static Collapse Create( float left, float top, float width, float height, int UVWidth, int UVHeight, int animeTime, int id, int SpriteType ){
+	/*public static Collapse Create( float left, float top, float width, float height, int UVWidth, int UVHeight, int animeTime, int id, int SpriteType ){
 		Collapse s = new Collapse();
 		s.Init( left, top, width, height, UVWidth, UVHeight, animeTime, id, SpriteType );		
 		return s;

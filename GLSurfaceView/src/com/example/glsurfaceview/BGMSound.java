@@ -52,11 +52,13 @@ public class BGMSound {
 		private boolean isLoop;
 		private MediaPlayer player;							// ÉvÉåÉCÉÑÅ[
 		private int nowPlay;
+		private boolean isPlay;
 		
 		public BGM( int id, boolean loop )
 		{
 			isLoop = loop;
 			nowPlay = 0;
+			isPlay = false;
 			
 			player = MediaPlayer.create(OpenGLSurfaceView.c, id);
 			player.setLooping(isLoop);
@@ -64,13 +66,17 @@ public class BGMSound {
 		
 		public void Play()
 		{
-			player.seekTo(nowPlay);
-			player.start();
+			if( !isPlay )
+			{
+				player.seekTo(nowPlay);
+				player.start();
+				isPlay = true;
+			}
 		}
 		
 		public void Replay()
 		{
-			if( player.isPlaying() == true )
+			if( isPlay )
 			{
 				nowPlay = player.getCurrentPosition();
 				
@@ -82,11 +88,12 @@ public class BGMSound {
 		public void Stop()
 		{
 			// çƒê∂Ç≥ÇÍÇƒÇ¢ÇÈÇ∆Ç´
-			if( player.isPlaying() == true )
+			if( isPlay == true )
 			{
 				player.pause();
 		
 				nowPlay = 0;
+				isPlay = false;
 			}
 		}
 		
@@ -146,7 +153,23 @@ public class BGMSound {
 	{
 		for( int i = 0; i < SOUND.SOUND_MAX.getValue(); i++ )
 		{
-			BGMChoose[i].Play();
+			BGMChoose[i].Replay();
+		}
+	}
+	
+	// çƒê∂äƒéã
+	public void playWatching()
+	{
+		for( int i = 0; i < SOUND.SOUND_MAX.getValue(); i++ )
+		{
+			if( BGMChoose[i].isPlay )
+			{
+				if( !BGMChoose[i].player.isPlaying() )
+				{
+					BGMChoose[i].isPlay = false;
+					BGMChoose[i].nowPlay = 0;
+				}
+			}
 		}
 	}
 }

@@ -59,7 +59,7 @@ public class EnemyAppear extends Sprite {
 	// 更新処理
 	public boolean Update()
 	{	
-		if( ( System.currentTimeMillis() - time ) >= ( 2500 + waitRan ) )
+		if( ( System.currentTimeMillis() - time ) >= ( 3000 + waitRan - ( 500 * stageLevel ) ) )
 		{				
 			waitRan = rand.nextInt(2000);
 			waitRan -= 1000;
@@ -71,7 +71,7 @@ public class EnemyAppear extends Sprite {
 			serchEnemyLine();
 			
 			// プレイヤーより数が少ない時
-			if( enemyLineNum <= playerLineNum )
+			if( enemyLineNum <= ( playerLineNum + stageLevel ) )
 			{
 				// エネミーカードの枚数分
 				for( int i = 0; i < enemyCard.length; i++ )

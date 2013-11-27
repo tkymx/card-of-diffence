@@ -67,6 +67,9 @@ public class OpenGLSurfaceView extends GLSurfaceView{
 							//“ü—Í‚Ì‰Šú‰»
 							Touch touch = Touch.getInstance();
 							touch.UpdateEnd();
+							
+							// BGMÄ¶ŠÄ‹
+							BGMSound.getInstance().playWatching();
 						}
 						
 						// —áŠOˆ—
@@ -101,7 +104,7 @@ public class OpenGLSurfaceView extends GLSurfaceView{
 	public void onResume()
 	{
 		isHalt = false;
-		//BGMSound.getInstance().replayAll();
+		BGMSound.getInstance().replayAll();
 	}
 	  
 	@Override
@@ -109,6 +112,6 @@ public class OpenGLSurfaceView extends GLSurfaceView{
 	{
 		isHalt = true;
 		thread.interrupt();
-		//BGMSound.getInstance().stopAll();
+		BGMSound.getInstance().stopAll();
 	}	
 }
