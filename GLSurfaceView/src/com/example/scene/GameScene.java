@@ -2,8 +2,6 @@ package com.example.scene;
 
 import javax.microedition.khronos.opengles.GL10;
 
-import android.provider.ContactsContract.Contacts.Data;
-
 import com.example.data.DataBase;
 import com.example.glsurfaceview.BGMSound;
 import com.example.glsurfaceview.Const;
@@ -11,7 +9,6 @@ import com.example.glsurfaceview.Evolution;
 import com.example.glsurfaceview.MainActivity;
 import com.example.glsurfaceview.OpenGLSurfaceView;
 import com.example.glsurfaceview.Pause;
-import com.example.glsurfaceview.R;
 import com.example.glsurfaceview.Scene;
 import com.example.glsurfaceview.Score;
 import com.example.glsurfaceview.BGMSound.SOUND;
@@ -32,7 +29,7 @@ public class GameScene extends Scene {
 	
 	private StartNotify notify = null;
 	private ResultNotify rnotify = null;
-	private Evolution evolution = null;
+	public static Evolution evolution = null;
 	
 	// コンストラクタ
 	public GameScene()

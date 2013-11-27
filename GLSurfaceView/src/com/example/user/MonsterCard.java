@@ -1,7 +1,6 @@
 package com.example.user;
 
 import com.example.data.CharactorInfomation;
-import com.example.data.ParameterCardInfomatoin;
 import com.example.glsurfaceview.Const;
 import com.example.glsurfaceview.Touch;
 
@@ -35,8 +34,6 @@ public class MonsterCard extends Card {
 	@Override
 	public boolean Update() {	
 		if(super.Update()==false)return false;
-		
-		boolean alive = false;
 		
 		//Žg‚¦‚½‚ç
 		if( charactor != null )

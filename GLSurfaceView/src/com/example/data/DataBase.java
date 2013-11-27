@@ -6,7 +6,6 @@ import com.example.glsurfaceview.R;
 import com.example.glsurfaceview.Score;
 import com.example.user.DamageMagicCard;
 import com.example.user.DamageTrapCard;
-import com.example.user.MagicCard;
 import com.example.user.MonsterCard;
 import com.example.user.Stage;
 

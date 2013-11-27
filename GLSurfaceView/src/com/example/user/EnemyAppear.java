@@ -59,7 +59,7 @@ public class EnemyAppear extends Sprite {
 	// 更新処理
 	public boolean Update()
 	{	
-		if( ( System.currentTimeMillis() - time ) >= ( 3000 + waitRan - ( 500 * stageLevel ) ) )
+		if( ( System.currentTimeMillis() - time ) >= ( 3500 + waitRan - ( 250 * stageLevel ) ) )
 		{				
 			waitRan = rand.nextInt(2000);
 			waitRan -= 1000;
@@ -179,13 +179,13 @@ public class EnemyAppear extends Sprite {
 	// エネミーのいるラインを調べる
 	private void serchEnemyLine()
 	{
-		int enemySize = Const.SpriteType.TYPE_ENEMY.getValue();
-		LinkedList<Sprite> list = Sprite.spriteList.get(enemySize);
+		int enemyVal = Const.SpriteType.TYPE_ENEMY.getValue();
+		LinkedList<Sprite> list = Sprite.spriteList.get(enemyVal);
 		Enemy enemy;
 		eline1 = eline2 = eline3 = 0;
 		
 		// エネミーサイズ分ループ
-		for( int i = 0; i < Sprite.spriteList.get( enemySize ).size(); i++ )
+		for( int i = 0; i < Sprite.spriteList.get( enemyVal ).size(); i++ )
 		{
 			enemy = ( Enemy )list.get(i);
 			

@@ -8,7 +8,6 @@ import com.example.glsurfaceview.BGMSound;
 import com.example.glsurfaceview.BGMSound.SOUND;
 import com.example.glsurfaceview.OpenGLSurfaceView;
 import com.example.glsurfaceview.Scene;
-import com.example.glsurfaceview.SceneManager;
 import com.example.glsurfaceview.Touch;
 
 public class TitleScene extends Scene {

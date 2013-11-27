@@ -1,7 +1,5 @@
 package com.example.glsurfaceview;
 
-import java.util.Random;
-
 import com.example.data.DataBase;
 import com.example.user.Stage;
 
@@ -11,7 +9,6 @@ import android.content.Context;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.graphics.Canvas;
-import android.graphics.Color;
 import android.graphics.Paint;
 import android.graphics.Rect;
 import android.view.View;

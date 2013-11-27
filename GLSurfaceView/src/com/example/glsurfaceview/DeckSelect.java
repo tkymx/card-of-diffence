@@ -1,36 +1,16 @@
 package com.example.glsurfaceview;
 
-import java.util.ArrayList;
 import java.util.List;
-import java.util.Random;
-
-
-
-import com.example.*;
 import com.example.data.CardInformation;
 import com.example.data.DataBase;
 import com.example.glsurfaceview.Const;
-import com.example.glsurfaceview.Text;
 
 import android.app.Activity;
-import android.content.Context;
 import android.content.Intent;
-import android.graphics.Bitmap;
-import android.graphics.BitmapFactory;
-import android.graphics.Canvas;
-import android.graphics.Color;
-import android.graphics.Paint;
-import android.graphics.Point;
-import android.net.Uri;
 import android.os.Bundle;
-import android.view.Display;
 import android.view.View;
-import android.view.ViewGroup;
 import android.view.Window;
-import android.view.View.OnClickListener;
-import android.view.WindowManager;
 import android.widget.AdapterView;
-import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.LinearLayout;

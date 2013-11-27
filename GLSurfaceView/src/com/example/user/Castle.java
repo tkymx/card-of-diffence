@@ -1,7 +1,5 @@
 package com.example.user;
 
-import com.example.glsurfaceview.Const;
-import com.example.glsurfaceview.R;
 import com.example.glsurfaceview.Sprite;
 
 /**

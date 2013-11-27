@@ -3,10 +3,7 @@ package com.example.user;
 import java.util.LinkedList;
 
 import com.example.glsurfaceview.Const;
-import com.example.glsurfaceview.Const.SpriteType;
-import com.example.glsurfaceview.R;
 import com.example.glsurfaceview.Sprite;
-import com.example.glsurfaceview.SpriteAnimation;
 
 /*
  * HPBar‚Ì•\¦‚ğs‚¤B

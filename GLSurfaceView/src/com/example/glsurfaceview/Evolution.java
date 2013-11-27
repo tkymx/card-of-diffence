@@ -1,17 +1,19 @@
 package com.example.glsurfaceview;
 
 import com.example.data.DataBase;
-import com.example.scene.GameScene;
+import com.example.user.Charactor;
 
 public class Evolution {
 	private int evolutionNum;
 	private static final int evolutionMax = 5;
-	private static final int evolutinScore = 5000;
+	private static final int evolutinScore = 500;
+	private static final int colorChangeTime = 50;
 	private Button evolutionButton;
-	private float[] main, sub;
 	private int colorTime;
-	private boolean isTouch;
+	private boolean isEvolution;
+	private Score score;
 	
+	// コンストラクタ
 	public Evolution()
 	{
 		int w = MainActivity.width;
@@ -19,27 +21,19 @@ public class Evolution {
 		
 		colorTime = 0;
 		
-		isTouch = false;
-		
-		main = new float[]{ 1.0f, 1.0f, 1.0f, 1.0f };
-		sub = new float[]{ 1.0f, 1.0f, 0.0f, 1.0f };
+		isEvolution = false;
 		
 		evolutionNum = 0;
-		evolutionButton = Button.Create(0, h / 10, w / 10, h / 20, R.drawable.image4);
+		evolutionButton = Button.Create(0, h / 6, w / 9, h / 15, R.drawable.evolutionbutton);
+		evolutionButton.texture.SetColor(0.2f, 0.2f, 0.2f, 1.0f);
 	}
 	
-	public void evolutionCard()
-	{
-		if( evolutionNum > 0 )
-		{
-			evolutionNum--;
-		}
-	}
-	
+	// 更新
 	public void Update()
 	{
-		Score score = DataBase.getPresentScore();
+		score = DataBase.getPresentScore();
 		int scoreNum = score.getScore();
+		scoreNum += 100;
 		
 		if( ( scoreNum % evolutinScore ) == 0 )
 		{
@@ -54,38 +48,51 @@ public class Evolution {
 		if( evolutionNum > 0 )
 		{
 			// タッチされていないとき
-			if( !isTouch )
+			if( !isEvolution )
 			{
 				// 一定時間たったとき
-				if( ( colorTime % 60 ) == 0 )
+				if( ( colorTime % colorChangeTime ) == 0 )
 				{
-					if( ( colorTime % 120 ) == 0 )
+					if( ( colorTime % ( colorChangeTime * 2 ) ) == 0 )
 					{
-						evolutionButton.texture.SetColor(sub[0], sub[1], sub[2], sub[3]);
+						evolutionButton.texture.SetColor(1.0f, 1.0f, 0.0f, 1.0f);
 					}
 					else
 					{
-						evolutionButton.texture.SetColor(main[0], main[1], main[2], main[3]);
+						evolutionButton.texture.SetColor(1.0f, 1.0f, 1.0f, 1.0f);
 					}
 				}
 			}
 			else
 			{
-				evolutionButton.texture.SetColor(sub[0], sub[1], sub[2], sub[3]);
+				evolutionButton.texture.SetColor(1.0f, 1.0f, 0.0f, 1.0f);
 			}
 			
 			// タッチされたとき
 			if( evolutionButton.IsTouch() )
 			{
-				isTouch = isTouch^true;
+				isEvolution = isEvolution^true;
 			}
 			
 			colorTime++;
 		}
 		else
 		{
-			evolutionButton.texture.SetColor(main[0], main[1], main[2], main[3]);
+			evolutionButton.texture.SetColor(0.2f, 0.2f, 0.2f, 1.0f);
 			colorTime = 0;
 		}
+	}
+	
+	// 進化を設定
+	public void SetEvolution( Charactor charactor )
+	{
+		//charactor.ChangePram(1.2f, 1.1f, 0);
+		evolutionNum--;
+	}
+	
+	// 進化できるかのフラグ
+	public boolean IsEvolution()
+	{
+		return isEvolution;
 	}
 }

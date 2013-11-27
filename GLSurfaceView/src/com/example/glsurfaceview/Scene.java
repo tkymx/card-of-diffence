@@ -43,7 +43,7 @@ public abstract class Scene {
 				LinkedList<Sprite> list = Sprite.spriteList.get(i);
 				
 				// リストに登録されているシーンの数分ループ
-				for( int j = 0;list.size()>j; j++ )
+				for( int j = 0; j < list.size(); j++ )
 				{
 					// 使用中のとき
 					if( list.get(j).getDelete() == true )
@@ -52,6 +52,8 @@ public abstract class Scene {
 						
 						// リストからはずす
 						list.remove(sp);
+						
+						j--;
 						
 						if( list.get(i) == list.getLast() )
 						{

@@ -2,13 +2,7 @@ package com.example.data;
 
 import java.util.HashMap;
 
-import android.app.ApplicationErrorReport.CrashInfo;
-
 import com.example.user.Card;
-import com.example.user.DamageMagicCard;
-import com.example.user.DamageTrapCard;
-import com.example.user.MagicCard;
-import com.example.user.MonsterCard;
 
 /**
  * 

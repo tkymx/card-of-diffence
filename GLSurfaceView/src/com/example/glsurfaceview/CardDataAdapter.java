@@ -61,7 +61,6 @@ package com.example.glsurfaceview;
 import java.util.List;
 
 import com.example.data.CardInformation;
-import com.example.user.Card;
 
 import android.content.Context;
 import android.view.LayoutInflater;

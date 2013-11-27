@@ -164,21 +164,21 @@ public class Sprite {
 	}
 	
 	// ‰Šú‰»ˆ—
-		public void Init( float left, float top, float width, float height, int id, float[] UV, int SpriteType )
-		{
-			// •‚ÌŠi”[
-			m_width = width;
-			m_height = height;
-					
-			float[] vertexs = transToVertex(new Vector3( left, top, 0.0f ));
-			
-			vertexBuffer = new VertexBuffer( vertexs );
-			texture = new Texture( id, UV );
-			appear( SpriteType );
-			
-			bUse = true;
-			isDelete = false;
-		}
+	public void Init( float left, float top, float width, float height, int id, float[] UV, int SpriteType )
+	{
+		// •‚ÌŠi”[
+		m_width = width;
+		m_height = height;
+				
+		float[] vertexs = transToVertex(new Vector3( left, top, 0.0f ));
+		
+		vertexBuffer = new VertexBuffer( vertexs );
+		texture = new Texture( id, UV );
+		appear( SpriteType );
+		
+		bUse = true;
+		isDelete = false;
+	}
 	
 	// Œãˆ—
 	public void Uninit()

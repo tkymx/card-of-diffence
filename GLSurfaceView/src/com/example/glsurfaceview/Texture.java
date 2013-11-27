@@ -43,6 +43,8 @@ public class Texture {
 			
 			// IDの保存
 			ID = id;
+			
+			isBind = false;
 		}
 		else
 		{
@@ -55,13 +57,17 @@ public class Texture {
 			// 色の設定
 			texColor = t.GetColor();
 			
+			// テクスチャバッファの取得
+			texBuffer = t.GetTextureBuffer();
+			
 			// IDの取得
 			ID = t.GetID();
+			
+			isBind = true;
 		}
 		
 		// テクスチャのUV座標の生成
 		texUV = Common.FloatToBuffer( UV );
-		isBind = false;
 	}
 	
 	// コンストラクタ
@@ -171,6 +177,12 @@ public class Texture {
     {
     	return texBuffer;
     }
+    
+    // テクスチャのセット
+    public void SetTextureBuffer( int tex )
+    {
+    	texBuffer[0] = tex;
+    }
 
     // バインド状況取得
     public boolean GetBind()
@@ -214,5 +226,49 @@ public class Texture {
     public int GetID()
     {
     	return ID;
+    }
+    
+    // IDのセット
+    public void SetID( int id )
+    {
+    	boolean haveTextue = TextureManager.haveTexture(id);
+		
+		// テクスチャがつくられていないとき
+		if( haveTextue == false )
+		{			
+			options.inScaled = false;
+			
+			float color[] = { 1.0f, 1.0f, 1.0f, 1.0f };
+			
+			// 画像の生成
+			texture = BitmapFactory.decodeResource( OpenGLSurfaceView.c.getResources(), id, options );
+			
+			// 色の設定
+			texColor = color;
+			
+			// テクスチャをリストに追加
+			TextureManager.AddTexture(id, this);
+			
+			// IDの保存
+			ID = id;
+			
+			isBind = false;
+		}
+		else
+		{
+			// テクスチャの取得
+			Texture t = TextureManager.GetTexture(id);
+			
+			// 画像の取得
+			texture = t.GetBitmap();
+			
+			// テクスチャバッファの取得
+			texBuffer = t.GetTextureBuffer();
+			
+			// IDの取得
+			ID = t.GetID();
+			
+			isBind = true;
+		}
     }
 }

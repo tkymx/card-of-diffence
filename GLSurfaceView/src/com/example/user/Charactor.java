@@ -14,6 +14,7 @@ public abstract class Charactor extends SpriteAnimation {
 	enum Charactor_State{ WALK_STATE , ATTACK_STATE , ATTACK_AFTER_STATE };
 	
 	private int lineNum;
+	private boolean isEvolution;
 		
 	//‘Ì—Í‚âUŒ‚—Í
 	int value_hp;
@@ -88,7 +89,8 @@ public abstract class Charactor extends SpriteAnimation {
 		walkTexture = new Texture(walk_id);
 		attackBeforeTexture = new Texture(attak_before_id);
 		attackAfterTexture = new Texture(attak_after_id);
-		
+	
+		isEvolution = true;
 	}
 	
 	// ‰Šú‰»ˆ—
@@ -325,4 +327,20 @@ public abstract class Charactor extends SpriteAnimation {
 		return lineNum;
 	}
 
+	// i‰»
+	public void ChangePram( float attackMulti, float moveMulti, int texId )
+	{
+		value_attack *= attackMulti;
+		value_moveSpeed *= moveMulti;
+		texture.SetID(texId);
+		
+		// i‰»‚Å‚«‚È‚­‚·‚é
+		isEvolution = false;
+	}
+	
+	// i‰»‚Å‚«‚é‚©
+	public boolean IsEvolution()
+	{
+		return isEvolution;
+	}
 }

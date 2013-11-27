@@ -3,8 +3,6 @@ package com.example.user;
 import com.example.data.DataBase;
 import com.example.glsurfaceview.Const;
 import com.example.glsurfaceview.R;
-import com.example.glsurfaceview.SceneManager;
-import com.example.glsurfaceview.Sprite;
 
 /**
  * 
