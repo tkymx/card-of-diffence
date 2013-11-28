@@ -120,7 +120,7 @@ public class EnemyAppear extends Sprite {
 	public static Enemy CreateEnemy( int liney , String playername )
 	{
 		//–¼‘O‚Å‰æ‘œ‚ğ”»’f‚·‚é
-		int id = R.drawable.walk_enemy;
+		int id = CharactorInfomation.GetCharactorInformation(playername).getWalk_id();
 		//“Gî•ñ
 		Enemy enemy = CharactorInfomation.GetEnemyFromName(playername);
 		

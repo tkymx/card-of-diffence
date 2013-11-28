@@ -176,26 +176,26 @@ public class DataBase {
 		//キャラクタの追加を行う
 		///////////////////////////////////////		
 		CharactorInfomation.AddCharactor(
-				CharactorInfomation.Create("monster1","monsterCard1",10,1,1, 2, R.drawable.walk, R.drawable.image1, R.drawable.image2 ) );
+				CharactorInfomation.Create("monster1","monsterCard1",10,1,1, 2, R.drawable.player1_w, R.drawable.player1_w, R.drawable.player1_w ) );
 		CharactorInfomation.AddCharactor(
-				CharactorInfomation.Create("monster2","monsterCard2",10,1,1, 2, R.drawable.walk, R.drawable.image1, R.drawable.image2 ) );
+				CharactorInfomation.Create("monster2","monsterCard2",10,1,1, 2, R.drawable.player2_w, R.drawable.player2_w, R.drawable.player2_w  ) );
 		CharactorInfomation.AddCharactor(
-				CharactorInfomation.Create("monster3","monsterCard3",10,1,1, 2, R.drawable.walk, R.drawable.image1, R.drawable.image2 ) );
+				CharactorInfomation.Create("monster3","monsterCard3",10,1,1, 2, R.drawable.player3_w, R.drawable.player3_w, R.drawable.player3_w  ) );
 		CharactorInfomation.AddCharactor(
-				CharactorInfomation.Create("monster4","monsterCard4",10,1,1, 2, R.drawable.walk, R.drawable.image1, R.drawable.image2 ) );
+				CharactorInfomation.Create("monster4","monsterCard4",10,1,1, 2, R.drawable.player4_w, R.drawable.player4_w, R.drawable.player4_w  ) );
 		CharactorInfomation.AddCharactor(
-				CharactorInfomation.Create("monster5","monsterCard5",10,1,1, 2, R.drawable.walk, R.drawable.image1, R.drawable.image2 ) );
+				CharactorInfomation.Create("monster5","monsterCard5",10,1,1, 2, R.drawable.player5_w, R.drawable.player5_w, R.drawable.player5_w  ) );
 		CharactorInfomation.AddCharactor(
-				CharactorInfomation.Create("monster6","monsterCard6",10,1,1, 2, R.drawable.walk, R.drawable.image1, R.drawable.image2 ) );
+				CharactorInfomation.Create("monster6","monsterCard6",10,1,1, 2, R.drawable.player6_w, R.drawable.player6_w, R.drawable.player6_w  ) );
 		CharactorInfomation.AddCharactor(
-				CharactorInfomation.Create("monster7","monsterCard7",10,1,1, 2, R.drawable.walk, R.drawable.image1, R.drawable.image2 ) );
+				CharactorInfomation.Create("monster7","monsterCard7",10,1,1, 2, R.drawable.player7_w, R.drawable.player7_w, R.drawable.player7_w  ) );
 		CharactorInfomation.AddCharactor(
-				CharactorInfomation.Create("monster8","monsterCard8",10,1,1, 2, R.drawable.walk, R.drawable.image1, R.drawable.image2 ) );
+				CharactorInfomation.Create("monster8","monsterCard8",10,1,1, 2, R.drawable.player8_w, R.drawable.player8_w, R.drawable.player8_w  ) );
 		CharactorInfomation.AddCharactor(
-				CharactorInfomation.Create("monster9","monsterCard9",10,1,1, 2, R.drawable.walk, R.drawable.image1, R.drawable.image2 ) );
+				CharactorInfomation.Create("monster9","monsterCard9",10,1,1, 2, R.drawable.player9_w, R.drawable.player9_w, R.drawable.player9_w  ) );
 		
 		CharactorInfomation.AddCharactor(
-				CharactorInfomation.Create("enemy1","enemyCard1",10,1,1, 2, R.drawable.walk_enemy, R.drawable.image1, R.drawable.image2 ) );
+				CharactorInfomation.Create("enemy1","死者の魂が骸骨に乗り移った姿、魂のレベルで強さが変化する",10,1,1, 2, R.drawable.enemy1_w, R.drawable.enemy1_ab, R.drawable.enemy1_af ) );
 		
 
 		///////////////////////////////////////

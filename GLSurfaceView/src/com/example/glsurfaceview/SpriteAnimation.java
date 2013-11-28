@@ -58,6 +58,18 @@ public class SpriteAnimation extends Sprite {
 	{
 		super.SetTexture(tex);
 		
+		//インデックスを消す
+		
+		animeUV[0] = 0.0f;
+		animeUV[1] = 0.0f;
+		
+		//初めにすぐ次へ行かないため
+		animeNowTime = 1;		
+		
+		makeUV();
+		
+		texture.SetUV(UV);
+		
 		//終了を消す
 		isEnd = false;
 	}	
