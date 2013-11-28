@@ -229,7 +229,6 @@ public class Sprite {
     	//テクスチャがあったら描画
     	if( texture != null )
     	{
-    	
 	    	FloatBuffer buffer = vertexBuffer.GetVertexBuffer();
 	    	FloatBuffer UV = texture.GetUV();
 	    	float[] color = texture.GetColor();

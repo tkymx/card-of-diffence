@@ -6,8 +6,12 @@ import android.content.Intent;
 
 import com.example.glsurfaceview.BGMSound;
 import com.example.glsurfaceview.BGMSound.SOUND;
+import com.example.glsurfaceview.Const.SpriteType;
+import com.example.glsurfaceview.MainActivity;
 import com.example.glsurfaceview.OpenGLSurfaceView;
+import com.example.glsurfaceview.R;
 import com.example.glsurfaceview.Scene;
+import com.example.glsurfaceview.Sprite;
 import com.example.glsurfaceview.Touch;
 
 public class TitleScene extends Scene {
@@ -15,7 +19,7 @@ public class TitleScene extends Scene {
 	@Override
 	public void Init() {
 		// TODO Auto-generated method stub
-
+		Sprite.Create(0, 0, MainActivity.width, MainActivity.height, R.drawable.bg, SpriteType.TYPE_OTHER.getValue());
 	}
 
 	@Override

@@ -53,12 +53,12 @@ public abstract class Scene {
 						// ƒŠƒXƒg‚©‚ç‚Í‚¸‚·
 						list.remove(sp);
 						
-						j--;
-						
-						if( list.get(i) == list.getLast() )
+						if( list.get(j) == list.getLast() )
 						{
 							break;
 						}
+						
+						j--;
 					}
 				}
 			}
