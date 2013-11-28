@@ -1,11 +1,6 @@
 package com.example.user;
-import com.example.glsurfaceview.Const;
-import com.example.glsurfaceview.R;
-import com.example.glsurfaceview.SpriteAnimation;
-import com.example.glsurfaceview.OpenGLSurfaceView;
-import com.example.glsurfaceview.Sprite;
-import com.example.user.Charactor.*;
 
+import com.example.glsurfaceview.SpriteAnimation;
 
 //城が崩壊したら崩壊のエフェクトを付ける
 

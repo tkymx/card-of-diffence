@@ -3,8 +3,8 @@ package com.example.user;
 import com.example.glsurfaceview.Const;
 import com.example.glsurfaceview.R;
 import com.example.glsurfaceview.Sprite;
-import com.example.glsurfaceview.SpriteAnimation;
 import com.example.glsurfaceview.Vector3;
+import com.example.scene.GameScene;
 
 public class PlayerHPBar extends Sprite {
 
@@ -63,6 +63,17 @@ public class PlayerHPBar extends Sprite {
 		//キャラクタのHPに応じて大きさを変更
 		bar.setM_width(barLength*( (float)charactor.getValue_hp() / (float)charactor.getValue_maxhp() ));
 		bar.Translate(new Vector3());
+		
+		// HPバーがタッチされたとき
+		if( IsTouch() )
+		{
+			// 進化できるとき
+			if( GameScene.evolution.IsEvolution() && charactor.IsEvolution() )
+			{
+				// キャラクターの進化
+				GameScene.evolution.SetEvolution(charactor);
+			}
+		}
 		
 		if( charactor.isDead() )
 		{

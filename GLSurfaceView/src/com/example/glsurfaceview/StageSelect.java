@@ -1,24 +1,13 @@
 package com.example.glsurfaceview;
 
-import java.util.Random;
-
 import com.example.data.DataBase;
 import com.example.data.StageInformaion;
-import com.example.glsurfaceview.DeckSelect.SampleClickListener;
-import com.example.user.Stage;
-
 
 import android.app.Activity;
-import android.content.Context;
 import android.content.Intent;
-import android.graphics.Canvas;
-import android.graphics.Color;
-import android.graphics.Paint;
 import android.graphics.Point;
-import android.net.Uri;
 import android.os.Bundle;
 import android.view.Display;
-import android.view.Gravity;
 import android.view.MotionEvent;
 import android.view.View;
 import android.view.Window;

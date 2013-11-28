@@ -1,12 +1,5 @@
 package com.example.user;
 
-import java.util.ArrayList;
-import java.util.LinkedList;
-
-import com.example.glsurfaceview.Const;
-import com.example.glsurfaceview.Sprite;
-
-
 public abstract class MagicCard extends Card {
 		
 	

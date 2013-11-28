@@ -16,7 +16,7 @@ public class GameOverScene extends Scene {
 	public void Init() {
 		
 		//”wŒi‰æ‘œ
-		Sprite.Create(0, 0, Const.rx(1), Const.ry(1) , R.drawable.pause_base, SpriteType.TYPE_BG.getValue()).GetTexture().SetColor(1, 0, 0, 1);
+		Sprite.Create(0, 0, Const.rx(1), Const.ry(1) , R.drawable.gameover, SpriteType.TYPE_BG.getValue());
 
 		
 	}

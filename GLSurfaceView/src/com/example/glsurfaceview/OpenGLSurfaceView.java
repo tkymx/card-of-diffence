@@ -2,7 +2,6 @@ package com.example.glsurfaceview;
 
 import com.example.data.DataBase;
 import android.content.Context;
-import android.content.res.Resources.Theme;
 import android.opengl.GLSurfaceView;
 import android.view.MotionEvent;
 

@@ -17,7 +17,7 @@ public class ClearScene extends Scene {
 	public void Init() {
 		
 		//背景画像
-		Sprite.Create(0, 0, Const.rx(1), Const.ry(1) , R.drawable.pause_base, SpriteType.TYPE_BG.getValue()).GetTexture().SetColor(1, 1, 0, 1);
+		Sprite.Create(0, 0, Const.rx(1), Const.ry(1) , R.drawable.clear, SpriteType.TYPE_BG.getValue());
 
 		//クリア後はステージ数の更新を行う
 		DataBase.setPresentStageNum( DataBase.getPresentStage().getClear_stage_number() ); 

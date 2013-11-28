@@ -1,13 +1,9 @@
 package com.example.user;
 
-import java.util.ArrayList;
-import java.util.LinkedList;
 import java.util.Vector;
 
 import com.example.glsurfaceview.Const.SpriteType;
 import com.example.glsurfaceview.Sprite;
-import com.example.glsurfaceview.Texture;
-import com.example.glsurfaceview.Touch;
 
 /**
  * 
