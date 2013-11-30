@@ -6,6 +6,7 @@ import com.example.glsurfaceview.Const;
 import com.example.glsurfaceview.Sprite;
 import com.example.glsurfaceview.SpriteAnimation;
 import com.example.glsurfaceview.Texture;
+import com.example.glsurfaceview.TextureManager;
 import com.example.glsurfaceview.Vector3;
 
 public abstract class Charactor extends SpriteAnimation {
@@ -328,11 +329,14 @@ public abstract class Charactor extends SpriteAnimation {
 	}
 
 	// êiâª
-	public void ChangePram( float attackMulti, float moveMulti, int texId )
+	public void ChangePram( float attackMulti, float moveMulti, int work, int aBefor, int aAfter )
 	{
 		value_attack *= attackMulti;
 		value_moveSpeed *= moveMulti;
-		texture.SetID(texId);
+		walkTexture = TextureManager.GetTexture(work);
+		attackBeforeTexture = TextureManager.GetTexture(aBefor);
+		attackAfterTexture = TextureManager.GetTexture(aAfter);
+		texture.SetID(work);
 		
 		// êiâªÇ≈Ç´Ç»Ç≠Ç∑ÇÈ
 		isEvolution = false;

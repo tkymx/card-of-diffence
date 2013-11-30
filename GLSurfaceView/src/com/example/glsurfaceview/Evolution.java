@@ -126,7 +126,7 @@ public class Evolution {
 	// êiâªÇê›íË
 	public void SetEvolution( Charactor charactor )
 	{
-		charactor.ChangePram(1.5f, 1.5f, R.drawable.player1_w);
+		charactor.ChangePram(1.5f, 1.5f, R.drawable.player1_w, R.drawable.player1_w, R.drawable.player1_w);
 		evolutionNum--;
 		isDirection = true;
 		
