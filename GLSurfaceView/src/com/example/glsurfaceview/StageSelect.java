@@ -111,23 +111,23 @@ class SampleClickListener implements android.view.View.OnClickListener{
 	{
 		if(v.equals(right))
 		{
-			TranslateAnimation inanim = new TranslateAnimation(-sv[0].getWidth(),0,0,0);
-			TranslateAnimation outanim = new TranslateAnimation(0,sv[0].getWidth(),0,0);
-			inanim.setDuration(100);
-			outanim.setDuration(100);
-			vf.setInAnimation(inanim);
-			vf.setOutAnimation(outanim);
-			vf.showPrevious();
-		}
-		else if(v.equals(left))
-		{
 			TranslateAnimation inanim = new TranslateAnimation(sv[0].getWidth(),0,0,0);
 			TranslateAnimation outanim = new TranslateAnimation(0,-sv[0].getWidth(),0,0);
 			inanim.setDuration(100);
 			outanim.setDuration(100);
 			vf.setInAnimation(inanim);
 			vf.setOutAnimation(outanim);
-			vf.showNext();			
+			vf.showNext();
+		}
+		else if(v.equals(left))
+		{
+			TranslateAnimation inanim = new TranslateAnimation(-sv[0].getWidth(),0,0,0);
+			TranslateAnimation outanim = new TranslateAnimation(0,sv[0].getWidth(),0,0);
+			inanim.setDuration(100);
+			outanim.setDuration(100);
+			vf.setInAnimation(inanim);
+			vf.setOutAnimation(outanim);
+			vf.showPrevious();			
 		}
 		else if( v.equals(deck) )
 		{
