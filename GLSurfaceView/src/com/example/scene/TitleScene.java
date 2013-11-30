@@ -3,23 +3,31 @@ package com.example.scene;
 import javax.microedition.khronos.opengles.GL10;
 
 import android.content.Intent;
-
 import com.example.glsurfaceview.BGMSound;
 import com.example.glsurfaceview.BGMSound.SOUND;
+import com.example.glsurfaceview.Button;
 import com.example.glsurfaceview.Const.SpriteType;
 import com.example.glsurfaceview.MainActivity;
 import com.example.glsurfaceview.OpenGLSurfaceView;
 import com.example.glsurfaceview.R;
 import com.example.glsurfaceview.Scene;
 import com.example.glsurfaceview.Sprite;
-import com.example.glsurfaceview.Touch;
 
 public class TitleScene extends Scene {
 
+	private Button playButton;
+	
 	@Override
 	public void Init() {
 		// TODO Auto-generated method stub
-		Sprite.Create(0, 0, MainActivity.width, MainActivity.height, R.drawable.bg, SpriteType.TYPE_OTHER.getValue());
+		int w = MainActivity.width;
+		int h = MainActivity.height;
+		
+		Sprite.Create(0, 0, w, h, R.drawable.bg, SpriteType.TYPE_OTHER.getValue());
+		Sprite.Create(w/10, h-h/4, w/6*5, h/4, R.drawable.titlelogo, SpriteType.TYPE_TEXT.getValue());
+		playButton = Button.Create(MainActivity.width/3, MainActivity.height/3, 
+				MainActivity.width/3, MainActivity.height/3, 
+				R.drawable.playbutton);
 	}
 
 	@Override
@@ -33,9 +41,7 @@ public class TitleScene extends Scene {
 
 		super.Update();		
 		
-		Touch touch = Touch.getInstance();
-		
-		if( touch.IsTouch() )
+		if( playButton.IsTouch() )
 		{
 			Intent intent = new Intent();
 			intent.setClass( OpenGLSurfaceView.c , com.example.glsurfaceview.StageSelect.class);

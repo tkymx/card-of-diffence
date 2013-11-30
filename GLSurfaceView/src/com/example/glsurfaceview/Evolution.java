@@ -15,8 +15,8 @@ public class Evolution {
 	private Score score;
 	private Sprite base, direction;
 	private boolean isDirection;
-	private final int directionTime = 120;
-	private final int directionMove = 80;
+	private final int directionTime = 100;
+	private final int directionMove = 50;
 	private final float moveX = MainActivity.width / directionMove;
 	private int directionNowTime;
 	
@@ -33,13 +33,13 @@ public class Evolution {
 		isDirection = false;
 		
 		evolutionNum = 0;
-		evolutionButton = Button.Create(0, h / 6, w / 9, h / 15, R.drawable.evolutionbutton);
+		evolutionButton = Button.Create(w/8, h/2 + h/3.8f, w / 9, h / 12, R.drawable.evolutionbutton);
 		evolutionButton.texture.SetColor(0.2f, 0.2f, 0.2f, 1.0f);
 		
 		base = Sprite.Create(0, h/2, w, h/9, R.drawable.groundwork, SpriteType.TYPE_TEXT.getValue());
 		base.texture.SetColor(0.2f, 0.2f, 0.2f, 0);
 		
-		direction = Sprite.Create(-80, h/2, w/9, h/9, R.drawable.evolution, SpriteType.TYPE_TEXT.getValue());
+		direction = Sprite.Create(-150.0f, h/2, w/9, h/9, R.drawable.evolution, SpriteType.TYPE_TEXT.getValue());
 	}
 	
 	// 更新
@@ -106,7 +106,7 @@ public class Evolution {
 	// 進化を設定
 	public void SetEvolution( Charactor charactor )
 	{
-		//charactor.ChangePram(1.2f, 1.1f, R.drawable.image4);
+		charactor.ChangePram(1.25f, 1.4f, R.drawable.player1_w);
 		evolutionNum--;
 		isDirection = true;
 		
@@ -122,7 +122,7 @@ public class Evolution {
 	// 進化演出
 	private void EvolutionDirection()
 	{
-		if( ( directionNowTime < 40 ) || ( directionNowTime > 80 ) )
+		if( ( directionNowTime < 30 ) || ( directionNowTime > 70 ) )
 		{
 			direction.Translate( new Vector3(moveX, 0, 0) );
 		}
@@ -132,7 +132,7 @@ public class Evolution {
 		if( directionNowTime > directionTime )
 		{
 			base.texture.SetColor(0.2f, 0.2f, 0.2f, 0);
-			direction.setTrans(new Vector3( -80.0f, MainActivity.height/2.0f, 0.0f ));
+			direction.setTrans(new Vector3( -150.0f, MainActivity.height/2.0f, 0.0f ));
 			
 			directionNowTime = 0;
 			

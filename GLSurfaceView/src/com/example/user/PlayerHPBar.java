@@ -27,13 +27,13 @@ public class PlayerHPBar extends Sprite {
 	private PlayerHPBar( Charactor chara ) {
 
 		//背景
-		Init(Const.rx(0.05), Const.ry(1), Const.rw(0.15), Const.rh(0.05), R.drawable.image1 , Const.SpriteType.TYPE_TEXT.getValue());
+		Init(Const.rx(0.05), Const.ry(1), Const.rw(0.15), Const.rh(0.05), R.drawable.barbase , Const.SpriteType.TYPE_TEXT.getValue());
 		//バー
-		bar = Sprite.Create(Const.rx(0.05), Const.ry(1), Const.rw(0.15), Const.rh(0.05), R.drawable.image2 , Const.SpriteType.TYPE_TEXT.getValue());
+		bar = Sprite.Create(Const.rx(0.05), Const.ry(1), Const.rw(0.15), Const.rh(0.05), R.drawable.barbase , Const.SpriteType.TYPE_TEXT.getValue());
 	
 		//色の指定
-		this.GetTexture().SetColor(1.0f, 1.0f, 1.0f, 0.7f);
-		bar.GetTexture().SetColor(1.0f, 1.0f, 1.0f, 0.7f);
+		this.GetTexture().SetColor(0.0f, 0.0f, 0.0f, 0.7f);
+		bar.GetTexture().SetColor(1.0f, 0.7f, 0.0f, 1.0f);
 		
 		//長さを追加
 		barLength = (int) bar.GetWidth();
@@ -72,6 +72,7 @@ public class PlayerHPBar extends Sprite {
 			{
 				// キャラクターの進化
 				GameScene.evolution.SetEvolution(charactor);
+				bar.GetTexture().SetColor(1.0f, 1.0f, 0, 1.0f);
 			}
 		}
 		

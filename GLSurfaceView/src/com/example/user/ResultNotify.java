@@ -137,8 +137,10 @@ public class ResultNotify extends Sprite {
 					int id = CardInformation.GetCardInformaionFromName( DataBase.GetMyDeck(i) ).getCard_id();
 					//結果の表示
 					cardGraph[i] 		= Sprite.Create(x[i], y[i], w , h , id, Const.SpriteType.TYPE_BUTTON.getValue() );
-					cardExplainback[i] 	= Sprite.Create(x[i] + w + Const.rw(0.01) , y[i] + h/2 - h/4 , bar_width , h/2 , R.drawable.image1, Const.SpriteType.TYPE_BUTTON.getValue() );
-					cardExplainBar[i] 	= Sprite.Create(x[i] + w + Const.rw(0.01) , y[i] + h/2 - h/4 ,  bar_width * ( (float)(explain[i] + addexplain[i] )/(float)explainMax[i] ) , h/2 , R.drawable.image2, Const.SpriteType.TYPE_BUTTON.getValue() );					
+					cardExplainback[i] 	= Sprite.Create(x[i] + w + Const.rw(0.01) , y[i] + h/2 - h/4 , bar_width , h/2 , R.drawable.barbase, Const.SpriteType.TYPE_BUTTON.getValue() );
+					cardExplainback[i].GetTexture().SetColor(1.0f, 1.0f, 1.0f, 1.0f);
+					cardExplainBar[i] 	= Sprite.Create(x[i] + w + Const.rw(0.01) , y[i] + h/2 - h/4 ,  bar_width * ( (float)(explain[i] + addexplain[i] )/(float)explainMax[i] ) , h/2 , R.drawable.barbase, Const.SpriteType.TYPE_BUTTON.getValue() );					
+					cardExplainBar[i].GetTexture().SetColor(0.0f, 1.0f, 0, 1.0f);
 				}
 				
 				//スコア
