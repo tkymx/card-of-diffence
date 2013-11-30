@@ -64,8 +64,6 @@ public class StageView extends View {
 		//ステージの設定
 		DataBase.setPresentStage(stage);
 		
-		//ゲームの開始
-		SceneManager.ChangeScene( SceneManager.gameKey );
 	}
 }
 

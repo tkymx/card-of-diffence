@@ -195,6 +195,8 @@ public class DataBase {
 		
 		CharactorInfomation.AddCharactor(
 				CharactorInfomation.Create("enemy1","死者の魂が骸骨に乗り移った姿、魂のレベルで強さが変化する",10,1,1, 2, R.drawable.enemy1_w, R.drawable.enemy1_ab, R.drawable.enemy1_af ) );
+		CharactorInfomation.AddCharactor(
+				CharactorInfomation.Create("dragon","死をも食らうドラゴン。誰一人として死に際を見たものはいない",20,2,1, 3, R.drawable.dragon, R.drawable.dragon, R.drawable.dragon ) );
 		
 
 		///////////////////////////////////////
@@ -238,9 +240,11 @@ public class DataBase {
 		CardInformation.SetCardInforation(
 				CardInformation.CreateCardInformation("magic",dmc,R.drawable.magic_card,1));		
 
-		//敵用のカード
+		//敵用のカード(敵は基本的にカードとはならないので、カードの画像はダミー)
 		CardInformation.SetCardInforation(
 				CardInformation.CreateCardInformation("enemy1",mc,R.drawable.moster_card_1,1));
+		CardInformation.SetCardInforation(
+				CardInformation.CreateCardInformation("dragon",mc,R.drawable.moster_card_1,1));
 		
 		
 		///////////////////////////////////////
@@ -287,11 +291,12 @@ public class DataBase {
 		//ステージの追加
 		///////////////////////////////////////		
 		String str[] = {"enemy1","enemy1","enemy1","enemy1","enemy1","enemy1","enemy1","enemy1","enemy1","enemy1","enemy1"};
+		String str2[] = {"enemy1","enemy1","enemy1","enemy1","enemy1","enemy1","enemy1","dragon","dragon","dragon","dragon"};
 		Stage stage[] = 
 		{
-			new Stage(R.drawable.game_start, R.drawable.map, R.drawable.enemy_castle , R.drawable.player_castle, 2, 1 , str),
-			new Stage(R.drawable.image1, R.drawable.effect, R.drawable.enemy_castle, R.drawable.player_castle, 3, 2 , str),
-			new Stage(R.drawable.image2, R.drawable.explain, R.drawable.enemy_castle, R.drawable.player_castle, 3, 3 , str)			
+			new Stage(R.drawable.stage1, R.drawable.map, R.drawable.enemy_castle , R.drawable.player_castle, 2, 1 , str),
+			new Stage(R.drawable.stage2, R.drawable.map, R.drawable.enemy_castle, R.drawable.player_castle, 3, 2 , str),
+			new Stage(R.drawable.stage3, R.drawable.map, R.drawable.enemy_castle, R.drawable.player_castle, 3, 3 , str2)			
 		};		
 		for(int i = 0;i<stage.length;i++)
 		{
