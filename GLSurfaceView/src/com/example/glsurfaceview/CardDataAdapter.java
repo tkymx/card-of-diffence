@@ -63,6 +63,8 @@ import java.util.List;
 import com.example.data.CardInformation;
 
 import android.content.Context;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -96,9 +98,13 @@ public class CardDataAdapter extends ArrayAdapter<String> {
 			 return convertView;
 		 }else{
 		 // CustomDataのデータをViewの各Widgetにセットする
+			 
+		 Bitmap bmp = BitmapFactory.decodeResource( getContext().getResources() , CardInformation.GetCardInformaionFromName(item).getCard_id());
+		 bmp = Bitmap.createScaledBitmap(bmp, Const.card_width, Const.card_height , false);		
+			 
 		 ImageView imageView;
 		 imageView = (ImageView)convertView.findViewById(R.id.image);
-		 imageView.setImageResource(CardInformation.GetCardInformaionFromName(item).getCard_id());
+		 imageView.setImageBitmap(bmp);
 		 TextView textView;
 		 textView = (TextView)convertView.findViewById(R.id.name);
 		 textView.setText(CardInformation.GetCardInformaionFromName(item).getName());

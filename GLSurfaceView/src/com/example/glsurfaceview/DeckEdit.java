@@ -9,6 +9,8 @@ import com.example.data.DataBase;
 import android.widget.Button;
 import android.app.Activity;
 import android.content.Intent;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.os.Bundle;
 import android.view.Gravity;
 import android.view.View;
@@ -71,7 +73,7 @@ public class DeckEdit extends Activity {
 		bottomParam = new LinearLayout.LayoutParams(Const.rx(0.95), Const.ry(0.1));
 		instructParam = new LinearLayout.LayoutParams(Const.rx(0.6), Const.ry(0.1));
 		backParam = new LinearLayout.LayoutParams(Const.rx(0.2), Const.ry(0.1));
-		imageParam = new LinearLayout.LayoutParams(Const.rx(0.1), Const.ry(0.25));
+		imageParam = new LinearLayout.LayoutParams(Const.card_width, Const.card_height);
 		
 		//イメージの間隔設定
 		imageParam.setMargins(Const.rx(0.05), Const.ry(0.05), 0, Const.ry(0.05));
@@ -91,23 +93,29 @@ public class DeckEdit extends Activity {
 			member[i] = new ImageView(this);
 			
 			String selectedCard = DataBase.GetMyDeck(i);
-			member[i].setImageResource(CardInformation.GetCardInformaionFromName(selectedCard).getCard_id());
+
+			//画像のリサイズ
+			Bitmap bmp = BitmapFactory.decodeResource(getResources(), CardInformation.GetCardInformaionFromName(selectedCard).getCard_id());
+			bmp = Bitmap.createScaledBitmap(bmp, Const.card_width, Const.card_height , false);
+			
+			member[i].setImageBitmap(bmp);
 			memberName[i] = CardInformation.GetCardInformaionFromName(selectedCard).getName();
 			
 			if(i<5)topRow.addView(member[i],imageParam);   //始めの5枚を上の段に
 			if(i>4)middleRow.addView(member[i],imageParam);//残りを下の段に表示
+
 			member[i].setOnClickListener(new SampleClickListener());
 		
 		}
 		back.setOnClickListener(new SampleClickListener());
 		
 		//テキストのサイズとか
-		title.setText("デッキ編集画面");
+//		title.setText("デッキ編集画面");
 		title.setTextSize(Const.rx(0.035));
-		instruct.setText("カードをタッチして、デッキを編集しよう！");
+//		instruct.setText("カードをタッチして、デッキを編集しよう！");
 		instruct.setTextSize(Const.rx(0.015));
 		back.setText("戻る");
-		back.setTextSize(Const.rx(0.02));
+		back.setTextSize(Const.rx(0.01));
 		
 		
 		
@@ -121,10 +129,10 @@ public class DeckEdit extends Activity {
 		bottomRow.addView(back,backParam);
 		
 		//バックの写真セット
-		ll.setBackgroundResource(R.drawable.background);
-		topRow.setBackgroundResource(R.drawable.explain);
-		middleRow.setBackgroundResource(R.drawable.explain);
-		instruct.setBackgroundResource(R.drawable.back);
+		ll.setBackgroundResource(R.drawable.back_deckselect);
+//		topRow.setBackgroundResource(R.drawable.explain);
+//		middleRow.setBackgroundResource(R.drawable.explain);
+//		instruct.setBackgroundResource(R.drawable.back);
 		
 	}
 	class SampleClickListener implements android.view.View.OnClickListener{

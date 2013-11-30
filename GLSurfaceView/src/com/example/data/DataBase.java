@@ -175,9 +175,9 @@ public class DataBase {
 		//キャラクタの追加を行う
 		///////////////////////////////////////		
 		CharactorInfomation.AddCharactor(
-				CharactorInfomation.Create("monster1","monsterCard1",10,1,1, 2, R.drawable.player1_w, R.drawable.player1_w, R.drawable.player1_w ) );
+				CharactorInfomation.Create("レッドセイバー","伝説の戦士。赤き聖剣の名で魔王討伐に乗り出す。その後は聖剣の魔力に取り憑かれ魔王となる。",20,2,1, 2, R.drawable.player1_w, R.drawable.player1_w, R.drawable.player1_w ) );
 		CharactorInfomation.AddCharactor(
-				CharactorInfomation.Create("monster2","monsterCard2",10,1,1, 2, R.drawable.player2_w, R.drawable.player2_w, R.drawable.player2_w  ) );
+				CharactorInfomation.Create("ジン","疾風の戦士。戦場をかける速さはあまりに速く、その速さは音速をも超えるという、",10,1,1, 6, R.drawable.player2_w, R.drawable.player2_w, R.drawable.player2_w  ) );
 		CharactorInfomation.AddCharactor(
 				CharactorInfomation.Create("monster3","monsterCard3",10,1,1, 2, R.drawable.player3_w, R.drawable.player3_w, R.drawable.player3_w  ) );
 		CharactorInfomation.AddCharactor(
@@ -216,9 +216,9 @@ public class DataBase {
 		DamageTrapCard dtc = DamageTrapCard.CreateDamageTrapCard();
 		
 		CardInformation.SetCardInforation(
-				CardInformation.CreateCardInformation("monster1",mc,R.drawable.moster_card_1,2));
+				CardInformation.CreateCardInformation("レッドセイバー",mc,R.drawable.moster_card_1,2));
 		CardInformation.SetCardInforation(
-				CardInformation.CreateCardInformation("monster2",mc,R.drawable.moster_card_2,1));
+				CardInformation.CreateCardInformation("ジン",mc,R.drawable.moster_card_2,1));
 		CardInformation.SetCardInforation(
 				CardInformation.CreateCardInformation("monster3",mc,R.drawable.moster_card_3,1));
 		CardInformation.SetCardInforation(
@@ -247,8 +247,8 @@ public class DataBase {
 		//自分の保持しているカードの追加
 		///////////////////////////////////////
 
-		AddMyCards("monster1");
-		AddMyCards("monster2");
+		AddMyCards("レッドセイバー");
+		AddMyCards("ジン");
 		AddMyCards("monster3");
 		AddMyCards("monster4");
 		AddMyCards("monster5");
@@ -258,8 +258,8 @@ public class DataBase {
 		AddMyCards("monster9");
 		AddMyCards("trap");
 		AddMyCards("magic");
-		AddMyCards("monster1");
-		AddMyCards("monster2");
+		AddMyCards("レッドセイバー");
+		AddMyCards("ジン");
 		AddMyCards("monster3");
 		AddMyCards("monster4");
 		AddMyCards("monster5");
