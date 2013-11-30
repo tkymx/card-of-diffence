@@ -19,6 +19,8 @@ public class Evolution {
 	private final int directionMove = 50;
 	private final float moveX = MainActivity.width / directionMove;
 	private int directionNowTime;
+	private int repeat;
+	public static Sprite touchCursol;
 	
 	// コンストラクタ
 	public Evolution()
@@ -28,6 +30,7 @@ public class Evolution {
 		
 		colorTime = 0;
 		directionNowTime = 0;
+		repeat = 1;
 		
 		isEvolution = false;
 		isDirection = false;
@@ -40,21 +43,27 @@ public class Evolution {
 		base.texture.SetColor(0.2f, 0.2f, 0.2f, 0);
 		
 		direction = Sprite.Create(-150.0f, h/2, w/9, h/9, R.drawable.evolution, SpriteType.TYPE_TEXT.getValue());
+		
+		touchCursol = Sprite.Create(w/10, h/3, w/10, w/10, R.drawable.touchcursol, SpriteType.TYPE_TEXT.getValue());
+		touchCursol.texture.SetColor(0, 0, 0, 0);
 	}
 	
 	// 更新
 	public void Update()
 	{
 		score = DataBase.getPresentScore();
-		int scoreNum = score.getScore();
+		int scoreNum = score.getScore();		
 		scoreNum += 100;
 		
-		if( ( scoreNum % evolutinScore ) == 0 )
+		touchCursol.texture.SetColor(0, 0, 0, 0);
+		
+		if( ( scoreNum % ( evolutinScore * repeat ) ) == 0 )
 		{
 			// 進化できる最大数でないとき
 			if( evolutionNum <= evolutionMax )
 			{
 				evolutionNum++;
+				repeat++;
 			}
 		}
 		
@@ -67,37 +76,48 @@ public class Evolution {
 		// 進化できるとき
 		if( evolutionNum > 0 )
 		{
-			// タッチされていないとき
-			if( !isEvolution )
+			if( Sprite.spriteList.get(SpriteType.TYPE_PLAYER.getValue()).size() != 0 )
 			{
-				// 一定時間たったとき
-				if( ( colorTime % colorChangeTime ) == 0 )
+				// タッチされていないとき
+				if( !isEvolution )
 				{
-					if( ( colorTime % ( colorChangeTime * 2 ) ) == 0 )
+					// 一定時間たったとき
+					if( ( colorTime % colorChangeTime ) == 0 )
 					{
-						evolutionButton.texture.SetColor(1.0f, 1.0f, 0.0f, 1.0f);
-					}
-					else
-					{
-						evolutionButton.texture.SetColor(1.0f, 1.0f, 1.0f, 1.0f);
+						if( ( colorTime % ( colorChangeTime * 2 ) ) == 0 )
+						{
+							evolutionButton.texture.SetColor(1.0f, 1.0f, 0.0f, 1.0f);
+						}
+						else
+						{
+							evolutionButton.texture.SetColor(1.0f, 1.0f, 1.0f, 1.0f);
+						}
 					}
 				}
+				else
+				{
+					evolutionButton.texture.SetColor(1.0f, 0.0f, 0.0f, 1.0f);
+					touchCursol.texture.SetColor(1.0f, 1.0f, 1.0f, 1.0f);
+				}
+				
+				// タッチされたとき
+				if( evolutionButton.IsTouch() )
+				{
+					isEvolution = isEvolution^true;
+				}
+				
+				colorTime++;
 			}
 			else
 			{
-				evolutionButton.texture.SetColor(1.0f, 1.0f, 0.0f, 1.0f);
+				isEvolution = false;
+				evolutionButton.texture.SetColor(0.2f, 0.2f, 0.2f, 1.0f);
+				colorTime = 0;
 			}
-			
-			// タッチされたとき
-			if( evolutionButton.IsTouch() )
-			{
-				isEvolution = isEvolution^true;
-			}
-			
-			colorTime++;
 		}
 		else
 		{
+			isEvolution = false;
 			evolutionButton.texture.SetColor(0.2f, 0.2f, 0.2f, 1.0f);
 			colorTime = 0;
 		}

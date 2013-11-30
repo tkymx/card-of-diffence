@@ -3,7 +3,10 @@ package com.example.user;
 import java.util.LinkedList;
 
 import com.example.glsurfaceview.Const;
+import com.example.glsurfaceview.Evolution;
+import com.example.glsurfaceview.MainActivity;
 import com.example.glsurfaceview.Sprite;
+import com.example.glsurfaceview.Vector3;
 
 /*
  * HPBarÇÃï\é¶ÇçsÇ§ÅB
@@ -58,6 +61,7 @@ public class CharactorHPBarSort extends Sprite {
 			{
 				players.get(i).SetPosotion( start_y + start_h * i );
 			}
+			Evolution.touchCursol.setTrans(new Vector3( MainActivity.width/12, start_y + start_h * players.size(), 0 ));
 		}
 		if( enemys.size() != 0 )
 		{			

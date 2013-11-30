@@ -92,12 +92,13 @@ public final class R {
         public static final int playerhpbar_in=0x7f020044;
         public static final int right_button=0x7f020045;
         public static final int titlelogo=0x7f020046;
-        public static final int trap=0x7f020047;
-        public static final int trap_card=0x7f020048;
-        public static final int trap_card_selected=0x7f020049;
-        public static final int trap_card_used=0x7f02004a;
-        public static final int walk=0x7f02004b;
-        public static final int walk_enemy=0x7f02004c;
+        public static final int touchcursol=0x7f020047;
+        public static final int trap=0x7f020048;
+        public static final int trap_card=0x7f020049;
+        public static final int trap_card_selected=0x7f02004a;
+        public static final int trap_card_used=0x7f02004b;
+        public static final int walk=0x7f02004c;
+        public static final int walk_enemy=0x7f02004d;
     }
     public static final class id {
         public static final int action_settings=0x7f090005;
