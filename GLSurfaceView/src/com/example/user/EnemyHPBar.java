@@ -33,9 +33,9 @@ public class EnemyHPBar extends Sprite {
 		int y = Const.ry(1); 
 		
 		//背景
-		Init(x,y,w,h, R.drawable.image1 , Const.SpriteType.TYPE_TEXT.getValue());
+		Init(x,y,w,h, R.drawable.enemyhpbar , Const.SpriteType.TYPE_TEXT.getValue());
 		//バー
-		bar = Sprite.Create(x,y,w,h, R.drawable.image2 , Const.SpriteType.TYPE_TEXT.getValue());
+		bar = Sprite.Create(x,y,w,h, R.drawable.enemyhpbar_in , Const.SpriteType.TYPE_TEXT.getValue());
 	
 		//色の指定
 		this.GetTexture().SetColor(1.0f, 1.0f, 1.0f, 0.7f);

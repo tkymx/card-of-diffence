@@ -32,7 +32,7 @@ public class Const {
 	
 	//カードの座標情報
 	public static int card_width_offset =   Const.rx(0.005);
-	public static int card_heught_offset =  Const.ry(0.05);
+	public static int card_heught_offset =  Const.ry(0.054);
 	public static int card_width = 			Const.rx( 1.0/11.0 ) - card_width_offset;
 	public static int card_height = 		Const.ry( 0.23 );
 	

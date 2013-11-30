@@ -48,26 +48,37 @@ public class StageSelect extends Activity{
 		left = new Button(this);
 		right = new Button(this);
 		deck = new Button(this);
-		LinearLayout.LayoutParams titleParam = new LinearLayout.LayoutParams(Const.rx(0.7), Const.ry(0.1));
-		LinearLayout.LayoutParams leftParam = new LinearLayout.LayoutParams(Const.rx(0.1), Const.ry(0.6));
-		LinearLayout.LayoutParams vfParam = new LinearLayout.LayoutParams(Const.rx(0.5), Const.ry(0.6));
-		LinearLayout.LayoutParams rightParam = new LinearLayout.LayoutParams(Const.rx(0.1), Const.ry(0.6));
-		LinearLayout.LayoutParams deckParam = new LinearLayout.LayoutParams(Const.rx(0.3), Const.ry(0.1));
 		
-		titleParam.setMargins(Const.rx(0.1), Const.ry(0.05),0,0);
-		leftParam.setMargins(Const.rx(0.1), Const.ry(0.05),0,0);
-		vfParam.setMargins(Const.rx(0.05), Const.ry(0.05),0,0);
-		rightParam.setMargins(Const.rx(0.05), Const.ry(0.05),0,0);
-		deckParam.setMargins(Const.rx(0.35), Const.ry(0.05),0,0);
+		//大きさ
+		LinearLayout.LayoutParams titleParam = new LinearLayout.LayoutParams(Const.rx(0.8), Const.ry(0.15));
+		titleParam.setMargins(Const.rx(0.1), Const.ry(0.05),0,0);		
 		title.setTextSize(Const.ry(0.04));
 		
-		title.setBackgroundResource(R.drawable.list);
-		ll.setBackgroundResource(R.drawable.background);
-		right.setBackgroundResource(R.drawable.explain);
-		left.setBackgroundResource(R.drawable.explain);
+		LinearLayout.LayoutParams vfParam = new LinearLayout.LayoutParams(Const.rx(0.5), Const.ry(0.5));
+		vfParam.setMargins(Const.rx(0.05), Const.ry(0.04),0,0);
+
+		//左パネル
+		LinearLayout.LayoutParams leftParam = new LinearLayout.LayoutParams(Const.rx(0.1), Const.ry(0.2));
+		leftParam.setMargins(Const.rx(0.1), Const.ry(0.22),0,0);
+
+		//右パネル
+		LinearLayout.LayoutParams rightParam = new LinearLayout.LayoutParams(Const.rx(0.1), Const.ry(0.2));
+		rightParam.setMargins(Const.rx(0.05), Const.ry(0.22),0,0);
+
+		//デッキ情報
+		LinearLayout.LayoutParams deckParam = new LinearLayout.LayoutParams(Const.rx(0.5), Const.ry(0.12));
+		deckParam.setMargins(Const.rx(0.25), Const.ry(0.04),0,0);
+		
+		
+		title.setBackgroundResource(R.drawable.back_result);
+		ll.setBackgroundResource(R.drawable.back_deckselect);
+		right.setBackgroundResource(R.drawable.right_button);
+		left.setBackgroundResource(R.drawable.left_button);
 		deck.setBackgroundResource(R.drawable.explain);
 		
 		setContentView(ll);
+		
+		//コンテンツに追加
 		ll.addView(title,titleParam);
 		ll.addView(secondll);
 		ll.addView(deck,deckParam);
@@ -75,10 +86,8 @@ public class StageSelect extends Activity{
 		secondll.addView(vf,vfParam);
 		secondll.addView(right,rightParam);
 		
-		title.setText("ステージ選択画面");
-		right.setText("右");
-		left.setText("左");
-		deck.setText("デッキ編集");
+//		title.setText("ステージ選択画面");
+//		deck.setText("デッキ編集");
 		
 		//ステージの追加
 		for(int i=0;i<DataBase.getPresentStageNum();i++){			

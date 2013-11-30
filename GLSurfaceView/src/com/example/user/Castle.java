@@ -49,5 +49,7 @@ public class Castle extends Sprite {
 	{
 		//‘Ì—Í‚ðŒ¸‚ç‚·
 		hp -= c.getValue_attack();		
+		
+		if( hp < 0 )hp = 0;
 	}	
 }

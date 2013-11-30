@@ -5,8 +5,12 @@ import com.example.data.CardInformation;
 import com.example.data.DataBase;
 import com.example.glsurfaceview.Const;
 
+import android.R.color;
 import android.app.Activity;
 import android.content.Intent;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
+import android.graphics.Color;
 import android.os.Bundle;
 import android.view.View;
 import android.view.Window;
@@ -64,7 +68,11 @@ public class DeckSelect extends Activity{
 		//左画面の初期設定
 		String initCard = DataBase.GetMyCards(0);
 		selectedNewDeckCard=initCard;
-		card.setImageResource(CardInformation.GetCardInformaionFromName(initCard).getCard_id());
+		
+		Bitmap bmp = BitmapFactory.decodeResource(getResources(), CardInformation.GetCardInformaionFromName(initCard).getCard_id());
+		bmp = Bitmap.createScaledBitmap(bmp, Const.card_width, Const.card_height , false);		
+		card.setImageBitmap(bmp);		
+		
 		atackText.setText(CardInformation.GetCardInformaionFromName(initCard).getParameter1());		
 		defenceText.setText(CardInformation.GetCardInformaionFromName(initCard).getparameter2());
 		explainText.setText(CardInformation.GetCardInformaionFromName(initCard).getExplain());
@@ -72,27 +80,30 @@ public class DeckSelect extends Activity{
 		
 		
 		//テキストサイズ設定
-		cardNameText.setTextSize(Const.ry(0.030));
-		atackText.setTextSize(Const.ry(0.020));	
-		defenceText.setTextSize(Const.ry(0.020));
-		explainText.setTextSize(Const.ry(0.010));
+		cardNameText.setTextSize(Const.ry(0.036));
+		cardNameText.setTextAlignment( View.TEXT_ALIGNMENT_CENTER );
+		atackText.setTextSize(Const.ry(0.020));			
+		defenceText.setTextSize(Const.ry(0.020));		
+		explainText.setTextSize(Const.ry(0.020));
+		
 		okButton.setText("OK");
 		backButton.setText("戻る");
+		backButton.setAlpha(1.0f);
 		
 		//パラメータ生成、大きさの設定
 		cardNameTextParam = new RelativeLayout.LayoutParams(Const.rx(0.3), Const.ry(0.1));
 		cardParam = new RelativeLayout.LayoutParams(Const.rx(0.2), Const.ry(0.3));
-		atackTextParam = new RelativeLayout.LayoutParams(Const.rx(0.15), Const.ry(0.1));
-		defenceTextParam = new RelativeLayout.LayoutParams(Const.rx(0.15), Const.ry(0.1));
+		atackTextParam = new RelativeLayout.LayoutParams(Const.rx(0.15), Const.ry(0.06));
+		defenceTextParam = new RelativeLayout.LayoutParams(Const.rx(0.15), Const.ry(0.06));
 		explainTextParam = new RelativeLayout.LayoutParams(Const.rx(0.3), Const.ry(0.2));
 		okParam = new RelativeLayout.LayoutParams(Const.rx(0.1), Const.ry(0.1));
 		backParam = new RelativeLayout.LayoutParams(Const.rx(0.1), Const.ry(0.1));
 		
 		//パラメータで場所の指定
 		cardNameTextParam.setMargins(Const.rx(0.05), Const.ry(0.05),0,0);
-		cardParam.setMargins(Const.rx(0.1), Const.ry(0.2),0,0);
-		atackTextParam.setMargins(Const.rx(0.05), Const.ry(0.50),0,0);
-		defenceTextParam.setMargins(Const.rx(0.20), Const.ry(0.50),0,0);
+		cardParam.setMargins(Const.rx(0.1), Const.ry(0.2),0,Const.ry(0.05));
+		atackTextParam.setMargins(Const.rx(0.05), Const.ry(0.54),0,0);
+		defenceTextParam.setMargins(Const.rx(0.20), Const.ry(0.54),0,0);
 		explainTextParam.setMargins(Const.rx(0.05), Const.ry(0.60),0,0);
 		okParam.setMargins(Const.rx(0.05), Const.ry(0.8),0,0);
 		backParam.setMargins(Const.rx(0.25), Const.ry(0.8),0,0);
@@ -123,14 +134,20 @@ public class DeckSelect extends Activity{
 		
 		
 		//バックグラウンド画像設定
-		ll.setBackgroundResource(R.drawable.background);
-		cardNameText.setBackgroundResource(R.drawable.name); 
-		atackText.setBackgroundResource(R.drawable.atack);
-		defenceText.setBackgroundResource(R.drawable.defence);
-		explainText.setBackgroundResource(R.drawable.explain); 
-		atackText.setBackgroundResource(R.drawable.list);
-		defenceText.setBackgroundResource(R.drawable.list); 
-		explainText.setBackgroundResource(R.drawable.list); 
+		ll.setBackgroundResource(R.drawable.back_deckselect);
+
+		cardNameText.setBackgroundResource(R.drawable.pause_base);
+		cardNameText.setAlpha(0.7f);
+		
+		atackText.setBackgroundResource(R.drawable.pause_base);
+		atackText.setAlpha(0.7f);
+		
+		defenceText.setBackgroundResource(R.drawable.pause_base);
+		defenceText.setAlpha(0.7f);
+		
+		explainText.setBackgroundResource(R.drawable.pause_base);
+		explainText.setAlpha(0.7f);
+		
 		
 		//いろいろセット
 		setContentView(ll);
@@ -158,7 +175,11 @@ public class DeckSelect extends Activity{
 			
 			String selectedCard = DataBase.GetMyCards(arg2);
 			selectedNewDeckCard = selectedCard;
-			card.setImageResource(CardInformation.GetCardInformaionFromName(selectedCard).getCard_id());
+			
+			Bitmap bmp = BitmapFactory.decodeResource(getResources(), CardInformation.GetCardInformaionFromName(selectedCard).getCard_id());
+			bmp = Bitmap.createScaledBitmap(bmp, Const.card_width, Const.card_height , false);		
+			card.setImageBitmap(bmp);		
+			
 			atackText.setText(CardInformation.GetCardInformaionFromName(selectedCard).getParameter1());		
 			defenceText.setText(CardInformation.GetCardInformaionFromName(selectedCard).getparameter2());
 			explainText.setText(CardInformation.GetCardInformaionFromName(selectedCard).getExplain());

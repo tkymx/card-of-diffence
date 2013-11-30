@@ -26,9 +26,9 @@ public class EnemyCastleHPBar extends Sprite {
 	private EnemyCastleHPBar( Castle c){
 
 		//背景
-		Init(Const.rx(1-0.05-0.3), Const.ry(0.88), Const.rw(0.3), Const.rh(0.07), R.drawable.image1 , Const.SpriteType.TYPE_TEXT.getValue());
+		Init(Const.rx(1-0.05-0.3), Const.ry(0.88), Const.rw(0.3), Const.rh(0.07), R.drawable.enemyhpbar , Const.SpriteType.TYPE_TEXT.getValue());
 		//バー
-		bar = Sprite.Create(Const.rx(1-0.05-0.3), Const.ry(0.88), Const.rw(0.3), Const.rh(0.07), R.drawable.image2 , Const.SpriteType.TYPE_TEXT.getValue());
+		bar = Sprite.Create(Const.rx(1-0.05-0.3), Const.ry(0.88), Const.rw(0.3), Const.rh(0.07), R.drawable.enemyhpbar_in , Const.SpriteType.TYPE_TEXT.getValue());
 	
 		//色の指定
 		this.GetTexture().SetColor(1.0f, 1.0f, 1.0f, 0.7f);
