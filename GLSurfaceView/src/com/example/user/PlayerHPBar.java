@@ -74,7 +74,8 @@ public class PlayerHPBar extends Sprite {
 			{
 				// キャラクターの進化
 				GameScene.evolution.SetEvolution(charactor);
-				bar.GetTexture().SetColor(1.0f, 1.0f, 0, 1.0f);
+				this.GetTexture().SetColor(1, 1, 0, 0.7f);
+				bar.GetTexture().SetColor(1.0f, 1.0f, 0, 0.7f);
 			}
 		}
 		

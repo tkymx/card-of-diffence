@@ -37,6 +37,10 @@ public class EnemyHPBar extends Sprite {
 		//ƒo[
 		bar = Sprite.Create(x,y,w,h, R.drawable.enemyhpbar_in , Const.SpriteType.TYPE_TEXT.getValue());
 		
+		//F‚ğ•Ï‚¦‚é
+		this.GetTexture().SetColor(1, 1, 1, 0.7f);
+		bar.GetTexture().SetColor(1, 1, 1, 0.7f);
+		
 		//’·‚³‚ğ’Ç‰Á
 		barLength = (int) bar.GetWidth();
 		

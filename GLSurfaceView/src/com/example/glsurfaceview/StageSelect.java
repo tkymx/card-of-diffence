@@ -55,7 +55,7 @@ public class StageSelect extends Activity{
 		title.setTextSize(Const.ry(0.04));
 		
 		LinearLayout.LayoutParams vfParam = new LinearLayout.LayoutParams(Const.rx(0.5), Const.ry(0.5));
-		vfParam.setMargins(Const.rx(0.05), Const.ry(0.04),0,0);
+		vfParam.setMargins(Const.rx(0.05), Const.ry(0.05),0,0);
 
 		//左パネル
 		LinearLayout.LayoutParams leftParam = new LinearLayout.LayoutParams(Const.rx(0.1), Const.ry(0.2));
@@ -66,15 +66,15 @@ public class StageSelect extends Activity{
 		rightParam.setMargins(Const.rx(0.05), Const.ry(0.22),0,0);
 
 		//デッキ情報
-		LinearLayout.LayoutParams deckParam = new LinearLayout.LayoutParams(Const.rx(0.5), Const.ry(0.12));
-		deckParam.setMargins(Const.rx(0.25), Const.ry(0.04),0,0);
+		LinearLayout.LayoutParams deckParam = new LinearLayout.LayoutParams(Const.rx(0.4), Const.ry(0.15));
+		deckParam.setMargins(Const.rx(0.3), Const.ry(0.03),0,0);
 		
 		
-		title.setBackgroundResource(R.drawable.back_result);
-		ll.setBackgroundResource(R.drawable.back_deckselect);
+//		title.setBackgroundResource(R.drawable.back_result);
+		ll.setBackgroundResource(R.drawable.oldmap);
 		right.setBackgroundResource(R.drawable.right_button);
 		left.setBackgroundResource(R.drawable.left_button);
-		deck.setBackgroundResource(R.drawable.explain);
+		deck.setBackgroundResource(R.drawable.deckbutton);
 		
 		setContentView(ll);
 		
