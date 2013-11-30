@@ -23,7 +23,7 @@ public class TitleScene extends Scene {
 		int w = MainActivity.width;
 		int h = MainActivity.height;
 		
-		Sprite.Create(0, 0, w, h, R.drawable.bg, SpriteType.TYPE_OTHER.getValue());
+		Sprite.Create(0, 0, w, h, R.drawable.title, SpriteType.TYPE_OTHER.getValue());
 		Sprite.Create(w/10, h-h/4, w/6*5, h/4, R.drawable.titlelogo, SpriteType.TYPE_TEXT.getValue());
 		playButton = Button.Create(MainActivity.width/3, MainActivity.height/3, 
 				MainActivity.width/3, MainActivity.height/3, 
