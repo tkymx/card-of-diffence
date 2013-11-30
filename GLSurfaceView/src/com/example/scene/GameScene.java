@@ -4,14 +4,18 @@ import javax.microedition.khronos.opengles.GL10;
 
 import com.example.data.DataBase;
 import com.example.glsurfaceview.BGMSound;
+import com.example.glsurfaceview.Button;
 import com.example.glsurfaceview.Const;
+import com.example.glsurfaceview.Const.SpriteType;
 import com.example.glsurfaceview.Evolution;
 import com.example.glsurfaceview.MainActivity;
 import com.example.glsurfaceview.OpenGLSurfaceView;
 import com.example.glsurfaceview.Pause;
+import com.example.glsurfaceview.R;
 import com.example.glsurfaceview.Scene;
 import com.example.glsurfaceview.Score;
 import com.example.glsurfaceview.BGMSound.SOUND;
+import com.example.glsurfaceview.Sprite;
 import com.example.user.CharactorHPBarSort;
 import com.example.user.Deck;
 import com.example.user.EnemyAppear;
@@ -25,11 +29,80 @@ import com.example.user.StartNotify;
 
 public class GameScene extends Scene {
 	
+	public class Tutorial {
+		private boolean tuto1, tuto2, tuto3, tuto4;
+		public boolean tutorial;
+		private Sprite tutoImage;
+		private Button skip;
+		private int nowTuto;
+		
+		// コンストラクタ
+		public Tutorial()
+		{
+		}
+		
+		// 初期化
+		public void Init()
+		{
+			int w = MainActivity.width;
+			int h = MainActivity.height;
+			
+			tuto2 = tuto3 = tuto4 = false;
+			tutorial = tuto1 = true;
+			nowTuto = 1;
+			tutoImage = Sprite.Create(0, 0, w, h, R.drawable.image1, SpriteType.TYPE_TEXT.getValue());
+			skip = Button.Create(w - w/3, h - h/4, w/5, h/5, R.drawable.image1);
+			
+			tutoImage.GetTexture().SetColor(0, 0, 0, 0);
+			skip.GetTexture().SetColor(0, 0, 0, 0);
+		}
+		
+		// 画像の変更
+		public void changeImage( int id )
+		{
+			tutoImage.GetTexture().SetID(id);
+		}
+		
+		// チュートリアルの変更
+		public void changeTutorial()
+		{
+			nowTuto++;
+			
+			switch( nowTuto )
+			{
+			case 2:
+				tuto1 = false;
+				tuto2 = true;
+				
+				changeImage(0);
+				
+				break;
+				
+			case 3:
+				tuto2 = false;
+				tuto3 = true;
+				
+				changeImage(0);
+				
+				break;
+				
+			case 4:
+				tuto3 = false;
+				tuto4 = true;
+				
+				changeImage(0);
+				
+				break;
+			}
+		}
+	}
+	
 	private Pause pause = null;
 	
 	private StartNotify notify = null;
 	private ResultNotify rnotify = null;
 	public static Evolution evolution = null;
+	public static Tutorial tutorial = null;
 	
 	// コンストラクタ
 	public GameScene()
@@ -91,6 +164,14 @@ public class GameScene extends Scene {
 		rnotify = ResultNotify.Create();
 		//リザルト表示をオフにする
 		DataBase.setResult(false);
+		
+		tutorial = new Tutorial();
+		tutorial.Init();
+		
+		if( stage.getLevel() != 1 )
+		{
+			tutorial.tutorial = false;
+		}
 		
 		//ゲームを止める
 		OpenGLSurfaceView.GameStop();
