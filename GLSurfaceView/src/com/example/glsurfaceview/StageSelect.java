@@ -104,28 +104,6 @@ public class StageSelect extends Activity{
 		deck.setOnClickListener(new SampleClickListener());
 		
 	}
-	////
-	
-//ステージが押された時の処理
-class SampleStageViewClickLisnear implements android.view.View.OnClickListener{	
-
-	public void onClick(View v) {
-		
-		//ステージだったら移動して終了
-		if( v instanceof StageView )
-		{
-			
-			//ステージの移動
-			((StageView)v).moveStage();
-			
-			//終了
-			finish();
-			
-		}
-		
-	}
-}	
-	
 
 class SampleClickListener implements android.view.View.OnClickListener{
 	
@@ -197,6 +175,12 @@ class SampleTL implements OnTouchListener{
 					
 					//ステージの移動
 					((StageView)v).moveStage();
+					
+					//デッキ表示のインテントの発行
+					Intent intent = new Intent();
+					//intent.setClass( OpenGLSurfaceView.c , com.example.glsurfaceview.DeckSelect.class);
+					intent.setClass( OpenGLSurfaceView.c , com.example.glsurfaceview.StageStartImage.class);			
+					OpenGLSurfaceView.c.startActivity(intent);							
 					
 					//終了
 					finish();

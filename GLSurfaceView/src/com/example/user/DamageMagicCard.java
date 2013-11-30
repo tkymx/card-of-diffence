@@ -2,6 +2,7 @@ package com.example.user;
 
 import com.example.data.ParameterCardInfomatoin;
 import com.example.glsurfaceview.Const;
+import com.example.glsurfaceview.R;
 import com.example.glsurfaceview.Sprite;
 
 public class DamageMagicCard extends MagicCard {
@@ -53,6 +54,16 @@ public class DamageMagicCard extends MagicCard {
 				enemy.Damage( damage );				
 			}
 		}
+
+		//攻撃エフェクト
+		AnimationEffect.Create( 
+				0, 
+				0, 
+				Const.rx(1), 
+				Const.ry(1), 
+				4, 1, 5, R.drawable.attack, Const.SpriteType.TYPE_EFFECT.getValue());				
+				
+		
 				
 	}
 	
