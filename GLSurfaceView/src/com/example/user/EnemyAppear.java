@@ -9,6 +9,7 @@ import com.example.data.DataBase;
 import com.example.glsurfaceview.Const;
 import com.example.glsurfaceview.R;
 import com.example.glsurfaceview.Sprite;
+import com.example.scene.GameScene;
 
 public class EnemyAppear extends Sprite {
 	
@@ -59,59 +60,74 @@ public class EnemyAppear extends Sprite {
 	// 更新処理
 	public boolean Update()
 	{	
-		if( ( System.currentTimeMillis() - time ) >= ( 3500 + waitRan - ( 250 * stageLevel ) ) )
-		{				
-			waitRan = rand.nextInt(2000);
-			waitRan -= 1000;
-			
-			// プレイヤーがどのラインに何体いるか調べる
-			serchPlayerLine();
-			
-			// エネミーがどのラインに何体いるか調べる
-			serchEnemyLine();
-			
-			// プレイヤーより数が少ない時
-			if( enemyLineNum <= ( playerLineNum + stageLevel ) )
-			{
-				// エネミーカードの枚数分
-				for( int i = 0; i < enemyCard.length; i++ )
+		if(! GameScene.tutorial.tutorial )
+		{
+			if( ( System.currentTimeMillis() - time ) >= ( 3500 + waitRan - ( 250 * stageLevel ) ) )
+			{				
+				waitRan = rand.nextInt(2000);
+				waitRan -= 1000;
+				
+				// プレイヤーがどのラインに何体いるか調べる
+				serchPlayerLine();
+				
+				// エネミーがどのラインに何体いるか調べる
+				serchEnemyLine();
+				
+				// プレイヤーより数が少ない時
+				if( enemyLineNum <= ( playerLineNum + stageLevel ) )
 				{
-					// 使用していないとき
-					if( enemyCard[i].isUse )
+					// エネミーカードの枚数分
+					for( int i = 0; i < enemyCard.length; i++ )
 					{
-						Enemy enemy = null;
-						//int playerMaxLine = serchPlayerLineMaxNum();
-						int compareLine = compareEnemyToPlayer();		// 一番出ているエネミーの数が少ないライン
-						
-						ran = rand.nextInt(11);							// 取得するカードの番号を乱数で取得
-						
-						// 一番プレイヤーの多いラインに出す
-						switch( compareLine )
+						// 使用していないとき
+						if( enemyCard[i].isUse )
 						{
-						case Const.LINE1:
-							enemy = CreateEnemy( Const.LINE_1_Y , name[ran] );
-							break;
-						case Const.LINE2:
-							enemy = CreateEnemy( Const.LINE_2_Y , name[ran] );
-							break;
-						case Const.LINE3:
-							enemy = CreateEnemy( Const.LINE_3_Y , name[ran] );
+							Enemy enemy = null;
+							//int playerMaxLine = serchPlayerLineMaxNum();
+							int compareLine = compareEnemyToPlayer();		// 一番出ているエネミーの数が少ないライン
+							
+							ran = rand.nextInt(11);							// 取得するカードの番号を乱数で取得
+							
+							// 一番プレイヤーの多いラインに出す
+							switch( compareLine )
+							{
+							case Const.LINE1:
+								enemy = CreateEnemy( Const.LINE_1_Y , name[ran] );
+								break;
+							case Const.LINE2:
+								enemy = CreateEnemy( Const.LINE_2_Y , name[ran] );
+								break;
+							case Const.LINE3:
+								enemy = CreateEnemy( Const.LINE_3_Y , name[ran] );
+								break;
+							}
+							
+							// nullでないとき
+							if( enemy != null )
+							{
+								// キャラクターのセット
+								enemyCard[i].SetCharactor(enemy);
+							}
+							
 							break;
 						}
-						
-						// nullでないとき
-						if( enemy != null )
-						{
-							// キャラクターのセット
-							enemyCard[i].SetCharactor(enemy);
-						}
-						
-						break;
 					}
 				}
+				
+				time = System.currentTimeMillis();
 			}
-			
-			time = System.currentTimeMillis();
+		}
+		else
+		{
+			if( !GameScene.tutorial.appearEnemy )
+			{
+				if( GameScene.tutorial.tuto2 )
+				{
+					GameScene.tutorial.enemy = CreateEnemy(Const.LINE_2_Y, name[0]);
+					
+					GameScene.tutorial.appearEnemy = true;
+				}
+			}
 		}
 		
 		return true;

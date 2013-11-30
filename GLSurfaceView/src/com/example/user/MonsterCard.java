@@ -3,6 +3,7 @@ package com.example.user;
 import com.example.data.CharactorInfomation;
 import com.example.glsurfaceview.Const;
 import com.example.glsurfaceview.Touch;
+import com.example.scene.GameScene;
 
 public class MonsterCard extends Card {
 	
@@ -63,24 +64,39 @@ public class MonsterCard extends Card {
 		{
 			//座標を取得する
 			int y = (int) touch.getY();
+			int line = 0;
 						
 			//列によって表示する。
 			if( y > Const.LINE_1_Y )
 			{
-				charactor = PlayerAppear.CreatePlayer( Const.LINE_1_Y , name );					
+				charactor = PlayerAppear.CreatePlayer( Const.LINE_1_Y , name );			
+				line = Const.LINE_1_Y;
 			}
 			else if( y > Const.LINE_2_Y )
 			{
-				charactor = PlayerAppear.CreatePlayer( Const.LINE_2_Y , name );										
+				charactor = PlayerAppear.CreatePlayer( Const.LINE_2_Y , name );	
+				line = Const.LINE_2_Y;
 			}
 			else if( y > Const.LINE_3_Y )
 			{					
-				charactor = PlayerAppear.CreatePlayer( Const.LINE_3_Y , name );					
+				charactor = PlayerAppear.CreatePlayer( Const.LINE_3_Y , name );		
+				line = Const.LINE_3_Y;
 			}
 			else
 			{
 				//別のとこらなら終了
 				return;
+			}
+			
+			if( GameScene.tutorial.tuto3 )
+			{
+				if( line != 0 )
+				{
+					GameScene.tutorial.player = (Player) charactor;
+					GameScene.tutorial.x = Const.LINE_LEFT_2_X;	
+					GameScene.tutorial.y = line;
+					GameScene.tutorial.changeTutorial();
+				}
 			}
 			
 			//使用済みにする

@@ -183,6 +183,8 @@ public class Sprite {
 	// Œãˆ—
 	public void Uninit()
 	{
+		vertexBuffer = null;
+		texture = null;
 	}
 	
 	// XVˆ—
@@ -515,5 +517,10 @@ public class Sprite {
 	public boolean getDelete()
 	{
 		return isDelete;
+	}
+	
+	public void SetUse( boolean use )
+	{
+		bUse = use;
 	}
 }

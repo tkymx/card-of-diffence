@@ -16,11 +16,15 @@ import com.example.glsurfaceview.Scene;
 import com.example.glsurfaceview.Score;
 import com.example.glsurfaceview.BGMSound.SOUND;
 import com.example.glsurfaceview.Sprite;
+import com.example.glsurfaceview.Touch;
+import com.example.glsurfaceview.Vector3;
 import com.example.user.CharactorHPBarSort;
 import com.example.user.Deck;
+import com.example.user.Enemy;
 import com.example.user.EnemyAppear;
 import com.example.user.EnemyCastle;
 import com.example.user.Map;
+import com.example.user.Player;
 import com.example.user.PlayerAppear;
 import com.example.user.PlayerCastle;
 import com.example.user.ResultNotify;
@@ -30,11 +34,15 @@ import com.example.user.StartNotify;
 public class GameScene extends Scene {
 	
 	public class Tutorial {
-		private boolean tuto1, tuto2, tuto3, tuto4;
+		public boolean tuto1, tuto2, tuto3, tuto4;
 		public boolean tutorial;
 		private Sprite tutoImage;
 		private Button skip;
 		private int nowTuto;
+		public boolean appearEnemy;
+		public Enemy enemy = null;
+		public Player player = null;
+		public float x, y;
 		
 		// コンストラクタ
 		public Tutorial()
@@ -49,12 +57,51 @@ public class GameScene extends Scene {
 			
 			tuto2 = tuto3 = tuto4 = false;
 			tutorial = tuto1 = true;
-			nowTuto = 1;
-			tutoImage = Sprite.Create(0, 0, w, h, R.drawable.image1, SpriteType.TYPE_TEXT.getValue());
-			skip = Button.Create(w - w/3, h - h/4, w/5, h/5, R.drawable.image1);
+			appearEnemy = false;
+			nowTuto = 0;
+			tutoImage = Sprite.Create(0, 0, w, h, R.drawable.asist1, SpriteType.TYPE_TUTORIAL.getValue());
+			skip = Button.Create(w - w/3, h - h/4, w/5, h/5, R.drawable.skip);
 			
 			tutoImage.GetTexture().SetColor(0, 0, 0, 0);
 			skip.GetTexture().SetColor(0, 0, 0, 0);
+		}
+		
+		public void  Update()
+		{
+			if( skip.IsTouch() )
+			{
+				tutoImage.GetTexture().SetColor(0, 0, 0, 0);
+				skip.GetTexture().SetColor(0, 0, 0, 0);
+				
+				tutorial = false;
+				tuto1 = false;
+				tuto2 = false;
+				tuto3 = false;
+				tuto4 = false;
+			}
+			
+			if( tuto2 || tuto3 || tuto4 )
+			{
+				if( enemy != null )
+				{
+					enemy.setTrans(new Vector3( Const.LINE_RIGHT_2_X  , Const.LINE_2_Y , 0 ));
+				}
+			}
+			if( tuto4 )
+			{
+				if( player != null )
+				{
+					player.setTrans(new Vector3(x, y, 0));
+				}
+			}
+			
+			if( tuto1 || tuto4 )
+			{
+				if( Touch.getInstance().IsTouch() )
+				{
+					changeTutorial();
+				}
+			}
 		}
 		
 		// 画像の変更
@@ -70,11 +117,18 @@ public class GameScene extends Scene {
 			
 			switch( nowTuto )
 			{
+			case 1:
+				tuto1 = true;
+				
+				tutoImage.GetTexture().SetColor(1, 1, 1, 1);
+				skip.GetTexture().SetColor(1, 1, 1, 1);
+				
+				break;
 			case 2:
 				tuto1 = false;
 				tuto2 = true;
 				
-				changeImage(0);
+				changeImage(R.drawable.asist2);
 				
 				break;
 				
@@ -82,7 +136,7 @@ public class GameScene extends Scene {
 				tuto2 = false;
 				tuto3 = true;
 				
-				changeImage(0);
+				changeImage(R.drawable.asist3);
 				
 				break;
 				
@@ -90,7 +144,16 @@ public class GameScene extends Scene {
 				tuto3 = false;
 				tuto4 = true;
 				
-				changeImage(0);
+				changeImage(R.drawable.asist4);
+				
+				break;
+				
+			case 5:
+				tuto4 = false;
+				tutorial = false;
+				
+				tutoImage.GetTexture().SetColor(0, 0, 0, 0);
+				skip.GetTexture().SetColor(0, 0, 0, 0);
 				
 				break;
 			}
@@ -171,6 +234,10 @@ public class GameScene extends Scene {
 		if( stage.getLevel() != 1 )
 		{
 			tutorial.tutorial = false;
+			tutorial.tuto1 = false;
+			tutorial.tuto2 = false;
+			tutorial.tuto3 = false;
+			tutorial.tuto4 = false;
 		}
 		
 		//ゲームを止める
@@ -196,10 +263,13 @@ public class GameScene extends Scene {
 			if(notify.Update()==false)
 			{
 				notify = null;
+				if( tutorial.tutorial )tutorial.changeTutorial();
 			}
 		}
 		else
 		{
+			if( tutorial.tutorial ) tutorial.Update();
+			
 			evolution.Update();
 			super.Update();			
 		}

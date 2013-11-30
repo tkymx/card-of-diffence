@@ -64,7 +64,8 @@ public class Const {
 		TYPE_EFFECT( 7 ),
 		TYPE_TEXT( 8 ),
 		TYPE_BUTTON( 9 ),
-		TYPE_MAX( 10 );
+		TYPE_TUTORIAL( 10 ),
+		TYPE_MAX( 11 );
 		
 		private int value;
 		

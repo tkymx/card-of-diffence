@@ -4,6 +4,7 @@ import java.util.Vector;
 
 import com.example.glsurfaceview.Const.SpriteType;
 import com.example.glsurfaceview.Sprite;
+import com.example.scene.GameScene;
 
 /**
  * 
@@ -174,8 +175,11 @@ public abstract class Card extends Sprite {
 					//個数が揃っていたら
 					if( isNeed() )
 					{
-						//自分がタッチされていなかったら更新動作
-						SelectedUpdate();						
+						if( !GameScene.tutorial.tuto1 )
+						{
+							//自分がタッチされていなかったら更新動作
+							SelectedUpdate();						
+						}
 					}
 				}
 			}
@@ -193,6 +197,8 @@ public abstract class Card extends Sprite {
 			{
 				if( IsTouch() )
 				{
+					if( GameScene.tutorial.tuto2 ) GameScene.tutorial.changeTutorial();
+					
 					//個数が揃っていたら
 					if( isNeed() )
 					{

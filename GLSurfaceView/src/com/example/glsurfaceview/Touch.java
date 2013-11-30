@@ -4,7 +4,7 @@ import android.view.MotionEvent;
 
 public class Touch {
 	
-	public static Touch Instance = new Touch();
+	private static Touch Instance = new Touch();
 	private float x, y;
 	private float oldX, oldY;
 	private float moveX, moveY;
