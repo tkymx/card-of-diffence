@@ -196,7 +196,9 @@ public class DataBase {
 		CharactorInfomation.AddCharactor(
 				CharactorInfomation.Create("enemy1","死者の魂が骸骨に乗り移った姿、魂のレベルで強さが変化する",10,1,1, 2, R.drawable.enemy1_w, R.drawable.enemy1_ab, R.drawable.enemy1_af ) );
 		CharactorInfomation.AddCharactor(
-				CharactorInfomation.Create("dragon","死をも食らうドラゴン。誰一人として死に際を見たものはいない",20,2,1, 3, R.drawable.dragon, R.drawable.dragon, R.drawable.dragon ) );
+				CharactorInfomation.Create("dora","洞窟の中でいつも卑屈に生きてきた飛行生物らしい",15,2,1, 2, R.drawable.dora, R.drawable.dora, R.drawable.dora ) );
+		CharactorInfomation.AddCharactor(
+				CharactorInfomation.Create("dragon","死をも食らうドラゴン。誰一人として死に際を見たものはいない",20,3,1, 3, R.drawable.dragon, R.drawable.dragon, R.drawable.dragon ) );
 		
 
 		///////////////////////////////////////
@@ -245,6 +247,8 @@ public class DataBase {
 				CardInformation.CreateCardInformation("enemy1",mc,R.drawable.moster_card_1,1));
 		CardInformation.SetCardInforation(
 				CardInformation.CreateCardInformation("dragon",mc,R.drawable.moster_card_1,1));
+		CardInformation.SetCardInforation(
+				CardInformation.CreateCardInformation("dora",mc,R.drawable.moster_card_1,1));
 		
 		
 		///////////////////////////////////////
@@ -291,11 +295,12 @@ public class DataBase {
 		//ステージの追加
 		///////////////////////////////////////		
 		String str[] = {"enemy1","enemy1","enemy1","enemy1","enemy1","enemy1","enemy1","enemy1","enemy1","enemy1","enemy1"};
-		String str2[] = {"enemy1","enemy1","enemy1","enemy1","enemy1","enemy1","enemy1","dragon","dragon","dragon","dragon"};
+		String str1[] = {"enemy1","enemy1","enemy1","enemy1","enemy1","enemy1","dora","dora","dora","dora","dora"};
+		String str2[] = {"enemy1","enemy1","enemy1","enemy1","dora","dora","dora","dora","dragon","dragon","dragon"};
 		Stage stage[] = 
 		{
 			new Stage(R.drawable.stage1, R.drawable.map, R.drawable.enemy_castle , R.drawable.player_castle, 2, 1 , str),
-			new Stage(R.drawable.stage2, R.drawable.map, R.drawable.enemy_castle, R.drawable.player_castle, 3, 2 , str),
+			new Stage(R.drawable.stage2, R.drawable.map, R.drawable.enemy_castle, R.drawable.player_castle, 3, 2 , str1),
 			new Stage(R.drawable.stage3, R.drawable.map, R.drawable.enemy_castle, R.drawable.player_castle, 3, 3 , str2)			
 		};		
 		for(int i = 0;i<stage.length;i++)

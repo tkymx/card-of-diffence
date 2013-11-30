@@ -1,8 +1,11 @@
 package com.example.user;
 
+import java.util.Random;
+
 import com.example.data.DataBase;
 import com.example.glsurfaceview.Const;
 import com.example.glsurfaceview.R;
+import com.example.glsurfaceview.Vector3;
 
 /**
  * 
@@ -15,9 +18,19 @@ import com.example.glsurfaceview.R;
 
 public class PlayerCastle extends Castle {
 
+	int time;
+	
+	Random r = null;	
+	
 	public PlayerCastle(int h) {
 		super(h);
 		// TODO Auto-generated constructor stub
+		
+		time = 0;
+		
+		//乱数の初期化
+		r = new Random(System.currentTimeMillis());
+		
 	}
 
 	// 初期化処理
@@ -35,12 +48,44 @@ public class PlayerCastle extends Castle {
 		//死んでたら消す
 		if( hp <= 0 )
 		{
-			//ゲームオーバーにする
-			DataBase.setResult(true);
-			DataBase.setWin(false);
-			return false;		
+
+			if( time >= 100 )
+			{
+				//ゲームクリアにする
+				DataBase.setResult(true);
+				DataBase.setWin(false);
+
+				return false;						
+			}
+			else
+			{
+				//時間を進める
+				time+=1;
+				
+				//左下の位置
+				Vector3 p = new Vector3( getTrans() );
+				//サイズ
+				Vector3 s = new Vector3( GetWidth() , GetHeight() , 0 );
+				
+				for(int i = 0 ; i < 1; i ++)
+				{
+					//乱数でその範囲で座標を決める
+					int x = r.nextInt((int)s.getX());
+					int y = r.nextInt((int)s.getY());
+					
+					//ダメージエフェクト
+					AnimationEffect.Create( 
+							p.getX() + x - Const.rx(0.15)/2,
+							p.getY() + y - Const.rx(0.15)/2,
+							Const.rx(0.15), 
+							Const.rx(0.15), 
+							10, 1, 1, R.drawable.effect, Const.SpriteType.TYPE_EFFECT.getValue());	
+					
+				}				
+				
+			}
+			
 		}
-		
 		return true;		
 	}	
 	
