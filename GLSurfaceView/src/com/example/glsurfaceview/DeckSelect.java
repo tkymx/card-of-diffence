@@ -134,7 +134,7 @@ public class DeckSelect extends Activity{
 		
 		
 		//バックグラウンド画像設定
-		ll.setBackgroundResource(R.drawable.back_deckselect);
+		ll.setBackgroundResource(R.drawable.back_deckselect_back);
 
 		cardNameText.setBackgroundResource(R.drawable.pause_base);
 		cardNameText.setAlpha(0.7f);

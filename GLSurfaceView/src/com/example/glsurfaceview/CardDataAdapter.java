@@ -145,7 +145,7 @@ public class CardDataAdapter extends ArrayAdapter<String> {
 		 textView3.setText(CardInformation.GetCardInformaionFromName(item).getName());
 		 textView3.setTextSize(Const.ry(0.015));
 */		 
-		 convertView.setBackgroundResource(R.drawable.list); 
+		 convertView.setBackgroundResource(R.drawable.info_back); 
 		 
 		 return convertView;
 		 }
