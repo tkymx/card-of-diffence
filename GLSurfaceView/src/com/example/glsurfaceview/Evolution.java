@@ -36,13 +36,13 @@ public class Evolution {
 		isDirection = false;
 		
 		evolutionNum = 0;
-		evolutionButton = Button.Create(w/8, h/2 + h/3.8f, w / 9, h / 12, R.drawable.evolutionbutton);
+		evolutionButton = Button.Create(w/8, h/2 + h/3.8f, w / 8, h / 10, R.drawable.evolutionbutton);
 		evolutionButton.texture.SetColor(0.2f, 0.2f, 0.2f, 1.0f);
 		
 		base = Sprite.Create(0, h/2, w, h/9, R.drawable.groundwork, SpriteType.TYPE_TEXT.getValue());
 		base.texture.SetColor(0.2f, 0.2f, 0.2f, 0);
 		
-		direction = Sprite.Create(-150.0f, h/2, w/9, h/9, R.drawable.evolution, SpriteType.TYPE_TEXT.getValue());
+		direction = Sprite.Create(-w/9, h/2, w/9, h/9, R.drawable.evolution, SpriteType.TYPE_TEXT.getValue());
 		
 		touchCursol = Sprite.Create(w/10, h/3, w/10, w/10, R.drawable.touchcursol, SpriteType.TYPE_TEXT.getValue());
 		touchCursol.texture.SetColor(0, 0, 0, 0);
@@ -152,7 +152,7 @@ public class Evolution {
 		if( directionNowTime > directionTime )
 		{
 			base.texture.SetColor(0.2f, 0.2f, 0.2f, 0);
-			direction.setTrans(new Vector3( -150.0f, MainActivity.height/2.0f, 0.0f ));
+			direction.setTrans(new Vector3( -MainActivity.width/9, MainActivity.height/2.0f, 0.0f ));
 			
 			directionNowTime = 0;
 			
