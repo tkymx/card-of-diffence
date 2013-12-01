@@ -177,21 +177,21 @@ public class DataBase {
 		CharactorInfomation.AddCharactor(
 				CharactorInfomation.Create("レッドセイバー","伝説の戦士。赤き聖剣の名で魔王討伐に乗り出す。その後は聖剣の魔力に取り憑かれ魔王となる。",20,2,1, 2, R.drawable.player1_w, R.drawable.player1_w, R.drawable.player1_w ) );
 		CharactorInfomation.AddCharactor(
-				CharactorInfomation.Create("ジン","疾風の戦士。戦場をかける速さはあまりに速く、その速さは音速をも超えるという、",10,1,1, 6, R.drawable.player2_w, R.drawable.player2_w, R.drawable.player2_w  ) );
+				CharactorInfomation.Create("ジン","疾風の戦士。戦場をかける速さはあまりに速く、その速さは音速をも超えるという。",8,1,1, 6, R.drawable.player2_w, R.drawable.player2_w, R.drawable.player2_w  ) );
 		CharactorInfomation.AddCharactor(
-				CharactorInfomation.Create("monster3","monsterCard3",10,1,1, 2, R.drawable.player3_w, R.drawable.player3_w, R.drawable.player3_w  ) );
+				CharactorInfomation.Create("ホックロック","天性の海賊。その昔伝説の海賊を倒した際の呪いから顔に大きな字を持つ。",20,1,1, 2, R.drawable.player3_w, R.drawable.player3_w, R.drawable.player3_w  ) );
 		CharactorInfomation.AddCharactor(
-				CharactorInfomation.Create("monster4","monsterCard4",10,1,1, 2, R.drawable.player4_w, R.drawable.player4_w, R.drawable.player4_w  ) );
+				CharactorInfomation.Create("ズーカー","最高学府出身の才に秀でた少年。勉強次第でどんな力も扱うことができる。",15,2,1, 2, R.drawable.player4_w, R.drawable.player4_w, R.drawable.player4_w  ) );
 		CharactorInfomation.AddCharactor(
-				CharactorInfomation.Create("monster5","monsterCard5",10,1,1, 2, R.drawable.player5_w, R.drawable.player5_w, R.drawable.player5_w  ) );
+				CharactorInfomation.Create("ロベルチュリス","英国出身の紳士、紳士故に戦場においても落ち着きを崩さない。",10,1,2, 2, R.drawable.player5_w, R.drawable.player5_w, R.drawable.player5_w  ) );
 		CharactorInfomation.AddCharactor(
-				CharactorInfomation.Create("monster6","monsterCard6",10,1,1, 2, R.drawable.player6_w, R.drawable.player6_w, R.drawable.player6_w  ) );
+				CharactorInfomation.Create("ウェルダム","重量戦士、戦場において前線を崩さないことを主な任務と心得ている。",14,3,1, 1, R.drawable.player6_w, R.drawable.player6_w, R.drawable.player6_w  ) );
 		CharactorInfomation.AddCharactor(
-				CharactorInfomation.Create("monster7","monsterCard7",10,1,1, 2, R.drawable.player7_w, R.drawable.player7_w, R.drawable.player7_w  ) );
+				CharactorInfomation.Create("ケイチャン","運動不足寝不足になるほど戦闘力が上昇する。",10,2,1, 2, R.drawable.player7_w, R.drawable.player7_w, R.drawable.player7_w  ) );
 		CharactorInfomation.AddCharactor(
-				CharactorInfomation.Create("monster8","monsterCard8",10,1,1, 2, R.drawable.player8_w, R.drawable.player8_w, R.drawable.player8_w  ) );
+				CharactorInfomation.Create("セノー","古の騎士、古来からの経験を持って全てに当たる。",15,3,1, 3, R.drawable.player8_w, R.drawable.player8_w, R.drawable.player8_w  ) );
 		CharactorInfomation.AddCharactor(
-				CharactorInfomation.Create("monster9","monsterCard9",10,1,1, 2, R.drawable.player9_w, R.drawable.player9_w, R.drawable.player9_w  ) );
+				CharactorInfomation.Create("ゼルス","やすらぎの天使、戦場における紅一点として安らぎを与える反面、接触したものはいない。",30,1,1, 1, R.drawable.player9_w, R.drawable.player9_w, R.drawable.player9_w  ) );
 		
 		CharactorInfomation.AddCharactor(
 				CharactorInfomation.Create("enemy1","死者の魂が骸骨に乗り移った姿、魂のレベルで強さが変化する",10,1,1, 2, R.drawable.enemy1_w, R.drawable.enemy1_ab, R.drawable.enemy1_af ) );
@@ -205,9 +205,9 @@ public class DataBase {
 		//魔法、トラップの追加を行う
 		///////////////////////////////////////		
 		ParameterCardInfomatoin.AddParameterCard(
-				ParameterCardInfomatoin.Create("magic", "DamageMagicCard1", -1, 10));
+				ParameterCardInfomatoin.Create("快晴の雷撃", "いつ起こるかわからない、快晴と油断しているといきなりやってくる。", -1, 2));
 		ParameterCardInfomatoin.AddParameterCard(
-				ParameterCardInfomatoin.Create("trap", "DamageTrapCard1", 0, 10));
+				ParameterCardInfomatoin.Create("運命の落とし穴", "落とし穴にかかったものは人生の落とし穴に遭遇するという。", 0, 5));
 	
 		
 		///////////////////////////////////////
@@ -224,23 +224,23 @@ public class DataBase {
 		CardInformation.SetCardInforation(
 				CardInformation.CreateCardInformation("ジン",mc,R.drawable.moster_card_2,1));
 		CardInformation.SetCardInforation(
-				CardInformation.CreateCardInformation("monster3",mc,R.drawable.moster_card_3,1));
+				CardInformation.CreateCardInformation("ホックロック",mc,R.drawable.moster_card_3,1));
 		CardInformation.SetCardInforation(
-				CardInformation.CreateCardInformation("monster4",mc,R.drawable.moster_card_4,1));
+				CardInformation.CreateCardInformation("ズーカー",mc,R.drawable.moster_card_4,1));
 		CardInformation.SetCardInforation(
-				CardInformation.CreateCardInformation("monster5",mc,R.drawable.moster_card_5,1));
+				CardInformation.CreateCardInformation("ロベルチュリス",mc,R.drawable.moster_card_5,1));
 		CardInformation.SetCardInforation(
-				CardInformation.CreateCardInformation("monster6",mc,R.drawable.moster_card_6,1));
+				CardInformation.CreateCardInformation("ウェルダム",mc,R.drawable.moster_card_6,1));
 		CardInformation.SetCardInforation(
-				CardInformation.CreateCardInformation("monster7",mc,R.drawable.moster_card_7,1));
+				CardInformation.CreateCardInformation("ケイチャン",mc,R.drawable.moster_card_7,1));
 		CardInformation.SetCardInforation(
-				CardInformation.CreateCardInformation("monster8",mc,R.drawable.moster_card_8,1));
+				CardInformation.CreateCardInformation("セノー",mc,R.drawable.moster_card_8,1));
 		CardInformation.SetCardInforation(
-				CardInformation.CreateCardInformation("monster9",mc,R.drawable.moster_card_9,1));
+				CardInformation.CreateCardInformation("ゼルス",mc,R.drawable.moster_card_9,1));
 		CardInformation.SetCardInforation(
-				CardInformation.CreateCardInformation("trap",dtc,R.drawable.trap_card,1));
+				CardInformation.CreateCardInformation("運命の落とし穴",dtc,R.drawable.trap_card,1));
 		CardInformation.SetCardInforation(
-				CardInformation.CreateCardInformation("magic",dmc,R.drawable.magic_card,1));		
+				CardInformation.CreateCardInformation("快晴の雷撃",dmc,R.drawable.magic_card,1));		
 
 		//敵用のカード(敵は基本的にカードとはならないので、カードの画像はダミー)
 		CardInformation.SetCardInforation(
@@ -257,26 +257,26 @@ public class DataBase {
 
 		AddMyCards("レッドセイバー");
 		AddMyCards("ジン");
-		AddMyCards("monster3");
-		AddMyCards("monster4");
-		AddMyCards("monster5");
-		AddMyCards("monster6");
-		AddMyCards("monster7");
-		AddMyCards("monster8");
-		AddMyCards("monster9");
-		AddMyCards("trap");
-		AddMyCards("magic");
+		AddMyCards("ホックロック");
+		AddMyCards("ズーカー");
+		AddMyCards("ロベルチュリス");
+		AddMyCards("ウェルダム");
+		AddMyCards("ケイチャン");
+		AddMyCards("セノー");
+		AddMyCards("ゼルス");
+		AddMyCards("快晴の雷撃");
+		AddMyCards("運命の落とし穴");
 		AddMyCards("レッドセイバー");
 		AddMyCards("ジン");
-		AddMyCards("monster3");
-		AddMyCards("monster4");
-		AddMyCards("monster5");
-		AddMyCards("monster6");
-		AddMyCards("monster7");
-		AddMyCards("monster8");
-		AddMyCards("monster9");
-		AddMyCards("trap");
-		AddMyCards("magic");		
+		AddMyCards("ホックロック");
+		AddMyCards("ズーカー");
+		AddMyCards("ロベルチュリス");
+		AddMyCards("ウェルダム");
+		AddMyCards("ケイチャン");
+		AddMyCards("セノー");
+		AddMyCards("ゼルス");
+		AddMyCards("快晴の雷撃");
+		AddMyCards("運命の落とし穴");		
 		
 		///////////////////////////////////////
 		//一応、自分のカードから自分のデッキへの追加

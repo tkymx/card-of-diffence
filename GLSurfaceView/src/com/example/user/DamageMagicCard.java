@@ -21,8 +21,7 @@ public class DamageMagicCard extends MagicCard {
 	protected DamageMagicCard(int left, int top, int width, int height, int id ,int need) {
 		super(left, top, width, height, id ,need);
 		
-		//攻撃力をセット
-		damage = 10;
+		damage = 2;
 	}
 	
 	//更新処理

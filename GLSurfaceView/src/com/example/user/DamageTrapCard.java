@@ -18,7 +18,7 @@ public class DamageTrapCard extends TrapCard {
 	protected DamageTrapCard(int left, int top, int width, int height, int id ,int need) {
 		super(left, top, width, height, id ,need);
 		
-		damage = 10;
+		damage = 5;
 		
 	}
 
