@@ -12,6 +12,7 @@ import com.example.glsurfaceview.OpenGLSurfaceView;
 import com.example.glsurfaceview.R;
 import com.example.glsurfaceview.Scene;
 import com.example.glsurfaceview.Sprite;
+import com.example.glsurfaceview.Text;
 
 public class TitleScene extends Scene {
 
@@ -28,6 +29,10 @@ public class TitleScene extends Scene {
 		playButton = Button.Create(MainActivity.width/3, MainActivity.height/4, 
 				MainActivity.width/3, MainActivity.height/3, 
 				R.drawable.playbutton);
+		
+		String text = "‚ ‚¢‚¤‚¦‚¨‚ ‚¢‚¤‚¦‚¨‚ ‚¢‚¤‚¦‚¨‚ ‚¢‚¤‚¦‚¨‚ ‚¢‚¤‚¦‚¨‚ ‚¢‚¤‚¦‚¨‚ ‚¢‚¤‚¦‚¨‚ ‚¢‚¤‚¦‚¨";
+		float[] color = { 1.0f, 1.0f, 1.0f, 1.0f };
+		Text.Create(0, 0, 500, 100, text, color);
 	}
 
 	@Override

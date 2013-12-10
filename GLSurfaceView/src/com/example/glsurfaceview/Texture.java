@@ -126,9 +126,9 @@ public class Texture {
 		isBind = false;
 	}
 	
-	public Texture( int width, int height, String text )
+	public Texture( int width, int height, String text, float[] color )
 	{
-		texture = Bitmap.createBitmap(256, 256, Config.ARGB_8888);
+		texture = Bitmap.createBitmap(256, 16, Config.ARGB_8888);
 		
 		Canvas canvas = new Canvas( texture );
         Paint paint = new Paint();
@@ -139,13 +139,11 @@ public class Texture {
         
         // デフォルトUV
  		float UV[] = {
- 			1.0f, 1.0f,
- 			1.0f, 0.0f,
  			0.0f, 1.0f,
  			0.0f, 0.0f,
+ 			1.0f, 1.0f,
+ 			1.0f, 0.0f,
  		};
- 		
- 		float color[] = { 1.0f, 1.0f, 1.0f, 1.0f };
  		
  		// テクスチャのUV座標の生成
  		texUV = Common.FloatToBuffer( UV );
