@@ -26,9 +26,9 @@ public class PlayerCastleHPBar extends Sprite {
 	private PlayerCastleHPBar( Castle c){
 
 		//îwåi
-		Init(Const.rx(0.04), Const.ry(0.88), Const.rw(0.3), Const.rh(0.07), R.drawable.playerhpbar , Const.SpriteType.TYPE_TEXT.getValue());
+		Init(Const.rx(0.05), Const.ry(0.88), Const.rw(0.3), Const.rh(0.07), R.drawable.playerhpbar , Const.SpriteType.TYPE_TEXT.getValue());
 		//ÉoÅ[
-		bar = Sprite.Create(Const.rx(0.04), Const.ry(0.88), Const.rw(0.3), Const.rh(0.07), R.drawable.playerhpbar_in , Const.SpriteType.TYPE_TEXT.getValue());
+		bar = Sprite.Create(Const.rx(0.05), Const.ry(0.88), Const.rw(0.3), Const.rh(0.07), R.drawable.playerhpbar_in , Const.SpriteType.TYPE_TEXT.getValue());
 		
 		//êFÇïœÇ¶ÇÈ
 		this.GetTexture().SetColor(1, 1, 1, 0.7f);

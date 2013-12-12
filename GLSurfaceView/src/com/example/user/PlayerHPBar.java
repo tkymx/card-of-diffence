@@ -1,6 +1,9 @@
 package com.example.user;
 
+import com.example.data.CardInformation;
+import com.example.data.CharactorInfomation;
 import com.example.glsurfaceview.Const;
+import com.example.glsurfaceview.Const.SpriteType;
 import com.example.glsurfaceview.R;
 import com.example.glsurfaceview.Sprite;
 import com.example.glsurfaceview.Vector3;
@@ -12,6 +15,8 @@ public class PlayerHPBar extends Sprite {
 	
 	//HPバーのスプライト
 	Sprite bar;
+	//画像
+	Sprite image;
 	
 	//バーの長さ
 	int barLength;
@@ -32,6 +37,18 @@ public class PlayerHPBar extends Sprite {
 		//バー
 		bar = Sprite.Create(Const.rx(0.05), Const.ry(1), Const.rw(0.15), Const.rh(0.05), R.drawable.playerhpbar_in , Const.SpriteType.TYPE_TEXT.getValue());
 	
+		//画像		
+		CardInformation ci = CardInformation.GetCardInformaionFromName(chara.getName());
+		image = Sprite.Create(Const.rx(0.005), Const.ry(1), Const.card_width*0.5f, Const.card_height*0.5f/2, ci.getCard_id() , SpriteType.TYPE_TEXT.getValue());
+		//画像の上を切る
+		float UV[] = {
+				0.0f, 0.5f,
+				0.0f, 0.0f,
+				1.0f, 0.5f,
+				1.0f, 0.0f,
+			};
+		image.GetTexture().SetUV(UV);
+		
 		//色を変える
 		this.GetTexture().SetColor(1, 1, 1, 0.7f);
 		bar.GetTexture().SetColor(1, 1, 1, 0.7f);
@@ -59,6 +76,7 @@ public class PlayerHPBar extends Sprite {
 		if(charactor == null)
 		{
 			bar.remove();
+			image.remove();
 			return false;
 		}
 		
@@ -83,6 +101,7 @@ public class PlayerHPBar extends Sprite {
 		{
 			//スプライトの消去
 			bar.remove();
+			image.remove();
 			
 			return false;
 		}
@@ -98,7 +117,13 @@ public class PlayerHPBar extends Sprite {
 		setTrans( v );
 		
 		//バーを変える
+		v = new Vector3( bar.getTrans() );
+		v.setY(f);
 		bar.setTrans(v);
+		
+		v = new Vector3(image.getTrans() );
+		v.setY( f - Const.rh(0.01) );
+		image.setTrans(v);
 	}
 	
 }

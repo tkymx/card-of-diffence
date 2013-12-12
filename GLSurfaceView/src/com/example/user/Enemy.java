@@ -16,8 +16,8 @@ import com.example.glsurfaceview.Sprite;
 
 public class Enemy extends Charactor {
 	
-	public Enemy(int hp, int attack, int speed,int wi,int abi,int afi) {
-		super(hp, attack, speed, wi, abi, afi);
+	public Enemy(String name,int hp, int attack, int speed,int wi,int abi,int afi) {
+		super(name, hp, attack, speed, wi, abi, afi);
 		// TODO Auto-generated constructor stub
 	}
 

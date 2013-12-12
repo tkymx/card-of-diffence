@@ -36,7 +36,7 @@ public class Evolution {
 		isDirection = false;
 		
 		evolutionNum = 0;
-		evolutionButton = Button.Create(w/8, h/2 + h/3.8f, w / 8, h / 10, R.drawable.evolutionbutton);
+		evolutionButton = Button.Create(w*0.05f, h/2 + h/3.8f, w / 8, h / 10, R.drawable.evolutionbutton);
 		evolutionButton.texture.SetColor(0.2f, 0.2f, 0.2f, 1.0f);
 		
 		base = Sprite.Create(0, h/2, w, h/9, R.drawable.groundwork, SpriteType.TYPE_TEXT.getValue());

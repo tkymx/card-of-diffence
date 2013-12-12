@@ -11,6 +11,7 @@ import com.example.glsurfaceview.R;
 import com.example.glsurfaceview.SceneManager;
 import com.example.glsurfaceview.Score;
 import com.example.glsurfaceview.Sprite;
+import com.example.glsurfaceview.Text;
 import com.example.glsurfaceview.Touch;
 import com.example.glsurfaceview.Vector3;
 
@@ -151,6 +152,10 @@ public class ResultNotify extends Sprite {
 					//ÉXÉRÉA
 					score = Score.Create(Const.rx(0.67), Const.ry(0.89) , Const.rx(0.35)/Const.THE_NUMBER_OF_DECK , h , Const.SpriteType.TYPE_BUTTON.getValue() );
 					addscore = DataBase.getPresentScore().getScore()/10;
+					
+					String text = "Score";
+					float[] color = { 1.0f, 1.0f, 1.0f, 1.0f };
+					Text.Create(Const.rx(0.67), Const.ry(0.89), 500, 100, text, color);
 					
 					start = false;
 				}			

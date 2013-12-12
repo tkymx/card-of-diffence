@@ -122,14 +122,14 @@ public class CharactorInfomation {
 	{
 		CharactorInfomation ci = charahash.get(name);		
 		if( ci == null )return null;		
-		return new Player( ci.getHp() , ci.getAttack() , ci.getSpeed() , ci.getWalk_id() , ci.getAttack_before_id() , ci.getAttack_after_id() );
+		return new Player( ci.getName() , ci.getHp() , ci.getAttack() , ci.getSpeed() , ci.getWalk_id() , ci.getAttack_before_id() , ci.getAttack_after_id() );
 	}
 		
 	public static Enemy GetEnemyFromName( String name )
 	{
 		CharactorInfomation ci = charahash.get(name);		
 		if( ci == null )return null;		
-		return new Enemy( ci.getHp() , ci.getAttack() , -ci.getSpeed() , ci.getWalk_id() , ci.getAttack_before_id() , ci.getAttack_after_id() );
+		return new Enemy( ci.getName() , ci.getHp() , ci.getAttack() , -ci.getSpeed() , ci.getWalk_id() , ci.getAttack_before_id() , ci.getAttack_after_id() );
 	}
 		
 	public static CharactorInfomation Create(String name,String explation,int hp,int attack,int deffence,int speed,int walk_id,int attack_before_id,int attack_after_id )

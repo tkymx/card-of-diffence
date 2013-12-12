@@ -105,6 +105,7 @@ public class Sprite {
 		
 		// ‰Šú‰»
 		s.Init( left, top, width, height, id, SpriteType );
+		s.GetTexture().SetColor(1, 1, 1, 1);
 		
 		return s;
 	}
@@ -234,7 +235,11 @@ public class Sprite {
 	    	FloatBuffer buffer = vertexBuffer.GetVertexBuffer();
 	    	FloatBuffer UV = texture.GetUV();
 	    	float[] color = texture.GetColor();
+	    	
+	    	//‚Æ‚è‚ ‚¦‚¸ƒGƒ‰[‰ñ”ğ
+	    	if(vertexBuffer==null)return;
 	    	int size = vertexBuffer.GetVertexBufferSize();
+	    	
 	    	int tex[] = texture.GetTextureBuffer();
 	     	
 	     	// 1“x‚¾‚¯‰æ‘œ‚ğopengl‚Ö“]‘—‚·‚é

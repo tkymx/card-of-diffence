@@ -16,6 +16,9 @@ public abstract class Charactor extends SpriteAnimation {
 	
 	private int lineNum;
 	private boolean isEvolution;
+	
+	//名前
+	String name;
 		
 	//体力や攻撃力
 	int value_hp;
@@ -36,6 +39,8 @@ public abstract class Charactor extends SpriteAnimation {
 	Texture attackAfterTexture;	
 	
 	//セッターとゲッター
+	public String getName() {return name;}
+	public void setName(String name) {this.name = name;}
 	public int getValue_hp() {return value_hp;}
 	public void setValue_hp(int value_hp) {this.value_hp = value_hp;}
 	public int getValue_maxhp() {return value_maxhp;}
@@ -72,9 +77,10 @@ public abstract class Charactor extends SpriteAnimation {
 	
 	
 	//コンストラクタ
-	public Charactor( int hp , int attack , int speed , int walk_id , int attak_before_id , int attak_after_id )
-	{
+	public Charactor( String name , int hp , int attack , int speed , int walk_id , int attak_before_id , int attak_after_id )
+	{		
 		//基本情報設定
+		this.name = name;
 		value_hp = value_maxhp = hp;
 		value_attack = attack;
 		value_moveSpeed = speed;
