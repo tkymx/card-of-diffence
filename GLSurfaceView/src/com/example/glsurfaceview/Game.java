@@ -26,7 +26,7 @@ public class Game extends Scene {
 		s = Sprite.Create( 0, 0, 500, 500, R.drawable.image4, Const.SpriteType.TYPE_OTHER.getValue() );
 		player = Sprite.Create( 500, 500, 100, 400, R.drawable.image1, Const.SpriteType.TYPE_OTHER.getValue() );
 		anime = SpriteAnimation.Create(100, 100, 300, 300, 3, 1, 30, R.drawable.image4, Const.SpriteType.TYPE_BG.getValue());
-		t = Text.Create(300, 400, 100, 50, "DMTC2013");
+//		t = Text.Create(300, 400, 100, 50, "DMTC2013");
 	}
 	
 	@Override

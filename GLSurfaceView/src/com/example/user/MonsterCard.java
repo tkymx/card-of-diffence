@@ -145,14 +145,14 @@ public class MonsterCard extends Card {
 	@Override
 	public String GetParameter1ForList(String name) {
 		CharactorInfomation ci = CharactorInfomation.GetCharactorInformation(name);		
-		return "攻撃力  = " + ci.getAttack();
+		return "体力:" + ci.getHp() + "攻撃:" + ci.getAttack();
 	}
 
 
 	@Override
 	public String GetParameter2ForList(String name) {
 		CharactorInfomation ci = CharactorInfomation.GetCharactorInformation(name);		
-		return "速度　  = " + ci.getSpeed();
+		return "速度:" + ci.getSpeed();
 	}		
 
 	// キャラクターの設定
